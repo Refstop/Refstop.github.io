@@ -1,0 +1,601 @@
+I"�i<h1 id="particle-filter란">Particle Filter란?</h1>
+<p>노이즈가 있는 환경에서 측정된 데이터를 필터를 사용해 실제 위치를 추정하는 도구이다. 선형 시스템과 가우시안 잡음(Gaussian Noise)가 적용되는 Kalman Filter와는 달리 비선형, 가우시안 분포가 적용되지 않는 환경에서 사용된다. turtlebot에서는 위치 추정에 사용된다. 아직은 크게 와닿지 않는 개념이다. 좀 더 알아보자.</p>
+
+<h1 id="particle-filter의-원리">Particle Filter의 원리</h1>
+<p>Particle Filter는 이름처럼 Particle을 사용하는 필터 기법이다. 쉽게 설명하기 위해 <a href="https://www.youtube.com/playlist?list=PLIZKwnpVunbWZ-metR7rQMkavgPIKxWe6">Youtube 채널 Team Jupeter의 Particle Filter 강의</a>에서 든 예시를 설명하겠다. 위의 링크의 재생목록은 내가 공부하기 편하게 모아놓은 것이다. 게시글은 순전히 내 공부를 위한 것이니 사실 저기에 나온 내용을 정리해 놓은 것이기에 영상을 봐도 문제는 없다.</p>
+
+<h2 id="stage-1">Stage 1</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">좌표</th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">벽</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">문</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">문</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">문</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">복도</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">로봇</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>위의 표를 복도를 이동하는 로봇을 나타낸 것이라고 가정하자. 첫번째 행이 좌표, 두번째 행이 문의 위치, 세번째 행이 로봇이 이동하는 복도이다.
+처음에 로봇은 자신의 위치는 모르지만 자신이 있는 곳의 지도를 갖고있다. 따라서 지금 장님 로봇은 자신이 복도상의 어떤 지점에 존재할 확률을 <strong>모든 지점에서 균등하게</strong> 보고 있다.
+자, 그럼 로봇은 파티클을 복도에 무작위로 뿌린다. 모든 파티클은 자기 자신과 같은 행동을 할 수 있는 더미라고 볼 수 있다. 이게 무슨 말이냐면 처음에 모든 곳에 자신이 있을 가능성을 가정하고, 더욱 더 자신이 있을 것 같은 곳에 가중치를 더해서 그곳에 자신을 가중치만큼 복제시키고, 그것을 반복하여 자신의 진짜 위치를 찾는 것이다. 지금은 이해하기 어렵더라도 과정을 보다 보면 이해될 것이다.</p>
+<h3 id="uniform-particle-distribution">Uniform Particle Distribution</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+      <th style="text-align: center"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Measurement Probability</td>
+      <td style="text-align: center">확률</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">(%)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">The Importance Weight</td>
+      <td style="text-align: center">가중치</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">신뢰공간</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>위의 표에서 가중치를 사실상 파티클이라고 보면 된다. Stage 1은 이렇게 균등하게 파티클이 뿌려진 set 1이 생성되었다. 이 set를 Posterior Probability라고 한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">set 1</th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="stage-2">Stage 2</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">좌표</th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">벽</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">문</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">문</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">문</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">복도</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">(((</td>
+      <td style="text-align: center">로봇</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>로봇이 움직이기 시작한다. 문을 발견하면 자신이 위치한 곳으로 추정되는 곳을 짚어 볼 수 있다. 하지만 예상위치에 있을 확률이 올라간 만큼, 다른 지점은 확률이 떨어진다. 표로 나타내면 다음과 같다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+      <th style="text-align: center"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Measurement Probability</td>
+      <td style="text-align: center">확률</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">17</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">17</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">17</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">(%)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">The Importance Weight</td>
+      <td style="text-align: center">가중치</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">O</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">O</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">O</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">신뢰공간</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>확률이 올라간 지점의 가중치 o의 크기가 조금 커진 것이 보이는가? 여기서 Importance Weight의 생성과정은 Stage 1에서의 가중치 $\times$ stage 2에서의 Measurement Probability이다.</p>
+<center> $X_{i}=X_{i-1} \cdot W(X_{i}) \; \; \; \; (X_{i}: Stage \; i의 \; set, \; W(X_{i}): Stage \; i의 \; The \; Importance \; Weight)$ </center>
+<p>어째서 바로 윗줄과 또 말이 다른것 같다? 그건 바로 원래 <strong>Importance Weight와 set는 사실 한몸</strong>이다. 여기서는 이해를 쉽게 하기 위해 다른 방식으로 떼어서 생각해 보았지만, 사실 Importance Weight와 set가 의미하는 바는 같다. 결국 Stage 2의 set는 다음과 같이 나타낼 수 있다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">set 2</th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">oo</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">oo</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">oo</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이렇게 가중치를 Density의 형태로 나타내는 과정을 <strong>Resampling</strong>이라고 한다. 여기서 주의할 점이 있는데, 이전의 파티클의 개수와 Resampling한 파티클의 개수가 같아야 한다. 즉, 파티클은 가중치가 작다고 사라지는 게 아니라, 가중치가 높은 쪽으로 계속해서 모이는 방식으로 진행된다. 사실 위의 표에서 문이 있는 3, 5, 8번 지점을 제외한 나머지의 가중치, 즉 동그라미의 크기가 조금 작아져야 한다. 작성자의 한계로 더 작게 하지는 못했으니 10에서 7이 된 것만큼 작아졌다고 생각하고 봐주길 바란다…</p>
+
+<h3 id="실제로-데이터가-아주-많을-때">실제로 데이터가 아주 많을 때</h3>
+<p>예시인 이 강의에서는 데이터가 10개 밖에 없지만 1000개 정도 된다고 가정하자. 무작위로 뽑지만 각 파티클의 Importance Weight가 클수록 높은 확률로 샘플에 잡히게 된다고 프로그래밍 한다. 이때의 set를 나타내면 다음과 같은 형태가 나올 것이다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">set</th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">oo</td>
+      <td style="text-align: center">ooo</td>
+      <td style="text-align: center">oo</td>
+      <td style="text-align: center">ooo</td>
+      <td style="text-align: center">oo</td>
+      <td style="text-align: center">oo</td>
+      <td style="text-align: center">ooo</td>
+      <td style="text-align: center">oo</td>
+      <td style="text-align: center">o</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>연속적인 형태의 그래프가 나올 것이기 때문에 3, 5, 8번 지점을 중심으로 서서히 가중치가 올라가고 내려갈 것이다.</p>
+
+<h2 id="stage-3">Stage 3</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">좌표</th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">벽</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">문</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">문</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">문</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">복도</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">(((</td>
+      <td style="text-align: center">로봇</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>또 로봇이 움직였다. 하지만 이번에는 로봇이 <strong>“움직이기만”</strong> 했다고 생각해 보자. <strong>“움직인다”</strong>는 measurement와는 다른 관점에서 봐야 한다. 단순히 이동만 하는 것이므로 아직 센서를 통해 measurement를 하지 않은 상태인 것이다. 하지만 odometry를 통해 이동에 대한 정보를 알고 있으므로, 확률 정보는 업데이트될 수 있다. 그렇다면 내친김에 그냥 한칸 더 가서 업데이트해보자.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">좌표</th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">벽</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">문</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">문</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">문</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">복도</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">(((</td>
+      <td style="text-align: center">로봇</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>다시 문을 발견했다. 자 아직 measurement는 하지말고, 확률 정보만 업데이트해보자. 현재 로봇이 어떤 위치에 있을 확률과 그에 대한 가중치는 다음과 같다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">확률 1</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+      <th style="text-align: center"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Measurement Probability</td>
+      <td style="text-align: center">확률</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">17</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">17</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">(%)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">The Importance Weight</td>
+      <td style="text-align: center">가중치</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">O</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">O</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">신뢰공간</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이제 확률 정보를 업데이트했으니 다시 measurement를 해보자. measurement 결과 문을 발견한 사실을 가지고 추정한 로봇 자신이 어떤 위치에 있을 확률은 다음과 같다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">확률 2</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+      <th style="text-align: center"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Measurement Probability</td>
+      <td style="text-align: center">확률</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">17</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">17</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">17</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">(%)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>자 이제 원래 로봇이 갖고 있던 확률 정보와 문을 발견한 사실을 토대로 추정한 위치에 있을 확률을 곱하면, 즉 확률 1 $\times$ 확률 2를 하면 새로운(이 stage의) Importance Weight가 나올 것이다. 확률이 높은 곳끼리 곱해진 곳은 더욱 커질 것이다. 따라서 새로운 Importance Weight는 다음과 같다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+      <th style="text-align: center"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">The Importance Weight</td>
+      <td style="text-align: center">가중치</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">O</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">@</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">O</td>
+      <td style="text-align: center">O</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">신뢰공간</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>5번 지점의 가중치가 매우 큰데 어떻게 표현해야 할지 모르겠다…. 아무튼 저 지점이 현저히 높은 가중치를 가진다. 또한 원래 작았던 1, 2, 4, 6, 9, 10 지점의 가중치는 쪼그라들어 없어지려 한다. 이 가중치를 토대로 Resampling을 하면 다음과 같은 결과가 나온다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">set 3</th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th style="text-align: center">7</th>
+      <th style="text-align: center">8</th>
+      <th style="text-align: center">9</th>
+      <th style="text-align: center">10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">oo</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">oooo</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">oo</td>
+      <td style="text-align: center">oo</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>다시 말하지만 파티클 수는 유지된다. 가중치가 쪼그라든 지점의 파티클을 끌어다가 가중치가 높은 지점으로 뿌려주었기 때문이다. Resampling 결과를 보면 아직 몇군데 짐작 가는 부분이 남았지만 거의 현재 로봇의 위치와 결과가 근접했다. 파티클 필터는 이런식으로 작은 가중치를 채로 걸러내듯이 굵은 가중치(?)만 남기는 방식으로 로봇의 위치를 추정할 수 있다.</p>
+
+<h2 id="한눈에-보는-particle-filter의-원리">한눈에 보는 Particle Filter의 원리</h2>
+<p><img src="https://1.bp.blogspot.com/-MHEOooeFWsU/XvnXAsWm70I/AAAAAAAACaI/Q5Ef9yZa6ykO-12j85St7XkWxtt9b1pOwCK4BGAsYHg/s632/particle%2Bfilter.jpg" alt="" /></p>
+
+<p>그림을 봐도 파티클 개수는 변하지 않았다. 파티클이 로봇의 위치를 거의 추정했을 때 계산을 효율적으로 하기 위해 파티클의 개수를 줄이는 방식인 AMCL 방식도 있지만 다음 기회에 알아보기로 하자. 나도 여기까지밖에 모른다.</p>
+
+<h1 id="참고-사이트">참고 사이트</h1>
+<p><a href="https://www.youtube.com/playlist?list=PLIZKwnpVunbWZ-metR7rQMkavgPIKxWe6">Youtube 채널 Team Jupeter의 Particle Filter 강의</a> 강추<br />
+<a href="https://www.youtube.com/watch?v=NrzmH_yerBU">Tuttlebot의 Particle Filter 적용 방식</a> 한번에 이해된다. 강추<br />
+<a href="https://ryanclaire.blogspot.com/2020/06/particle-filter-principle.html">쉽게 설명한 파티클 필터(particle filter) 동작 원리와 예제 (사진 출처: Ryan Blog)</a></p>
+
+:ET

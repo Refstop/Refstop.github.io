@@ -1,0 +1,50 @@
+I"a<h1 id="tensorflow-설치">Tensorflow 설치</h1>
+<p>일반적으로 Terminal에서 <code class="language-plaintext highlighter-rouge">pip install tensorflow</code> 명령어를 통해 설치할 수 있다.<br />
+특정한 버전이 필요하다면 <code class="language-plaintext highlighter-rouge">pip install tensorflow -v '&lt;필요한 버전&gt;'</code> 명령어를 사용하면 된다.</p>
+
+<h1 id="anaconda-가상환경-설치">anaconda 가상환경 설치</h1>
+<ol>
+  <li>anaconda를 설치
+    <ul>
+      <li>다음 블로그를 참고하여 acaconda를 설치한다.<br />
+<a href="https://greedywyatt.tistory.com/107">[Ubuntu 18.04] Anaconda 설치 및 가상환경 구축</a></li>
+    </ul>
+  </li>
+  <li>anaconda 가상 환경 설치 후 PATH 환경변수 설정
+    <ul>
+      <li>bashrc에 <code class="language-plaintext highlighter-rouge">export PATH=~/anaconda3/bin:~/anaconda3/condabin:$PATH</code> 추가</li>
+    </ul>
+  </li>
+  <li>Terminal에서 <code class="language-plaintext highlighter-rouge">conda activate base</code> 실행, anaconda 가상환경을 실행
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">conda activate base</code>에서 base는 가상환경 이름이기에 임의로 설정이 가능하다.</li>
+      <li><code class="language-plaintext highlighter-rouge">conda activate base</code> 실행에서 다음의 오류가 발생할 수 있다.<br />
+<code class="language-plaintext highlighter-rouge">CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.</code><br />
+위의 오류 발생 시 <code class="language-plaintext highlighter-rouge">source ~/anaconda3/etc/profile.d/conda.sh</code> 를 실행하여 conda.sh를 다시 적용해주면 된다.</li>
+    </ul>
+  </li>
+  <li>가상환경 내에서 Python 인터프리터 실행, 텐서플로를 <code class="language-plaintext highlighter-rouge">conda install tensorflow</code> 명령어로 설치</li>
+</ol>
+
+<h1 id="tensorflow-설치-확인-버전-확인">Tensorflow 설치 확인, 버전 확인</h1>
+<ol>
+  <li>anaconda 가상 환경에서 <code class="language-plaintext highlighter-rouge">python3</code>을 실행</li>
+  <li><code class="language-plaintext highlighter-rouge">import tensorflow as tf</code> 실행
+    <ul>
+      <li>오류가 뜨지 않는다면 tensorflow가 성공적으로 설치된 것이다.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">tf.__version__</code> 실행
+    <ul>
+      <li>tensorflow의 버전을 확인할 수 있다.<br />
+버전에 따라 실행할 수 있는 코드가 달라지거나, 실행 가능했던 코드가 실행할 수 없는 코드가 될 수도 있다.<br />
+이 점 유의하도록 하자.</li>
+    </ul>
+  </li>
+</ol>
+
+<h1 id="참고-사이트">참고 사이트</h1>
+<p><a href="https://somjang.tistory.com/entry/Anaconda-CommandNotFoundError-Your-shell-has-not-been-properly-configured-to-use-conda-activate-해결-방법">솜씨좋은장씨: CommandNotFoundError 해결</a><br />
+<a href="https://greedywyatt.tistory.com/107">욕심쟁이와이엇: [Ubuntu 18.04] Anaconda 설치 및 가상환경 구축</a></p>
+
+:ET

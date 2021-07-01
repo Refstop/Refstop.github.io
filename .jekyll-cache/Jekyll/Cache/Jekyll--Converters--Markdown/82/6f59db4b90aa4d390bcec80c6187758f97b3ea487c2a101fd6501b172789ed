@@ -1,0 +1,94 @@
+I"J<h1 id="토픽은-대화주제다">토픽은 대화주제다</h1>
+<p>비유하자면 노드가 사람이고 토픽은 대화주제, 메시지는 주고받는 대화내용, 메시지를 이루는 형식이 문법입니다. 우리는 rostopic 명령어로 대화내용을 엿볼 수 있습니다. 유용한 몇가지 테크닉을 알아봅시다.
+<img src="/assets/img/ros2/rostopic.png" alt="토픽그림" /></p>
+<center> 대강 이런 느낌. 완전히 맞지는 않다. </center>
+
+<h1 id="ros2에서의-rostopic">ROS2에서의 rostopic</h1>
+<p>ROS2에서 <code class="language-plaintext highlighter-rouge">rostopic</code> 명령어에 해당하는 것은 <code class="language-plaintext highlighter-rouge">ros2 topic</code>입니다. 이제 슬슬 패턴이 보입니다. 대부분은 ROS1에서 쓰는 명령어에서 <code class="language-plaintext highlighter-rouge">ros</code>를 <code class="language-plaintext highlighter-rouge">ros2 </code>로 바꾸면 됩니다.</p>
+
+<h2 id="ros2-topic-list">ros2 topic list</h2>
+<p>현재 실행되고 있는 topic을 보여주는 명령어입니다. 다음의 명령어로 실행할 수 있습니다.
+<code class="language-plaintext highlighter-rouge">ros2 topic list</code>
+터틀심 노드를 실행했을 때 보여주는 토픽은 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 topic list
+/parameter_events
+/rosout
+/turtle1/cmd_vel
+/turtle1/color_sensor
+/turtle1/pose
+</code></pre></div></div>
+<p>위의 주제들로 노드끼리 통신을 하고 있습니다. 예를 들어 /turtle1/cmd_vel은 터틀심의 속도(command_velocity)를 전달하는 토픽입니다.</p>
+
+<h2 id="ros2-topic-echo">ros2 topic echo</h2>
+<p>현재 실행되고 있는 topic을 지정하여 대화 내용을 엿볼 수 있는 명령어입니다. 사용 방법은 다음과 같습니다.<br />
+<code class="language-plaintext highlighter-rouge">ros2 topic echo &lt;토픽 이름&gt;</code><br />
+예를 들어 현재 터틀심의 /cmd_vel 토픽을 보고 싶다면, 다음과 같이 실행하면 됩니다.<br />
+<code class="language-plaintext highlighter-rouge">ros2 topic echo /turtle1/cmd_vel</code><br />
+아래는 실행 결과입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 topic echo /turtle1/cmd_vel
+linear:
+  x: 2.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+---
+</code></pre></div></div>
+<p>turtle_teleop_key 노드에서 속도 메시지를 전달해주면 터틀심이 그 내용을 수행합니다. 물론 turtle_teleop_key 노드가 실행되지 않았을 때는 아무것도 뜨지 않습니다.</p>
+
+<h2 id="ros2-topic-info">ros2 topic info</h2>
+<p>지정한 토픽의 정보를 보여줍니다. 정보는 메시지 형식과 연결된 퍼블리셔, 서브스크라이버 개수입니다. 퍼블리셔와 서브스크라이버는 쉽게 말하면 각각 말하는 이와 듣는 이를 의미합니다. 퍼블리셔가 토픽을 발행(publish)하면 서브스크라이버가 구독(subscribe)합니다. 각각 메시지를 주고 받는 이들입니다. 이들은 C++이나 Python같은 언어로 구현되어 있습니다. <code class="language-plaintext highlighter-rouge">ros2 topic info</code>의 사용법은 다음과 같습니다.<br />
+<code class="language-plaintext highlighter-rouge">ros2 topic info &lt;토픽 이름&gt;</code><br />
+터틀심으로 예시를 들어봅시다. turtle_teleop_key 노드가 실행되지 않았을 때의 /turtle1/cmd_vel의 info 명령어 결과를 봅시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 topic info /turtle1/cmd_vel
+Topic: /turtle1/cmd_vel
+Publisher count: 0
+Subscriber count: 1
+</code></pre></div></div>
+<p>퍼블리셔가 없습니다. 아무도 움직이라고 말해주지 않는군요. 하지만 터틀심의 발에 동작개시를 명령할 준비는 되어 있습니다. 이제 turtle_teleop_key 노드를 실행했을 때의 /turtle1/cmd_vel의 info 명령어 결과를 봅시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 topic info /turtle1/cmd_vel
+Topic: /turtle1/cmd_vel
+Publisher count: 1
+Subscriber count: 1
+</code></pre></div></div>
+<p>움직이라고 말해주는 퍼블리셔가 있습니다. 터틀심은 이 노드가 말하는대로 움직입니다. 하지만 아쉽게도 누가 말해주는지는 알 수 없습니다. 말해주는 사람을 알고 싶다면 rqt_graph 명령어를 사용하면 됩니다. rqt_graph는 밑에서 간단히 소개하도록 하겠습니다.</p>
+
+<h2 id="ros2-interface-show">ros2 interface show</h2>
+<p>ROS1의 <code class="language-plaintext highlighter-rouge">rosmsg</code>명령어와 동일한 역할을 수행합니다. ROS2 dashing 버전과 ROS2 eloquent 이상의 버전의 명령어가 다릅니다.<br />
+ROS2 dashing:<br />
+<code class="language-plaintext highlighter-rouge">ros2 msg show &lt;메시지 이름&gt;</code><br />
+예시:<code class="language-plaintext highlighter-rouge">ros2 msg show geometry_msgs/msg/Twist</code><br />
+ROS2 eloquent and newer:<br />
+<code class="language-plaintext highlighter-rouge">ros2 interface show &lt;메시지 이름&gt;</code><br />
+예시:<code class="language-plaintext highlighter-rouge">ros2 interface show geometry_msgs/msg/Twist</code></p>
+
+<p>출력결과는 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 interface show geometry_msgs/msg/Twist
+Vector3  linear
+Vector3  angular
+</code></pre></div></div>
+
+<p>메시지의 형태를 볼 수 있습니다. 문법같은 느낌입니다.</p>
+
+<h2 id="ros2-topic-pub">ros2 topic pub</h2>
+<p>지정한 토픽의 메시지에 직접 매개변수를 전달할 수 있는 명령어입니다.<br />
+<code class="language-plaintext highlighter-rouge">ros2 topic pub &lt;topic_name&gt; &lt;msg_type&gt; '&lt;args&gt;'</code><br />
+예시: <code class="language-plaintext highlighter-rouge">ros2 topic pub --once /turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.8}}"</code><br />
+–once 옵션은 한번만 수행하겠다는 뜻입니다. 이 명령어는 /turtle1/cmd_vel 토픽의 geometry_msgs/msg/Twist 메시지에 linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.8} 라는 내용을 한번 전송하겠다는 의미입니다. 이 명령어를 실행하면 터틀봇은 원 둘레의 1/3만큼 도는데, –once를 지우면 계속해서 돌게 됩니다.
+<img src="/assets/img/ros2/topic pub.png" alt="topic_pub" /></p>
+<center> 실행 모습 </center>
+
+<h1 id="rqt_graph">rqt_graph</h1>
+<p>이 기능은 ROS1과 ROS2의 실행방법은 같습니다. rqt가 설치되어 있다면 다음의 명령어로 실행할 수 있습니다.<br />
+<code class="language-plaintext highlighter-rouge">rqt_graph</code><br />
+터틀심의 rqt_graph는 다음과 같습니다. teleop 노드를 실행한 상태입니다.
+<img src="/assets/img/ros2/turtlesim_rqt.png" alt="turtle_rqt" />
+/turtle1/cmd_vel 토픽에 연결된 퍼블리셔/서브스크라이버는 각각 /turtlesim과 /teleop_turtle 이었나 보군요. 터틀심의 발에 붙은 노드는 /turtlesim 이었나 봅니다.</p>
+
+<p>rqt의 기능은 그래프만 있는 것이 아닙니다. 추후 다양한 기능을 다른 게시글에서 소개하도록 하겠습니다.</p>
+
+<h1 id="참고-사이트">참고 사이트</h1>
+<p><a href="https://index.ros.org/doc/ros2/Tutorials/Topics/Understanding-ROS2-Topics/">ROS Index-ROS2 튜토리얼 토픽편</a></p>
+:ET

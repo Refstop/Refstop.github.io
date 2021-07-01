@@ -1,0 +1,9 @@
+I"m<h1 id="이산-모델에서-연속-모델로">이산 모델에서 연속 모델로</h1>
+<p><a href="https://refstop.github.io/posts/uda-dl-nndm/">저번 게시글</a>에선 로지스틱 회귀의 이산 모델에 대해서 정리했습니다. 하지만 경사 하강법을 사용하기 위해서는 연속 모델을 사용해야 합니다. 이산 모델과 비교하여 연속 모델에서 추가된 과정은 다음과 같습니다.</p>
+<ol>
+  <li>Sigmoid 함수 (확률함수)</li>
+  <li>Maximum Likelihood Estimation (최대우도법)</li>
+  <li>Cross-Entropy</li>
+  <li>Gradient Descent (경사 하강법)</li>
+</ol>
+:ET

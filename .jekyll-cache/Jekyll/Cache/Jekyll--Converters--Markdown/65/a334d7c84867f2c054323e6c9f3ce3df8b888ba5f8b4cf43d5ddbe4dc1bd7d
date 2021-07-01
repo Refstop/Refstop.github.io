@@ -1,0 +1,30 @@
+I"�<h1 id="realsense-d435i의-카메라는-monocular-인가-stereo-인가">realsense d435i의 카메라는 Monocular 인가? Stereo 인가?</h1>
+<p>이 부분을 잘못 알아서 한참 헤맸다. 틀림없이 Stereo인줄 알았는데 오른쪽에 렌즈 하나만 달린 Monocular 였던 것이다. 아…. 현타 엄청나게 왔다<br />
+Monocular 카메라의 캘리브레이션 방법은 다음 사이트에 나와 있다.<br />
+<a href="http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration">ROS wiki: How to Calibrate a Monocular Camera</a></p>
+
+<h1 id="intel이-제공하는-calibration-sdk-사용">Intel이 제공하는 Calibration SDK 사용</h1>
+<p>intel에서 제공하는 calibration tool을 사용한 캘리브레이션 시도해 보았다. 하지만 내부 파라미터를 빼오기 힘들어 지양하는 방법이란 말을 듣고 바로 포기했다.
+사실 issue로서 failed to start calibration 이 떴다. 왜인지는 모르겠다.</p>
+
+<h1 id="monocular-camera-calibration">Monocular Camera Calibration</h1>
+<p>-issue: Waiting for service /camera/set_camera_info …<br />
+Service not found<br />
+rosrun 명령어 끝에 –no-service-check를 붙임. 서비스 없이 가능할까?<br />
+-issue: (display:11948): GLib-GObject-CRITICAL **: 17:07:10.740: g_object_unref: assertion ‘G_IS_OBJECT (object)’ failed<br />
+무슨 이슈인지 짐작도 안간다.. gstreamer와 관계있다고 추정? 이 에러는 다양한 이유가 있기 때문에 직접적 해결은 못했다….<br />
+하지만 결국 해결헀다!! 토픽과 rosrun의 경로가 안맞았기 때문이다.<br />
+<code class="language-plaintext highlighter-rouge">/camera/camera_info</code><br />
+<code class="language-plaintext highlighter-rouge">/camera/image_raw</code><br />
+위의 두 Topic이 실행되고 있었어야 하는데, 실행은 되고 있지만 경로가 맞지 않아 Calibration node가 실행을 못하고 있었던 것이다.<br />
+실제 실행되고 있었던 Topic은 <code class="language-plaintext highlighter-rouge">/camera/color/camera_info</code>, <code class="language-plaintext highlighter-rouge">/camera/color/image_raw</code> 였기에, <br />
+결국 <code class="language-plaintext highlighter-rouge">rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.108 image:=/camera/image_raw camera:=/camera</code>을<br />
+<code class="language-plaintext highlighter-rouge">rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.108 image:=/camera/color/image_raw camera:=/camera</code> 으로 고치고 나서야 실행되었다.<br />
+공부부족이었다! rosrun문법에 대해서 더 공부하자. pub, sub/srv, client/param 역시 한번 복습 필요</p>
+
+<h1 id="calibration-결과">Calibration 결과</h1>
+<p><img src="/assets/img/realsense/calibration program.png" alt="calibration program" />
+<img src="/assets/img/realsense/calibration 결과.png" alt="calibration 결과" />
+터미널 창에 출력된 결과를 보면 camera matrix에 내부 파라미터의 값이 나온 것을 볼 수 있다. 그 외에 distortion(왜곡)이나 rectification(정류? 뭔지 모르겠다), projection(사영) 성분 역시 검출할 수 있다.</p>
+
+:ET

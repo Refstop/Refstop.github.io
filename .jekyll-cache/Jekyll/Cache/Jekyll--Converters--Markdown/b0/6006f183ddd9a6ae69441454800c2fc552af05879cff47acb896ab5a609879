@@ -1,0 +1,48 @@
+I"�<hr />
+<p>layout: post
+read_time: true
+show_date: true
+title: “Camera_calibration(1) 내부 파라미터의 구성요소”
+date: 2020-11-03 18:00:00 +/-TTTT
+tags: [RealSense, Camera Calibration]
+—</p>
+
+<h1 id="camera_calibration">Camera_calibration</h1>
+<p>Camera calibration을 하는 이유는 2d 평면을 3d 모델로 해석하기 위해서 필요한 파라미터를 구하는 것이다.<br />
+<img src="https://t1.daumcdn.net/cfile/tistory/24758441510E994028" alt="핀홀 카메라 모델" /><br />
+A[R/t] 행렬에서 A행렬이다.<br />
+A행렬은 내부 파라미터(intrinsic calibration)라고 하는데 이의 구성은</p>
+<h2 id="1-초점거리-fx-fy">1. 초점거리 fx, fy</h2>
+<p><img src="https://t1.daumcdn.net/cfile/tistory/22504A475344768E06" alt="" />
+실제 단위: mm, 카메라 모델 단위: pixel<br />
+pixel은 이미지 센서의 셀 크기에 대해 상대적인 값으로 표현<br />
+예를 들어 셀 크기: 0.1mm, 초점거리가 500mm면 렌즈 중심에서 이미지 센서까지의 거리는 이미지 센서 셀 크기의 500배, 50mm라는 뜻이다. 실제 단위를 셀 크기와 초점거리로 표현해 놓은 것이다. 왜? 값을 이미지 센서에 종속시킴으로서 영상에서의 기하학적 해석을 용이하게 하기 위해서.</p>
+<h2 id="2-주점-cx-cy">2. 주점 cx, cy</h2>
+<p>렌즈에서 이미지 센서에 내린 수선의 발<br />
+이론상으론 거의 영상 중심점과 같지만 렌즈의 길이가 잘못되었으면 다를 수도 있다.</p>
+
+<h2 id="3-비대칭계수-skew_c--tan-α">3. 비대칭계수 skew_c = tan α</h2>
+<p><img src="https://t1.daumcdn.net/cfile/tistory/192F8344510E9B3A33" alt="" /><br />
+이미지 센서의 y축이 기울어진 정도. 왜 기울어진거지?</p>
+
+<h1 id="camera-calibration의-이론-좌표계-파라미터-행렬-그의-식">Camera calibration의 이론-좌표계, 파라미터 행렬, 그의 식</h1>
+<p>normalized image plane에 대한 설명<br />
+원점을 카메라 죄표계의 Zc축이 관통하고, 원점으로부터의 거리가 1인 평면.<br />
+다크 프로그래머의 글에서 이해 안되는 부분인 x = fxX/Z+cx, y = fyY/Z+cy의 유도과정.<br />
+<img src="https://latex.codecogs.com/gif.latex?s%5Cbegin%7Bbmatrix%7D%20%5Cmathit%7Bx%7D%5C%5C%20%5Cmathit%7By%7D%5C%5C%201%20%5Cend%7Bbmatrix%7D%3D%5Cbegin%7Bbmatrix%7D%20f_%7Bx%7D%26%200%26%20C_%7Bx%7D%5C%5C%200%26%20f_%7By%7D%26%20C_%7By%7D%5C%5C%200%26%200%26%201%20%5Cend%7Bbmatrix%7D%5Ctimes%5Cbegin%7Bbmatrix%7D%20X%5C%5C%20Y%5C%5C%201%20%5Cend%7Bbmatrix%7D" alt="" /><br />
+월드 좌표계 항인 (X, Y, Z)는 [R/t]가 이미 곱해진것임. 이를 계산하면<br />
+<img src="https://latex.codecogs.com/gif.latex?%5Cbegin%7Bbmatrix%7D%20%5Cmathit%7Bx%7D%5C%5C%20%5Cmathit%7By%7D%5C%5C%201%20%5Cend%7Bbmatrix%7D%3D%5Cbegin%7Bbmatrix%7D%20f_%7Bx%7DX&plus;C_%7Bx%7DZ%5C%5C%20f_%7By%7DY&plus;C_%7By%7D%5C%5C%20Z%20%5Cend%7Bbmatrix%7D" alt="" /><br />
+(scale은 생략)<br />
+<img src="https://latex.codecogs.com/gif.latex?%5Cbegin%7Bbmatrix%7D%20%5Cmathit%7Bx%7D%5C%5C%20%5Cmathit%7By%7D%5C%5C%201%20%5Cend%7Bbmatrix%7D%3DZ%5Ctimes%5Cbegin%7Bbmatrix%7D%20%5Cfrac%7Bf_%7Bx%7DX%7D%7BZ%7D&plus;C_%7Bx%7D%5C%5C%20%5Cfrac%7Bf_%7By%7DY%7D%7BZ%7D&plus;C_%7By%7D%5C%5C%201%20%5Cend%7Bbmatrix%7D" alt="" /><br />
+이리하여 그 공식이 나오고 만것이다!!<br />
+사실 이건 그리 중요한 것이 아니다. 중요한건 정규좌표계와 픽셀좌표계, 그리고 픽셀의 개념이다…!</p>
+
+<h1 id="오늘의-의문점">오늘의 의문점</h1>
+<p>-rviz_ pointcloud2의 정체는 3d lidar였다.<br />
+-velodyne lidar : 최근 자율주행 자동차에 많이 사용되는 라이다.<br />
+-카메라 캘리브레이션의 이론과 실습 중</p>
+
+<h2 id="참고한-사이트">참고한 사이트</h2>
+<p><a href="https://darkpgmr.tistory.com/32#calibration4">다크 프로그래머 :: 카메라 캘리브레이션 (Camera Calibration)</a><br />
+<a href="http://darkpgmr.tistory.com/77">다크 프로그래머 :: 카메라 좌표계</a></p>
+:ET

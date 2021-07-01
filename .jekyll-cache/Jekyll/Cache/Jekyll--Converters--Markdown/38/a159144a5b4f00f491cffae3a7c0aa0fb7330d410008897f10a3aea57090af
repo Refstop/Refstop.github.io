@@ -1,0 +1,91 @@
+I"<h1 id="파라미터란">파라미터란??</h1>
+<p>노드를 실행하기 위해서 주어져야 할 값입니다. 환경설정값이라고도 할 수 있습니다. 함수를 만들 때 괄호 안에 들어가는 매개 변수와 같은 개념입니다.</p>
+
+<h1 id="ros2에서의-rosparam">ROS2에서의 rosparam</h1>
+<p>ROS2에서의 <code class="language-plaintext highlighter-rouge">rosparam</code> 명령어에 해당하는 것은 <code class="language-plaintext highlighter-rouge">ros2 param</code>입니다. 이젠 그냥 안적고 시작해도 어련히 알고 있겠군요. 오늘도 역시 터틀심 패키지로 예시를 봅시다. 실행합시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 run turtlesim turtlesim_node
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 run turtlesim turtle_teleop_key
+</code></pre></div></div>
+
+<h2 id="ros2-param-list">ros2 param list</h2>
+<p>현재 실행되고 있는 노드들의 파라미터 목록입니다. list 명령어는 이제 몇번 해봐서 알 수 있으실 겁니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 param list
+/teleop_turtle:
+  scale_angular
+  scale_linear
+  use_sim_time
+/turtlesim:
+  background_b
+  background_g
+  background_r
+  use_sim_time
+</code></pre></div></div>
+<p>여기서 <code class="language-plaintext highlighter-rouge">use_sim_time</code> 파라미터는 터틀심만이 아니라 모든 노드에 존재합니다.<br />
+이 파라미터들의 이름을 통해 무슨 역할을 하는 파라미터인지 추측할 수 있습니다. 예를 들어 <code class="language-plaintext highlighter-rouge">/turtlesim</code> 노드의 세 파라미터는 배경색의 rgb를 조정하는 역할인 것으로 추측할 수 있습니다. 이들의 값을 알기 위해서는 <code class="language-plaintext highlighter-rouge">ros2 param get</code> 명령어를 사용합니다.</p>
+
+<h2 id="ros2-param-get">ros2 param get</h2>
+<p>지정된 파라미터값을 보여주는 명령어입니다. 사용 방법은 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 param get &lt;노드 이름&gt; &lt;파라미터 이름&gt;
+</code></pre></div></div>
+<p>예시로 터틀심 파라미터를 한번 보겠습니다. <code class="language-plaintext highlighter-rouge">/turtlesim</code> 노드의 <code class="language-plaintext highlighter-rouge">background_g</code> 파라미터를 봅시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 param get /turtlesim background_g
+Integer value is: 86
+</code></pre></div></div>
+<p>배경색의 g성분이 86인 것을 확인할 수 있습니다. 이 값으로 파라미터의 자료형도 추측할 수 있습니다.</p>
+
+<h2 id="ros2-param-set">ros2 param set</h2>
+<p>지정된 파라미터값을 변경할 수 있는 명령어입니다. <code class="language-plaintext highlighter-rouge">ros2 topic pub</code> 명령어와 비슷합니다. 사용 방법은 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 param set &lt;노드 이름&gt; &lt;파라미터 이름&gt; &lt;설정할 값&gt;
+</code></pre></div></div>
+<p>터틀심 파라미터를 한번 변경해 보겠습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 param set /turtlesim background_r 150
+Set parameter successful
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">background_r</code> 값을 150으로 변경하여 보라색으로 바꿔 보았습니다.</p>
+
+<p><img src="/assets/img/ros2/purplesim.png" alt="purplesim" /></p>
+
+<h2 id="ros2-param-dump-eloquent">ros2 param dump <span style="color:red">(Eloquent)</span></h2>
+<p>지정한 노드에서 실행되고 있는 파라미터들을 yaml 파일로 저장합니다. 사용 방법은 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 param dump &lt;노드 이름&gt;
+</code></pre></div></div>
+<p>하지만 이 명령어는 ROS2 Eloquent 이상부터 지원합니다. 이론적으로나마 정리해 보겠습니다.
+터틀심 노드의 파라미터들을 저장해 봅시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 param dump /turtlesim
+Saving to:  ./turtlesim.yaml
+</code></pre></div></div>
+<p>저장된 <code class="language-plaintext highlighter-rouge">./turtlesim.yaml</code>파일의 내용은 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>turtlesim:
+  ros__parameters:
+    background_b: 255
+    background_g: 86
+    background_r: 150
+    use_sim_time: false
+</code></pre></div></div>
+<p>이 파일은 파라미터를 한창 조정하다가 저장해 놓을때 유용하게 사용 가능합니다.</p>
+
+<h2 id="파라미터-파일-로드-eloquent">파라미터 파일 로드 <span style="color:red">(Eloquent)</span></h2>
+<p>저장한 파라미터 파일을 불러오는 기능입니다. 명령어라기 보다는 <code class="language-plaintext highlighter-rouge">ros2 run</code>에 딸린 기능입니다. 사용 방법은 다음과 같습니다.<br />
+ROS Eloquent 이상:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 run &lt;패키지 이름&gt; &lt;실행할 노드 이름&gt; --ros-args --params-file &lt;파일 이름&gt;
+</code></pre></div></div>
+<p>ROS2 Dashing:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 run &lt;패키지 이름&gt; &lt;실행할 노드 이름&gt; __params:=&lt;파일 이름&gt;
+</code></pre></div></div>
+<p>터틀심 노드로 예시를 들어 보겠습니다.<br />
+ROS Eloquent 이상:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 run turtlesim turtlesim_node --ros-args --params-file ./turtlesim.yaml
+</code></pre></div></div>
+<p>ROS2 Dashing:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 run turtlesim turtlesim_node __params:=./turtlesim.yaml
+</code></pre></div></div>
+<p>실제로 터미널에서 실행은 못해보았지만 위의 명령어를 실행하면 조정한 파라미터 값이 적용될 것입니다.</p>
+
+<h1 id="마무리">마무리</h1>
+<p>beginner step에서 해볼 내용이 거의 마무리되어 갑니다. 다음 게시글에서는 ROS2에서의 launch에 대해서 정리하겠습니다.</p>
+
+<h1 id="참고-사이트">참고 사이트</h1>
+<p><a href="https://index.ros.org/doc/ros2/Tutorials/Parameters/Understanding-ROS2-Parameters/#id9">ROS Index-ROS2 튜토리얼 파라미터편</a></p>
+
+:ET

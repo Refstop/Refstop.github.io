@@ -1,0 +1,20 @@
+I"<h1 id="slam이란">SLAM이란?</h1>
+<p>SLAM이란 위치 추정과 맵핑을 동시에 하는 기법.<br />
+2차원, 3차원 지도를 그리는 방법이다.<br />
+방법: Gmapping, Katographer 등<br />
+OpenSLAM에 공개된 SLAM의 한 종류, ros에서 패키지로 제공.<br />
+Occupancy Grid Mapping: 2차원 점유 격자 지도<br />
+<img src="/assets/img/slam/스크린샷, 2020-12-11 20-41-31.png" alt="" /></p>
+
+<p>직접 만든 로봇관 2층 빈방의 occupancy grid map.<br />
+흰색: 자유 영역(이동 가능)<br />
+흑색: 점유 영역(이동 불가)<br />
+회색: 미지 영역(확인 안됨)</p>
+
+<p>Gmapping은 개발이 거의 되고 있지 않는데다가 2d이다.<br />
+구글 cartographer는 개발도 잘되고 있고, 3d이다.<br />
+카토그래퍼쪽이 비전이 있다고 한다.</p>
+
+<p>Q. 사실상 SLAM과 컴퓨터 비전은 다른 분야인거네요??<br />
+맞다. 본질적으로는 다르다. 하지만 교집합이 매우 넓고 점점 겹쳐지고 있는 상태라서 결국 둘 다 하게 될것이다.</p>
+:ET

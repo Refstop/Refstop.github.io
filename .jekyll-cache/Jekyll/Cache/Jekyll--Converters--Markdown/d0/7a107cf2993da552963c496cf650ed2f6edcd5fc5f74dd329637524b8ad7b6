@@ -1,0 +1,35 @@
+I"�	<h1 id="ros2-설치-명령어">ROS2 설치 명령어</h1>
+<p>아래 명령어들을 터미널에 실행합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt update &amp;&amp; sudo apt install curl gnupg2 lsb-release
+$ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+$ sudo sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" &gt; /etc/apt/sources.list.d/ros2-latest.list'
+</code></pre></div></div>
+<p>ROS2 dashing 설치, 우분투 버전마다 설치해야 하는 버전이 다릅니다. (ex. 18.04 -&gt; dashing, 20.04 -&gt; foxy)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt update
+$ sudo apt install ros-dashing-desktop
+</code></pre></div></div>
+
+<p>bashrc 파일에 다음 명령어 추가합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source /opt/ros/dashing/setup.bash
+</code></pre></div></div>
+<p>아니면 그냥 echo 명령어를 사용하여 bashrc 맨밑줄에 추가합시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo "source /opt/ros/dashing/setup.bash" &gt;&gt; ~/.bashrc
+</code></pre></div></div>
+
+<p>ROS1 버전이 이미 설치되어 있다면 조금 번거로울 수 있습니다.<br />
+자신에게 필요한 ROS를 사용할 때마다 bashrc를 열어 수정해 줘야 합니다. (해결법 필요)<br />
+공존하기가 쉽지 않네요.</p>
+
+<h1 id="간단한-예제-실행">간단한 예제 실행</h1>
+<p>Publisher와 Subscriber 실행<br />
+<code class="language-plaintext highlighter-rouge">ros2 run demo_nodes_cpp talker</code><br />
+<code class="language-plaintext highlighter-rouge">ros2 run demo_nodes_py listener</code></p>
+
+<p>저는 잘 되었습니다.</p>
+
+<p>벌써부터 차이점이 느껴집니다. roscore같은 master 서버를 사용하지 않습니다.</p>
+
+<h1 id="참고-사이트">참고 사이트</h1>
+<p><a href="https://pinkwink.kr/1284">ROS2 dashing 설치</a></p>
+<iframe width="857" height="482" src="https://www.youtube.com/embed/dbP1isbhegE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+:ET

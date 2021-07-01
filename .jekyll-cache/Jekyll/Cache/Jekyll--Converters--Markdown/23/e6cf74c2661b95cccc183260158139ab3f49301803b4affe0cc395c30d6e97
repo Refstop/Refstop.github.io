@@ -1,0 +1,165 @@
+I"�,<h1 id="패키지란">패키지란?</h1>
+<p>패키지는 ROS에서 실행될 코드를 담고 있는 공간입니다. 앞서 올린 작업공간 게시글에서 소스 파일과 비슷한 것이라 하였는데, 그것은 이 패키지가 사실상 코어 역할을 하고 있기 때문입니다. Visual Studio로 비유하자면 <code class="language-plaintext highlighter-rouge">Hello world!</code>를 출력하는 프로그램을 C언어로 작성했다고 합시다. 프로젝트(dev_ws)을 만들고 그 안의 소스 파일 폴더(src)안에 helloworld.cpp 소스 파일(패키지)을 만들면 결국 <code class="language-plaintext highlighter-rouge">Hello world!</code> 출력은 helloworld.cpp 파일이 하는 것입니다. 작업공간과 패키지 역시 같습니다. 작업공간도 패키지가 돌아갈 환경을 마련해 줄 뿐, 실제 operation은 패키지가 다 합니다. 따라서 어떤 부품을 사용하려 할때 그 부품에 맞는 패키지를 다운받아 사용하면, 우리가 직접적으로 코드를 짜는 일이 현저히 줄어듭니다. 이 Tutorial 게시글에는 간단한 예시로 패키지를 체험해 볼 뿐이지만, 직접 사용할 때는 디바이스와 연동하여 사용할 것입니다.</p>
+<h1 id="패키지-사용방법">패키지 사용방법</h1>
+<h2 id="1-패키지-생성">1. 패키지 생성</h2>
+<p>패키지를 생성하는 방법은 다음과 같습니다. 사용할 언어에 따라서 명령어가 조금 달라집니다.
+C++(cmake):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 pkg create --build-type ament_cmake &lt;패키지 이름&gt;
+</code></pre></div></div>
+<p>Python:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 pkg create --build-type ament_python &lt;패키지 이름&gt;
+</code></pre></div></div>
+<p>패키지는 src 폴더에 저장되어야 하므로 우선 src 폴더로 이동한 후 명령어를 실행해 줍시다. 저는 파이썬을 기준으로 예시를 들겠습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ~/dev_ws/src
+$ ros2 pkg create --build-type ament_python --node-name my_node my_package
+</code></pre></div></div>
+<p>src 폴더를 보면 <code class="language-plaintext highlighter-rouge">my_package</code>라는 폴더가 생성되었을 것입니다.</p>
+
+<h2 id="2-colcon-build">2. colcon build</h2>
+<p>패키지를 작업공간에서 사용하기 위해서 <code class="language-plaintext highlighter-rouge">colcon build</code> 명령어로 빌드해 줍시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ colcon build
+</code></pre></div></div>
+<p>또는 <code class="language-plaintext highlighter-rouge">colcon build</code>의 <code class="language-plaintext highlighter-rouge">--packages-select</code> 명령어를 사용하여 지정한 패키지만 빌드할 수도 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ colcon build --packages-select my_package
+</code></pre></div></div>
+
+<h2 id="3-colcon-ws-setupbash-파일-소싱">3. colcon ws setup.bash 파일 소싱</h2>
+<p>작업공간의 setup.bash 파일을 소싱해 줍시다. 이 작업은 오버레이(덧씌우기)하여 가장 최신 작업 상태의 작업공간을 적용하는 과정입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ . install/setup.bash
+</code></pre></div></div>
+<p>작업공간 내의 파일을 수정했다면 그때마다 실행해 줍시다.</p>
+
+<h2 id="4-노드-실행해보기">4. 노드 실행해보기</h2>
+<p>ROS2의 패키지는 기본적으로 테스트 노드가 같이 생성됩니다. 이미 패키지 생성&amp;빌드를 완료했으니 테스트 노드를 실행해 봅시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 run my_package my_node
+</code></pre></div></div>
+<p>실행결과는 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hi from my_package.
+</code></pre></div></div>
+<h1 id="언어에-따른-패키지-폴더-살펴보기">언어에 따른 패키지 폴더 살펴보기</h1>
+<p>위에서 말했듯 ROS2는 C++과 파이썬 두 언어로 빌드할 수 있습니다. 위의 예시는 파이썬을 실행한 결과입니다. 각각의 경우 <code class="language-plaintext highlighter-rouge">ros2 pkg create</code>가 생성해 주는 패키지의 생김새를 살펴봅시다.</p>
+<h2 id="1-ccmake-빌드">1. C++(Cmake 빌드)</h2>
+<p><code class="language-plaintext highlighter-rouge">dev_ws/src/my_package</code> 폴더의 내용물은 이렇습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd dev_ws/src/my_package
+$ ls
+CMakeLists.txt  include  package.xml  src
+</code></pre></div></div>
+<p>C++로 짠 노드 파일은 <code class="language-plaintext highlighter-rouge">src</code> 폴더 안에 저장됩니다. 실제로 기본적으로 생성된 테스트 노드가 들어 있습니다.</p>
+
+<h2 id="2-python">2. Python</h2>
+<p>마찬가지로 위의 명령어를 실행하면 내용물은 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd dev_ws/src/my_package
+$ ls
+my_package  package.xml  resource  setup.cfg  setup.py  test
+</code></pre></div></div>
+<p>Python으로 짠 노드 파일은 <code class="language-plaintext highlighter-rouge">my_package</code> 폴더 안에 저장됩니다. C++과는 다르게 노드 파일 폴더의 이름이 패키지 이름과 같습니다.</p>
+
+<h1 id="packagexml-파일">package.xml 파일</h1>
+<p>package.xml 파일에는 패키지에 대한 간단한 설명과 의존성 정보가 들어 있습니다. 설명은 패키지 실행에 아무 영향을 주지 않지만 정보를 위해 작성합니다. 각 언어에 따라서 package.xml의 생김새가 다릅니다.</p>
+<h2 id="1-ccmake-빌드-1">1. C++(Cmake 빌드)</h2>
+<p>C++패키지의 package.xml 내용은 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0"?&gt;
+&lt;?xml-model
+   href="http://download.ros.org/schema/package_format3.xsd"
+   schematypens="http://www.w3.org/2001/XMLSchema"?&gt;
+&lt;package format="3"&gt;
+ &lt;name&gt;my_package&lt;/name&gt;
+ &lt;version&gt;0.0.0&lt;/version&gt;
+ &lt;description&gt;TODO: Package description&lt;/description&gt;
+ &lt;maintainer email="user@todo.todo"&gt;user&lt;/maintainer&gt;
+ &lt;license&gt;TODO: License declaration&lt;/license&gt;
+
+ &lt;buildtool_depend&gt;ament_cmake&lt;/buildtool_depend&gt;
+
+ &lt;test_depend&gt;ament_lint_auto&lt;/test_depend&gt;
+ &lt;test_depend&gt;ament_lint_common&lt;/test_depend&gt;
+
+ &lt;export&gt;
+   &lt;build_type&gt;ament_cmake&lt;/build_type&gt;
+ &lt;/export&gt;
+&lt;/package&gt;
+</code></pre></div></div>
+<p>초반부는 패키지의 내용을 설명하는 부분입니다. 패키지의 이름이나, 작성자, 설명, 이메일, 라이센스의 정보를 담을 수 있습니다. 내맘대로 수정해 봅시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;name&gt;my_package&lt;/name&gt;
+ &lt;version&gt;1.0.0&lt;/version&gt;
+ &lt;description&gt;Beginner client libraries tutorials practice package&lt;/description&gt;
+ &lt;maintainer email="bhbhchoi@gmail.com"&gt;user&lt;/maintainer&gt;
+ &lt;license&gt;Apache License 2.0&lt;/license&gt;
+</code></pre></div></div>
+<p>다음은 의존성을 담당하는 부분입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;buildtool_depend&gt;ament_cmake&lt;/buildtool_depend&gt;
+
+ &lt;test_depend&gt;ament_lint_auto&lt;/test_depend&gt;
+ &lt;test_depend&gt;ament_lint_common&lt;/test_depend&gt;
+
+ &lt;export&gt;
+   &lt;build_type&gt;ament_cmake&lt;/build_type&gt;
+ &lt;/export&gt;
+</code></pre></div></div>
+<p>의존성을 추가하면 이곳에 같이 추가해 줘야 합니다.</p>
+
+<h2 id="2-python-1">2. Python</h2>
+<p>Python 패키지의 package.xml 파일은 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0"?&gt;
+&lt;?xml-model
+   href="http://download.ros.org/schema/package_format3.xsd"
+   schematypens="http://www.w3.org/2001/XMLSchema"?&gt;
+&lt;package format="3"&gt;
+ &lt;name&gt;my_package&lt;/name&gt;
+ &lt;version&gt;0.0.0&lt;/version&gt;
+ &lt;description&gt;TODO: Package description&lt;/description&gt;
+ &lt;maintainer email="user@todo.todo"&gt;user&lt;/maintainer&gt;
+ &lt;license&gt;TODO: License declaration&lt;/license&gt;
+
+ &lt;buildtool_depend&gt;ament_python&lt;/buildtool_depend&gt;
+
+ &lt;test_depend&gt;ament_copyright&lt;/test_depend&gt;
+ &lt;test_depend&gt;ament_flake8&lt;/test_depend&gt;
+ &lt;test_depend&gt;ament_pep257&lt;/test_depend&gt;
+ &lt;test_depend&gt;python3-pytest&lt;/test_depend&gt;
+
+ &lt;export&gt;
+   &lt;build_type&gt;ament_python&lt;/build_type&gt;
+ &lt;/export&gt;
+&lt;/package&gt;
+</code></pre></div></div>
+<p>C++의 package.xml 파일과 거의 비슷하지만 의존성 부분이 조금 다릅니다. 패키지 내용과 의존성 추가 편집 방법 역시 C++ 패키지와 같습니다. 하지만 Python 패키지에서는 package.xml 파일을 수정할 때 고쳐줘야 할 파일이 하나 더 있습니다. 바로 setup.py 파일입니다. setup.py 파일의 내용은 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from setuptools import setup
+
+package_name = 'my_py_pkg'
+
+setup(
+ name=package_name,
+ version='0.0.0',
+ packages=[package_name],
+ data_files=[
+     ('share/ament_index/resource_index/packages',
+             ['resource/' + package_name]),
+     ('share/' + package_name, ['package.xml']),
+   ],
+ install_requires=['setuptools'],
+ zip_safe=True,
+ maintainer='TODO',
+ maintainer_email='TODO',
+ description='TODO: Package description',
+ license='TODO: License declaration',
+ tests_require=['pytest'],
+ entry_points={
+     'console_scripts': [
+             'my_node = my_py_pkg.my_node:main'
+     ],
+   },
+)
+</code></pre></div></div>
+<p>이 파이썬 코드에서 16~19줄을 package.xml 파일의 내용에 맞게 고치면 됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> maintainer='bhbhchoi',
+ maintainer_email='bhbhchoi@gmail.com',
+ description='Beginner client libraries tutorials practice package',
+ license='Apache License 2.0',
+</code></pre></div></div>
+<p>이런 식으로 말이죠. 이미 maintainer와 maintainer_email은 본인에 맞게 되어 있을 것입니다.</p>
+<h1 id="마무리">마무리</h1>
+<p>다음 시간에는 퍼블리셔&amp;서브스크라이버 노드를 직접 작성해 보겠습니다.</p>
+<h1 id="참고-사이트">참고 사이트</h1>
+<p><a href="https://index.ros.org/doc/ros2/Tutorials/Creating-Your-First-ROS2-Package/">ROS Index-ROS2 튜토리얼 패키지 생성편</a></p>
+:ET

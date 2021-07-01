@@ -1,0 +1,94 @@
+I"�<h1 id="rosbag이란">rosbag이란?</h1>
+<p>ROS에서 실행되고 있는 토픽을 녹화하는 명령어입니다. 녹화된 파일은 나중에 같은 환경을 조성할 수 있습니다. 예를 들어 꼬부기와 라이다를 이용한 맵핑을 하려 할때, 우선 꼬부기와 라이다 노드만 켜놓고 rosbag으로 퍼블리시되는 토픽 내용을 녹화합니다. 그 후 녹화된 파일을 재생하고 맵핑 노드를 켜면 녹화된 토픽으로 맵을 만들 수 있습니다.</p>
+
+<h1 id="ros2-bag-prerequisites">ros2 bag Prerequisites</h1>
+<p>ros2 bag이 설치되지 않았다면 다음 명령어를 실행하여 설치합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt-get install ros-dashing-ros2bag ros-dashing-rosbag2-converter-default-plugins ros-dashing-rosbag2-storage-default-plugins
+</code></pre></div></div>
+<p>설치한 후에 bag 파일을 저장할 폴더를 만듭니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir bag_files
+$ cd bag_files
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">ros2 bag</code> 실습을 위해서 터틀심을 실행합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 run turtlesim turtlesim_node
+$ ros2 run turtlesim turtle_teleop_key
+</code></pre></div></div>
+
+<h1 id="ros2에서의-bag">ROS2에서의 bag</h1>
+<p>기본적으로 ROS1에서의 <code class="language-plaintext highlighter-rouge">rosbag</code> 과 사용법이 비슷합니다. 지금까지도 그래왔듯 <code class="language-plaintext highlighter-rouge">rosbag</code>을 <code class="language-plaintext highlighter-rouge">ros2 bag</code>으로 고치면 됩니다.</p>
+
+<h2 id="ros2-bag-record">ros2 bag record</h2>
+<p>record 명령어를 사용하는 방법은 3가지 정도가 있습니다.</p>
+<ol>
+  <li>하나만</li>
+  <li>여러개</li>
+  <li>모두</li>
+</ol>
+
+<h3 id="1-하나만">1. 하나만</h3>
+<p>먼저 하나만 record 하는 명령어는 다음과 같습니다. 지정된 토픽 하나만 녹화합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 bag record &lt;토픽 이름&gt;
+</code></pre></div></div>
+<p>터틀심 예시는 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 bag record /turtle1/cmd_vel
+[INFO] [rosbag2_storage]: Opened database 'rosbag2_2019_10_11-05_18_45'.
+[INFO] [rosbag2_transport]: Listening for topics...
+[INFO] [rosbag2_transport]: Subscribed to topic '/turtle1/cmd_vel'
+[INFO] [rosbag2_transport]: All requested topics are subscribed. Stopping discovery...
+</code></pre></div></div>
+<p>지정된 <code class="language-plaintext highlighter-rouge">/turtle1/cmd_vel</code> 토픽만 녹화합니다.</p>
+
+<h3 id="2-여러개">2. 여러개</h3>
+<p>사실 여러개 녹화도 마찬가지입니다. 뒤에 녹화하고 싶은 토픽을 더 적어주면 됩니다.<br />
+예시를 들어보겠습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 bag record -o subset /turtle1/cmd_vel /turtle1/pose
+[INFO] [rosbag2_storage]: Opened database 'subset'.
+[INFO] [rosbag2_transport]: Listening for topics...
+[INFO] [rosbag2_transport]: Subscribed to topic '/turtle1/cmd_vel'
+[INFO] [rosbag2_transport]: Subscribed to topic '/turtle1/pose'
+[INFO] [rosbag2_transport]: All requested topics are subscribed. Stopping discovery...
+</code></pre></div></div>
+<p>여기서 <code class="language-plaintext highlighter-rouge">-o</code> 명령어는 bag 파일에 커스텀 네임을 주기 위해서입니다. 기본적으로 bag파일은 <code class="language-plaintext highlighter-rouge">년-월-일-시-분-초.bag</code>의 이름으로 저장됩니다. 하지만 <code class="language-plaintext highlighter-rouge">-o &lt;나만의 이름&gt;</code> 명령어를 추가하여 필요한 이름으로 저장할 수 있습니다. 위의 명령어는 <code class="language-plaintext highlighter-rouge">subset.bag</code> 이라는 파일명으로 저장될 것입니다.</p>
+
+<h3 id="3-모두">3. 모두</h3>
+<p>현재 실행되고 있는 모든 토픽을 녹화합니다. 하지만 이 명령어는 circular dependency의 발생이나 시스템에 문제가 생길 수 있기 때문에 왠만하면 토픽 지정 녹화를 사용하기를 권장합니다. 사용 방법은 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 bag record -a
+</code></pre></div></div>
+
+<h2 id="ros2-bag-info">ros2 bag info</h2>
+<p>bag 파일 정보를 볼 수 있습니다. 사용 방법은 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 bag info &lt;bag 파일 이름&gt;
+</code></pre></div></div>
+<p>예시로서 위에서 생성했던 <code class="language-plaintext highlighter-rouge">subset.bag</code> 파일의 info를 봅시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 bag info &lt;subset.bag&gt;
+Files:             subset.db3
+Bag size:          228.5 KiB
+Storage id:        sqlite3
+Duration:          48.47s
+Start:             Oct 11 2019 06:09:09.12 (1570799349.12)
+End                Oct 11 2019 06:09:57.60 (1570799397.60)
+Messages:          3013
+Topic information: Topic: /turtle1/cmd_vel | Type: geometry_msgs/msg/Twist | Count: 9 | Serialization Format: cdr
+                 Topic: /turtle1/pose | Type: turtlesim/msg/Pose | Count: 3004 | Serialization Format: cdr
+</code></pre></div></div>
+
+<h2 id="ros2-bag-play">ros2 bag play</h2>
+<p>지정한 bag 파일을 재생합니다. 사용 방법은 다음과 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 bag play &lt;bag 파일 이름&gt;
+</code></pre></div></div>
+<p>예시로 위에서 생성했던 <code class="language-plaintext highlighter-rouge">subset.bag</code> 파일을 재생해 봅시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ros2 bag play subset
+[INFO] [rosbag2_storage]: Opened database 'subset'.
+</code></pre></div></div>
+<p>터틀심이 이전에 녹화했던 경로대로 움직입니다.
+<img src="https://index.ros.org/doc/ros2/_images/playback.png" alt="playbag" /> {: width:”70%” height:”70%”}</p>
+
+<p>게다가 bag 파일이 재생되고 있을 때 토픽도 생성되므로 <code class="language-plaintext highlighter-rouge">ros2 topic echo</code> 명령어를 이용하여 토픽 내용도 볼 수 있습니다.</p>
+
+<h1 id="마무리">마무리</h1>
+<p>ROS2 beginner 첫번째 파트의 내용이 마무리되어 갑니다. 이제 workspace와 package, node를 직접 만들어보는 내용을 공부할 예정입니다.</p>
+
+<h1 id="참고-사이트">참고 사이트</h1>
+<p><a href="https://index.ros.org/doc/ros2/Tutorials/Ros2bag/Recording-And-Playing-Back-Data/">ROS Index-ROS2 튜토리얼 bag편</a></p>
+
+:ET

@@ -1,0 +1,31 @@
+I"R<h1 id="작업공간이란">작업공간이란?</h1>
+<p>작업공간은 ROS 패키지를 운용할 수 있는 디렉토리를 말합니다. 사용자는 이 작업공간 내부에 패키지를 생성하여 ROS를 사용할 수 있습니다. 마치 Visual Studio에서 프로젝트를 만들고 그 안의 소스 파일 폴더에 소스 파일을 생성하여 프로그래밍 언어를 돌리듯이, ROS에서는 작업공간을 만들어 그 안의 src(source의 줄임말) 폴더에 패키지 폴더를 생성하여 패키지를 돌리는 느낌입니다.<br />
+ROS를 사용하기 위해서 터미널에는 <code class="language-plaintext highlighter-rouge">source /opt/ros/&lt;distro&gt;/setup.bash</code>명령어가 실행되어 있어야 합니다. <code class="language-plaintext highlighter-rouge">&lt;distro&gt;</code>에는 ROS2 버전 이름을 적습니다. 저는 dashing 버전을 사용하고 있기에 <code class="language-plaintext highlighter-rouge">source /opt/ros/dashing/setup.bash</code> 명령어를 사용하였습니다. <code class="language-plaintext highlighter-rouge">bashrc</code> 파일에 넣어두면 터미널을 켤 때마다 실행해 줍니다. 이 방법은 <a href="https://refstop.github.io/posts/ros2-install/">ROS2 설치 게시글</a>에 작성되어 있습니다.</p>
+
+<h1 id="1-작업공간-디렉토리-만들기">1. 작업공간 디렉토리 만들기</h1>
+<p>우선 작업공간 디렉토리를 만들어 줍시다. 일반적으로 이름은 workspace의 줄임말인 <code class="language-plaintext highlighter-rouge">작업공간 이름_ws</code>로 짓습니다. Tutorial 사이트를 참고해서 <code class="language-plaintext highlighter-rouge">dev_ws</code>로 만들어 줍시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir -p ~/dev_ws/src
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">dev_ws</code>라는 이름의 작업공간을 생성하고 그 내부에 패키지가 있을 폴더인 <code class="language-plaintext highlighter-rouge">src</code> 폴더를 만들어 주었습니다.</p>
+<h1 id="2-샘플-패키지-저장">2. 샘플 패키지 저장</h1>
+<p>이제 패키지를 실행해 봅시다. 참고 사이트에서 준비한 패키지를 저장합니다. 패키지는 반드시 src 폴더 안에 저장합니다. 이 명령어의 <code class="language-plaintext highlighter-rouge">&lt;distro&gt;</code> 역시 자신에게 맞는 버전명으로 바꿔줍시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ~/dev_ws/src
+$ git clone https://github.com/ros/ros_tutorials.git -b &lt;distro&gt;-devel
+</code></pre></div></div>
+
+<h1 id="3-colcon-build">3. colcon build</h1>
+<p>colcon은 작업공간을 빌드해주는 명령어입니다. ROS1에서 catkin과 비슷한 역할을 담당합니다. 한번 빌드해 봅시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ colcon build
+</code></pre></div></div>
+<p>몇초 기다리면 빌드가 다 되었다고 뜰 것입니다.</p>
+
+<h2 id="설치가-되어있지-않다고-뜰-때">설치가 되어있지 않다고 뜰 때</h2>
+<p>사실 이 블로그의 ROS2 설치 게시글에는 colcon 설치에 대한 내용이 없습니다. 다음 명령어로 설치해 줍시다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt update
+$ sudo apt install python3-colcon-common-extensions
+</code></pre></div></div>
+
+<h1 id="참고-사이트">참고 사이트</h1>
+<p><a href="https://index.ros.org/doc/ros2/Tutorials/Workspace/Creating-A-Workspace/">ROS Index-ROS2 튜토리얼 작업공간 생성편</a><br />
+<a href="https://colcon.readthedocs.io/en/released/user/installation.html">colcon Installation</a></p>
+:ET

@@ -1,0 +1,13 @@
+I"�<h1 id="지금까지의-진행상황-요약">지금까지의 진행상황 요약</h1>
+<p>RealSense D435i를 교수님께 받고 SDK 툴을 설치했다. ROS wiki의 RealSense 항목을 참조했다.<br />
+<a href="http://wiki.ros.org/RealSense">ROS wiki RealSense 항목</a><br />
+그 후 Rviz를 설치하여 Depth Camera의 PointCloud와 rgb camera를 볼 수 있었다.<br />
+(rviz 사진 첨부 필요)<br />
+realsense d435i와 rviz 연동해봄.<br />
+필요한것은 *roslaunch realsense2_camera rs_rgbd.launch, rviz<br />
+이를 위해서 rgbd가 설치되어 있어야 한다.<br />
+안되어 있으면 Resource not found: rgbd_launch 오류 발생.<br />
+<code class="language-plaintext highlighter-rouge">sudo apt install ros-&lt;ros_version&gt;-rgbd-launch</code> 커맨드를 실행해 설치.<br />
+이후 rviz에서 map-&gt;camara_link로 변경, Add-&gt;Pointcloud2를 선택하여 realsense 작동을 확인할 수 있다.</p>
+
+:ET

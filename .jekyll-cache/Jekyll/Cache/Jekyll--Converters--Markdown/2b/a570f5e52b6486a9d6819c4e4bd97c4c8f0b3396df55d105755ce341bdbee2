@@ -1,0 +1,3 @@
+I"�<h1 id="deep-nerual-network">Deep Nerual Network</h1>
+<p>지금까지 정리한 Nerual Network는 모두 layer가 하나뿐인 단층 신경망(Single-Layer Perceptron)입니다. 하지만 단층 신경망으로는 비선형 모델을 구현할 수 없습니다. <a href="https://refstop.github.io/udacity/deep%20learning/uda-dl-nnnl#1">지난 게시글</a>에서 언급한 바와 같이 비선형 모델은 입력층(Input layer), 은닉층(Hidden layer), 출력층(Output layer)으로 이루어진 $^{1)}$심층 신경망(Deep Neural Network)으로 구현할 수 있습니다. 따라서 인공 신경망의 성능 향상을 위해서는 심층 신경망의 사용은 필수적이라고 할 수 있습니다.</p>
+:ET

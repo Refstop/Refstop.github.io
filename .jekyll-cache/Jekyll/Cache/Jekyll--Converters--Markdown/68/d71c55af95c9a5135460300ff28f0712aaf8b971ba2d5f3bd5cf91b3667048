@@ -1,0 +1,33 @@
+I"�
+<h1 id="지금까지-했던-것에-대해">지금까지 했던 것에 대해</h1>
+<p>지금까지는 설명 없이 예제만 실행해 봤습니다. 이제는 ROS에서 쓰이는 개념에 대해서 조금씩 설명해 보겠습니다.</p>
+
+<h1 id="노드란">노드란?</h1>
+<p>ROS2를 시작하시는 분들은 거의 ROS1을 만져 보셨을 것이기에, 노드의 설명은 간단하게 하겠습니다. 노드는 데이터를 처리하는 세포 같은 것입니다. 데이터를 보내거나 받는 기능이 있고, 혹은 둘 다 있을수도 있습니다. 이들끼리는 토픽이라는 걸 주고 받는데 이는 메시지의 형태로, 메시지는 자료형의 형태로 수신/발신 됩니다.</p>
+
+<h1 id="ros2에서의-rosrun">ROS2에서의 rosrun</h1>
+<p>ROS2에서는 <code class="language-plaintext highlighter-rouge">ros2 run</code>의 형식으로 노드를 실행합니다.<br />
+<code class="language-plaintext highlighter-rouge">ros2 run &lt;패키지 이름&gt; &lt;실행할 노드 이름&gt;</code><br />
+예를 들어 터틀심 노드를 실행할때, 다음과 같이 입력합니다.<br />
+<code class="language-plaintext highlighter-rouge">ros2 run turtlesim turtlesim_node</code></p>
+
+<h1 id="ros2에서의-rosnode">ROS2에서의 rosnode</h1>
+<p>ROS2에서는 <code class="language-plaintext highlighter-rouge">ros2 node</code>의 형식으로 <code class="language-plaintext highlighter-rouge">rosnode</code> 명령어를 수행합니다.</p>
+
+<h2 id="ros2-node-list">ros2 node list</h2>
+<p>다음의 명령어는 ROS1에서의 <code class="language-plaintext highlighter-rouge">rosnode list</code>와 같습니다. 현재 실행되고 있는 노드들의 리스트를 보여줍니다.<br />
+<code class="language-plaintext highlighter-rouge">ros2 node list</code><br />
+터틀심 노드를 실행하고 있다면 다음과 같이 나올겁니다.
+<code class="language-plaintext highlighter-rouge">/turtlesim</code></p>
+
+<h2 id="ros2-node-info">ros2 node info</h2>
+<p>다음의 명령어는 ROS1에서의 <code class="language-plaintext highlighter-rouge">rosnode info</code>와 같습니다. 어떤 노드 하나의 정보만을 콕 집어 보고싶을때 사용합니다.<br />
+<code class="language-plaintext highlighter-rouge">ros2 node info &lt;노드 이름&gt;</code><br />
+보통 퍼블리셔, 서브스크라이버, 서비스의 정보가 담겨있습니다.</p>
+
+<h1 id="요약">요약</h1>
+<p>ROS2부터 시작하시는 분은 없으시니 다 알고 계시는 내용일 것입니다. 아직까지는 ROS1과 크게 차이가 없는 듯 합니다.</p>
+
+<h1 id="참고-사이트">참고 사이트</h1>
+<p><a href="https://index.ros.org/doc/ros2/Tutorials/Understanding-ROS2-Nodes/">ROS Index-ROS2 튜토리얼 노드편</a></p>
+:ET

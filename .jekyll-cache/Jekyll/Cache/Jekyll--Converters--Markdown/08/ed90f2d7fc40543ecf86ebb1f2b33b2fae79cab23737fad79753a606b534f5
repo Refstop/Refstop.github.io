@@ -1,0 +1,38 @@
+I"=
+<h1 id="introducing-kobuki">Introducing KOBUKI</h1>
+<p>Kobuki 로봇은 유진 로봇에서 제작한 모바일 로봇 플랫폼입니다. ROS 실습용으로 사용하기 좋은 로봇입니다. 이 게시글은 KOBUKI 설치 방법을 다루고 있습니다.</p>
+
+<h1 id="kobuki-package-설치">Kobuki package 설치</h1>
+<p>제가 사용하는 ROS 버전은 melodic이기 때문에 유진로봇 github에서 패키지를 다운받았습니다. kinetic 버전을 사용하시는 분은 아래 링크를 참고해 주십시오.<br />
+<a href="http://wiki.ros.org/kobuki/Tutorials/Installation">ROS wiki Kobuki Tutorial-Installation</a></p>
+
+<p>우선 Kobuki를 위한 workspace를 만듭니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir -p ~/kobuki_ws/src
+$ cd ~/kobuki_ws/
+$ catkin_make
+</code></pre></div></div>
+<p>src 폴더에 Kobuki 패키지를 설치합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd src
+$ git clone https://github.com/yujinrobot/kobuki.git
+</code></pre></div></div>
+<p>kobuki_ws로 가서 rosdep으로 의존성을 설치해 줍니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ~/kobuki_ws/
+$ rosdep install --from-paths src --ignore-src -r -y
+</code></pre></div></div>
+<p>마지막으로 catkin_make해 줍니다.<br />
+<code class="language-plaintext highlighter-rouge">$ catkin_make</code></p>
+
+<p>설치가 완료되었습니다. bashrc에 kobuki_ws의 source 명령어를 추가해 줍시다.<br />
+<code class="language-plaintext highlighter-rouge">$ echo ". ~/kobuki_ws/devel/setup.bash" &gt;&gt; ~/.bashrc</code></p>
+
+<h1 id="kobuki-작동-확인-teleop">Kobuki 작동 확인 (teleop)</h1>
+<p>우선 <code class="language-plaintext highlighter-rouge">roscore</code>를 실행한 후, 다른 쉘을 열어 다음의 명령어를 실행합니다.<br />
+<code class="language-plaintext highlighter-rouge">$ roslaunch kobuki_node minimal.launch</code><br />
+다음은 teleop를 위해 다른 쉘에서 다음의 명령어를 실행합니다.<br />
+<code class="language-plaintext highlighter-rouge">$ roslaunch kobuki_keyop safe_keyop.launch</code><br />
+이제 키보드로 터틀봇을 조종할 수 있습니다.</p>
+
+<h1 id="참고-사이트">참고 사이트</h1>
+<p><a href="https://medium.com/@parkerrobert1351/kobuki-ros-b8b06c0591df">Kobuki ROS - Den medium blog</a><br />
+<a href="http://wiki.ros.org/kobuki/Tutorials">Ros wiki Kobuki Tutorial - Beginner Level</a></p>
+:ET
