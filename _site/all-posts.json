@@ -1,6 +1,8 @@
 {
   "posts" : [
     
+    "./uda-lenet.html",
+    
     "./uda-cnn.html",
     
     "./i2n-signal.html",

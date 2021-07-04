@@ -582,7 +582,46 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./uda-cnn.html">[Udacity] Deep Learning (6) - Convolutional Nerual Network(작성중)</a>
+					<a class="post-list-title" href="./uda-lenet.html">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-07-05T01:11:24+09:00">July 5, 2021</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        less than 1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.</p> <h2 id="1-cnn의-구성">1. CNN의 구성</h2> <p>CNN의 구성을 공부하는 예시로서 대표적으로 사용되는 LeNet-5 모델으로 정리하겠습니다.</p> <h3 id="lenet-5-네트워크란">LeNet-5 네트워크란?</h3> <p align="center"> <img width="100%" height="100%" src="/assets/img/deeplearning/lenet.png" /> </p> <p>LeNet-5 네트워크는 CNN을 처음으로 개발한 Yann Lecun 연구팀이 개발한 CNN 알고리즘의 이름입니다. 이 알고리즘이 소개된 논문 제목은 Gradient-based learning applied to document recognition”입니다.<br /> LeNet-5 네트워크는 Input-C1-S2-C3-S4-C5-F6-Output으로 이루어져 있고, Convolution layer, Pooling layer 두 쌍과 Fully Connected layer 3개로 구성되어 있습니다. 원래 논문에서는 활성화 함수로서 tanh 함수를 사용했지만, 제 코드에서는 ReLU 함수를 사용하였습니다.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.models import Sequential from keras.layers.convolutional import Conv2D from...<a class="read-more" href="./uda-lenet.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./uda-cnn.html">[Udacity] Deep Learning (6) - Convolutional Nerual Network</a>
 					
 
   <span class = "post-card-meta">
@@ -606,7 +645,7 @@
     
     <span class="page_meta-readtime">
       
-        2 minute read
+        3 minute read
       
     </span>
   
@@ -654,45 +693,6 @@
 
 					<div class="post-excerpt">
 						<h1 id="deep-nerual-network">Deep Nerual Network</h1> <p>지금까지 정리한 Nerual Network는 모두 layer가 하나뿐인 단층 신경망(Single-Layer Perceptron)입니다. 하지만 단층 신경망으로는 비선형 모델을 구현할 수 없습니다. <a href="https://refstop.github.io/udacity/deep%20learning/uda-dl-nnnl#1">지난 게시글</a>에서 언급한 바와 같이 비선형 모델은 입력층(Input layer), 은닉층(Hidden layer), 출력층(Output layer)으로 이루어진 $^{1)}$심층 신경망(Deep Neural Network)으로 구현할 수 있습니다. 따라서 인공 신경망의 성능 향상을 위해서는 심층 신경망의 사용은 필수적이라고 할 수 있습니다.</p> <h2 id="relu-activation-function">ReLU Activation Function</h2> <p>심층 신경망에 대해서 정리하기 전에 <strong>ReLU 활성화 함수</strong>에 대해서 알아보고 넘어가겠습니다. 활성화 함수는 각 층의 신경망의 출력을 결정하는 함수입니다. 또한 활성화 함수가 없다면 심층 신경망은 $y=W_{1}W_{2}W_{3} \cdots x=Wx$가 되므로 비선형 모델이라고 볼 수 없는 결과가 나옵니다. 이러한 문제를 해결하기...<a class="read-more" href="./uda-dnn.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./uda-dl-tensorflow.html">[Udacity] Deep Learning (4) - Tensorflow</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2021-03-01T21:14:35+09:00">March 1, 2021</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        7 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<h1 id="왜-tensowflow-인가">왜 Tensowflow 인가</h1> <h2 id="tensorflow란">Tensorflow란?</h2> <p>지난 시간까지 신경망을 쌓으면서 모델을 학습, 즉 적절한 가중치와 바이어스를 구하는 방법을 이론적으로 알아보았습니다. 이번 게시글에선 이 방법들을 물리적인 코드로 구현해 보겠습니다. 하지만 코드로 구현한다고 하여 덧셈 뺄셈 연산자를 이용하여 밑바닥부터 구현한다는 의미는 아닙니다. 이미 시중에는 딥러닝을 초보자도 쉽게(?) 구현할 수 있도록 제작해 놓은 여러 라이브러리들이 있습니다. 이 중 우리는 가장 많은 사람들이 사용하는 <strong>Tensorflow</strong>를 사용할 것입니다. <img src="/assets/img/deeplearning/tensor flow.png" alt="tensor flow" width="90%" height="90%" /><br /> Tensorflow는 구글에서 만든 딥러닝을 쉽게 구현할 수 있도록 기능을 제공하는 라이브러리입니다. 위 그림과 같이 딥러닝을 할 사용되는 텐서 형태의 데이터들이 모델을 구성하는 연산들의 그래프를 따라 흐르면서 연산이 일어납니다....<a class="read-more" href="./uda-dl-tensorflow.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1836,7 +1836,46 @@ realsense d435i와 rviz 연동해봄.<br />
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./uda-cnn.html">[Udacity] Deep Learning (6) - Convolutional Nerual Network(작성중)</a>
+					<a class="post-list-title" href="./uda-lenet.html">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-07-05T01:11:24+09:00">July 5, 2021</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        less than 1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.</p> <h2 id="1-cnn의-구성">1. CNN의 구성</h2> <p>CNN의 구성을 공부하는 예시로서 대표적으로 사용되는 LeNet-5 모델으로 정리하겠습니다.</p> <h3 id="lenet-5-네트워크란">LeNet-5 네트워크란?</h3> <p align="center"> <img width="100%" height="100%" src="/assets/img/deeplearning/lenet.png" /> </p> <p>LeNet-5 네트워크는 CNN을 처음으로 개발한 Yann Lecun 연구팀이 개발한 CNN 알고리즘의 이름입니다. 이 알고리즘이 소개된 논문 제목은 Gradient-based learning applied to document recognition”입니다.<br /> LeNet-5 네트워크는 Input-C1-S2-C3-S4-C5-F6-Output으로 이루어져 있고, Convolution layer, Pooling layer 두 쌍과 Fully Connected layer 3개로 구성되어 있습니다. 원래 논문에서는 활성화 함수로서 tanh 함수를 사용했지만, 제 코드에서는 ReLU 함수를 사용하였습니다.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.models import Sequential from keras.layers.convolutional import Conv2D from...<a class="read-more" href="./uda-lenet.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./uda-cnn.html">[Udacity] Deep Learning (6) - Convolutional Nerual Network</a>
 					
 
   <span class = "post-card-meta">
@@ -1860,7 +1899,7 @@ realsense d435i와 rviz 연동해봄.<br />
     
     <span class="page_meta-readtime">
       
-        2 minute read
+        3 minute read
       
     </span>
   
@@ -1908,45 +1947,6 @@ realsense d435i와 rviz 연동해봄.<br />
 
 					<div class="post-excerpt">
 						<h1 id="deep-nerual-network">Deep Nerual Network</h1> <p>지금까지 정리한 Nerual Network는 모두 layer가 하나뿐인 단층 신경망(Single-Layer Perceptron)입니다. 하지만 단층 신경망으로는 비선형 모델을 구현할 수 없습니다. <a href="https://refstop.github.io/udacity/deep%20learning/uda-dl-nnnl#1">지난 게시글</a>에서 언급한 바와 같이 비선형 모델은 입력층(Input layer), 은닉층(Hidden layer), 출력층(Output layer)으로 이루어진 $^{1)}$심층 신경망(Deep Neural Network)으로 구현할 수 있습니다. 따라서 인공 신경망의 성능 향상을 위해서는 심층 신경망의 사용은 필수적이라고 할 수 있습니다.</p> <h2 id="relu-activation-function">ReLU Activation Function</h2> <p>심층 신경망에 대해서 정리하기 전에 <strong>ReLU 활성화 함수</strong>에 대해서 알아보고 넘어가겠습니다. 활성화 함수는 각 층의 신경망의 출력을 결정하는 함수입니다. 또한 활성화 함수가 없다면 심층 신경망은 $y=W_{1}W_{2}W_{3} \cdots x=Wx$가 되므로 비선형 모델이라고 볼 수 없는 결과가 나옵니다. 이러한 문제를 해결하기...<a class="read-more" href="./uda-dnn.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./uda-dl-tensorflow.html">[Udacity] Deep Learning (4) - Tensorflow</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2021-03-01T21:14:35+09:00">March 1, 2021</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        7 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<h1 id="왜-tensowflow-인가">왜 Tensowflow 인가</h1> <h2 id="tensorflow란">Tensorflow란?</h2> <p>지난 시간까지 신경망을 쌓으면서 모델을 학습, 즉 적절한 가중치와 바이어스를 구하는 방법을 이론적으로 알아보았습니다. 이번 게시글에선 이 방법들을 물리적인 코드로 구현해 보겠습니다. 하지만 코드로 구현한다고 하여 덧셈 뺄셈 연산자를 이용하여 밑바닥부터 구현한다는 의미는 아닙니다. 이미 시중에는 딥러닝을 초보자도 쉽게(?) 구현할 수 있도록 제작해 놓은 여러 라이브러리들이 있습니다. 이 중 우리는 가장 많은 사람들이 사용하는 <strong>Tensorflow</strong>를 사용할 것입니다. <img src="/assets/img/deeplearning/tensor flow.png" alt="tensor flow" width="90%" height="90%" /><br /> Tensorflow는 구글에서 만든 딥러닝을 쉽게 구현할 수 있도록 기능을 제공하는 라이브러리입니다. 위 그림과 같이 딥러닝을 할 사용되는 텐서 형태의 데이터들이 모델을 구성하는 연산들의 그래프를 따라 흐르면서 연산이 일어납니다....<a class="read-more" href="./uda-dl-tensorflow.html"> read more</a>
 					</div>
 				</div>
 			
@@ -2405,7 +2405,7 @@ realsense d435i와 rviz 연동해봄.<br />
                 <li><a href="./tag.html?tag=Computer+Vision" class="tag">Computer Vision <span>(4)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=Deep+Learning" class="tag">Deep Learning <span>(10)</span></a></li>
+                <li><a href="./tag.html?tag=Deep+Learning" class="tag">Deep Learning <span>(11)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=Kalman+Filter" class="tag">Kalman Filter <span>(1)</span></a></li>
@@ -2450,7 +2450,7 @@ realsense d435i와 rviz 연동해봄.<br />
                 <li><a href="./tag.html?tag=Turtlebot3" class="tag">Turtlebot3 <span>(1)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=Udacity" class="tag">Udacity <span>(10)</span></a></li>
+                <li><a href="./tag.html?tag=Udacity" class="tag">Udacity <span>(11)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=coding" class="tag">coding <span>(1)</span></a></li>

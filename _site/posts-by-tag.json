@@ -48,6 +48,8 @@
   "tag" : "Deep Learning",
   "posts" : [
       
+      "./uda-lenet.html",
+      
       "./uda-cnn.html",
       
       "./uda-dnn.html",
@@ -263,6 +265,8 @@
   {
   "tag" : "Udacity",
   "posts" : [
+      
+      "./uda-lenet.html",
       
       "./uda-cnn.html",
       

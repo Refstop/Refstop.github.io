@@ -1,0 +1,12 @@
+I"�<p>지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.</p>
+<h2 id="1-cnn의-구성">1. CNN의 구성</h2>
+<p>CNN의 구성을 공부하는 예시로서 대표적으로 사용되는 LeNet-5 모델으로 정리하겠습니다.</p>
+<h3 id="lenet-5-네트워크란">LeNet-5 네트워크란?</h3>
+<p align="center">
+  <img width="100%" height="100%" src="/assets/img/deeplearning/lenet.png" />
+</p>
+<p>LeNet-5 네트워크는 CNN을 처음으로 개발한 Yann Lecun 연구팀이 개발한 CNN 알고리즘의 이름입니다. 이 알고리즘이 소개된 논문 제목은 Gradient-based learning applied to document recognition”입니다.<br />
+LeNet-5 네트워크는 Input-C1-S2-C3-S4-C5-F6-Output으로 이루어져 있고, Convolution layer, Pooling layer 두 쌍과 Fully Connected layer 3개로 구성되어 있습니다. 원래 논문에서는 활성화 함수로서 tanh 함수를 사용했지만, 제 코드에서는 ReLU 함수를 사용하였습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+:ET

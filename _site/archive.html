@@ -240,7 +240,46 @@
 		<div class="post">
 			
 
-			<a class="post-list-title" href="./uda-cnn.html">[Udacity] Deep Learning (6) - Convolutional Nerual Network(작성중)</a>
+			<a class="post-list-title" href="./uda-lenet.html">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)</a>
+			
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-07-05T01:11:24+09:00">July 5, 2021</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        less than 1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+			<div class="post-excerpt">
+				<p>지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.</p><h2 id="1-cnn의-구성">1. CNN의 구성</h2><p>CNN의 구성을 공부하는 예시로서 대표적으로 사용되는 LeNet-5 모델으로 정리하겠습니다.</p><h3 id="lenet-5-네트워크란">LeNet-5 네트워크란?</h3><p align="center"> <img width="100%" height="100%" src="/assets/img/deeplearning/lenet.png" /></p><p>LeNet-5 네트워크는 CNN을 처음으로 개발한 Yann Lecun 연구팀이 개발한 CNN 알고리즘의 이름입니다. 이 알고리즘이 소개된 논문 제목은 Gradient-based learning applied to document recognition”입니다.<br />LeNet-5 네트워크는 Input-C1-S2-C3-S4-C5-F6-Output으로 이루어져 있고, Convolution layer, Pooling layer 두 쌍과 Fully Connected layer 3개로 구성되어 있습니다. 원래 논문에서는 활성화 함수로서 tanh 함수를 사용했지만, 제 코드에서는 ReLU 함수를 사용하였습니다.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.models import Sequentialfrom keras.layers.convolutional import Conv2Dfrom keras.layers.convolutional import MaxPooling2Dfrom keras.layers import Densefrom keras.layers import Flattenmodel =...<a class="read-more" href="./uda-lenet.html"> read more</a>
+			</div>
+		</div>
+	
+		<div class="post">
+			
+
+			<a class="post-list-title" href="./uda-cnn.html">[Udacity] Deep Learning (6) - Convolutional Nerual Network</a>
 			
 
   <span class = "post-card-meta">
@@ -264,7 +303,7 @@
     
     <span class="page_meta-readtime">
       
-        2 minute read
+        3 minute read
       
     </span>
   
@@ -312,45 +351,6 @@
 
 			<div class="post-excerpt">
 				<h1 id="프로젝트의-목적">프로젝트의 목적</h1><p>본 프로젝트의 목적은 Kobuki 로봇을 사용하여 대학의 로봇관 건물을 자율주행 할 수 있도록 여러 SLAM 기법이나 Navigation 패키지를 사용해 보고, ROS 패키지를 제작하여 ROS와 우분투 환경에 익숙해지는 것입니다. 차후 있을 3D 라이다를 사용한 실내 자율주행 로봇 과제 등을 수행하기 위해 기본적인 사용법을 익히는 것을 목표로 하고 있습니다.</p><h1 id="프로젝트-계획">프로젝트 계획</h1><p>프로젝트의 진행 계획은 다음과 같습니다. 이 계획은 진행 상황에 따라 수정될 수 있습니다.</p><ol> <li>Kobuki 패키지 작성</li> <li>map에서 특정 좌표를 기준으로 일정 범위 내에 위치하면 신호 출력 노드</li> <li>좌표를 파라미터화(yaml, dynamic_reconfigure)</li> <li>gmapping, cartographer mapping 실습</li> <li>amcl, cartographer pure localization을 사용한 localization</li> <li>move_base를 사용한 자율주행</li></ol><h1 id="패키지-작성-전-prerequisite">패키지 작성 전 Prerequisite</h1><h2 id="1-kobuki-패키지-설치">1. Kobuki 패키지...<a class="read-more" href="./i2n-signal.html"> read more</a>
-			</div>
-		</div>
-	
-		<div class="post">
-			
-
-			<a class="post-list-title" href="./uda-dnn.html">[Udacity] Deep Learning (5) - Deep Nerual Network</a>
-			
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2021-03-02T12:34:24+09:00">March 2, 2021</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        4 minute read
-      
-    </span>
-  
-  
-  </span>
-
-			<div class="post-excerpt">
-				<h1 id="deep-nerual-network">Deep Nerual Network</h1><p>지금까지 정리한 Nerual Network는 모두 layer가 하나뿐인 단층 신경망(Single-Layer Perceptron)입니다. 하지만 단층 신경망으로는 비선형 모델을 구현할 수 없습니다. <a href="https://refstop.github.io/udacity/deep%20learning/uda-dl-nnnl#1">지난 게시글</a>에서 언급한 바와 같이 비선형 모델은 입력층(Input layer), 은닉층(Hidden layer), 출력층(Output layer)으로 이루어진 $^{1)}$심층 신경망(Deep Neural Network)으로 구현할 수 있습니다. 따라서 인공 신경망의 성능 향상을 위해서는 심층 신경망의 사용은 필수적이라고 할 수 있습니다.</p><h2 id="relu-activation-function">ReLU Activation Function</h2><p>심층 신경망에 대해서 정리하기 전에 <strong>ReLU 활성화 함수</strong>에 대해서 알아보고 넘어가겠습니다. 활성화 함수는 각 층의 신경망의 출력을 결정하는 함수입니다. 또한 활성화 함수가 없다면 심층 신경망은 $y=W_{1}W_{2}W_{3} \cdots x=Wx$가 되므로 비선형 모델이라고 볼 수 없는 결과가 나옵니다. 이러한 문제를 해결하기 위해서 넣은 활성화...<a class="read-more" href="./uda-dnn.html"> read more</a>
 			</div>
 		</div>
 	
