@@ -48,6 +48,8 @@
   "tag" : "Deep Learning",
   "posts" : [
       
+      "./uda-cnn.html",
+      
       "./uda-dnn.html",
       
       "./uda-dl-tensorflow.html",
@@ -261,6 +263,8 @@
   {
   "tag" : "Udacity",
   "posts" : [
+      
+      "./uda-cnn.html",
       
       "./uda-dnn.html",
       

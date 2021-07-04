@@ -22,7 +22,7 @@
   "headline": "[Udacity] Deep Learning (5) - Deep Nerual Network",
   "abstract": "",
     "keywords": "Udacity, Deep Learning",
-    "wordcount": "952",
+    "wordcount": "951",
     "image": ["https://Refstop.github.io/assets/img/deeplearning/sigmoid_deriv.png"],
   "datePublished": "2021-03-02 12:34:24 +0900",
   "dateModified": "2021-03-02 12:34:24 +0900",
@@ -62,7 +62,7 @@
 <meta name="twitter:description" content="">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="952"/>
+<meta data-rh="true" name="twitter:data1" content="951"/>
 <meta name="twitter:image:src" content="https://Refstop.github.io/assets/img//deeplearning/sigmoid_deriv.png">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -379,7 +379,7 @@
 </p>
 <p>이런 식으로 다수의 뉴런으로 심층 신경망을 구현하여 가중치를 구할 수 있습니다.</p>
 
-<h1 id="과적합을-방지하는-방법들">과적합을 방지하는 방법들</h1>
+<h1 id="과적합-방지법">과적합 방지법</h1>
 <p>과적합은 훈련 데이터에 모델이 과도하게 회귀되어 오히려 실제 사용에서 성능이 떨어지는 현상입니다. 훈련 데이터에 대한 노이즈까지 학습을 해버려서 일어나는 현상인데, 훈련 데이터에서는 높은 정확도를 보이지만 검증 데이터나 테스트 데이터에서는 제대로 동작하지 않습니다. 이러한 현상을 방지할 수 있는 방법에 대해서 정리하였습니다.</p>
 
 <h2 id="1-데이터-양을-늘리기">1. 데이터 양을 늘리기</h2>
@@ -390,26 +390,26 @@
 <p>데이터 정규화에는 $L1$ 정규화와 $L2$ 정규화가 있습니다. 이에 따라 필요한 용어부터 살펴보도록 하겠습니다.</p>
 <h3 id="l1-norm--l2-norm">$L1$ Norm &amp; $L2$ Norm</h3>
 <p>$L1$ 정규화와 $L2$ 정규화를 설명하기에 앞서 $L1$, $L2$ Norm에 대해서 설명하겠습니다. 우선 Norm이란 것은 벡터의 거리를 측정하는 방법입니다. 이를 표현한 수식은 다음과 같습니다.</p>
-<center> $\large{\left \| x \right \|_p:=\left (\sum_{i=1}^{n}\left | x_i \right |^p\right )^{1/p}}$ </center>
+<center> $\left \| x \right \|_p:=\left (\sum_{i=1}^{n}\left | x_i \right |^p\right )^{1/p}$ </center>
 <p>이때 p값은 Norm의 차수를 의미합니다. $L1$, $L2$에 있는 숫자가 바로 p입니다. 이 공식에 따르면 $L1$ Norm과 $L2$ Norm은 다음과 같습니다.</p>
-<center> $\large{p=(p_1, p_2, \cdots, p_n), q=(q_1, q_2, \cdots, q_n)}$ 일 때, </center>
-<center> $\large{L1\;Norm: \; \left \| x \right \|_1=\sum_{i=1}^{n}\left | p_i-q_i \right |}$ </center>
-<center> $\large{\begin{align*} L2\;Norm: \;\left \| x \right \|_2&amp;=\left (\sum_{i=1}^{n}\left | p_i-q_i \right |^2\right )^{1/2} \\
+<center> $p=(p_1, p_2, \cdots, p_n), q=(q_1, q_2, \cdots, q_n)$ 일 때, </center>
+<center> $L1\;Norm: \; \left \| x \right \|_1=\sum_{i=1}^{n}\left | p_i-q_i \right |$ </center>
+<center> $\begin{align*} L2\;Norm: \;\left \| x \right \|_2&amp;=\left (\sum_{i=1}^{n}\left | p_i-q_i \right |^2\right )^{1/2} \\
 &amp;= \sqrt{(p_1-q_1)^2+(p_2-q_2)^2+\cdots+(p_n-q_n)^2}
-\end{align*}}$ </center>
+\end{align*}$ </center>
 <p>$L1$ Norm은 각 $p,q$원소들 간의 직선거리입니다. $L2$ Norm은 $p, q$ 벡터 사이의 직선거리입니다.</p>
 
 <h3 id="l1-loss--l2-loss">$L1$ Loss &amp; $L2$ Loss</h3>
 <p>이러한 방식으로 $L1$ Loss와 $L2$ Loss 함수를 구현할 수 있습니다. $p$ 벡터를 실제 값으로, $q$ 벡터를 예측치로 치환하면 두 식은 다음과 같습니다.</p>
-<center> $\large{L1\;Loss=\sum_{i=1}^{n}\left | y_i-f(x_i) \right |}$</center>
-<center> $\large{L2\;Loss=\sum_{i=1}^{n}\left ( y_i-f(x_i) \right )^2}$</center>
+<center> $L1\;Loss=\sum_{i=1}^{n}\left | y_i-f(x_i) \right |$</center>
+<center> $L2\;Loss=\sum_{i=1}^{n}\left ( y_i-f(x_i) \right )^2$</center>
 <p>$L1$ Loss와 $L2$ Loss의 차이는 잘못된 값에 대해서 $L2$ Loss의 경우 오차의 제곱을 더해 주기 때문에 $L2$ Loss가 Outlier에 더 민감하다는 점입니다. 따라서 Outlier가 적당히 무시되길 원하면 $L1$ Loss를 사용하고, Outlier의 등장에 신경써야 한다면 $L2$ Loss를 사용하는 것이 좋습니다.</p>
 
 <h2 id="l1-regularization--l2-regularization">$L1$ Regularization &amp; $L2$ Regularization</h2>
 <p>위의 Loss 함수를 원래 모델에서 사용하던 Cost 함수에 추가하면 다음과 같은 결과를 얻을 수 있습니다.</p>
-<center> $\large{L1\;Regularization:\;\; cost(W,b)=\frac{1}{n} \sum_{i=1}^{n} \left \{ L(y_i,\hat{y_i})+\frac{\lambda}{2}\left | w \right |\right \}}$ </center>
-<center> $\large{L2\;Regularization:\;\; cost(W,b)=\frac{1}{n} \sum_{i=1}^{n} \left \{ L(y_i,\hat{y_i})+\frac{\lambda}{2}\left | w \right |^2\right \}}$ </center>
-<center> $\large{L(y_i,\hat{y_i}):}$ 기존의 Cost function</center>
+<center> $L1\;Regularization:\;\; cost(W,b)=\frac{1}{n} \sum_{i=1}^{n} \left \{ L(y_i,\hat{y_i})+\frac{\lambda}{2}\left | w \right |\right \}$ </center>
+<center> $L2\;Regularization:\;\; cost(W,b)=\frac{1}{n} \sum_{i=1}^{n} \left \{ L(y_i,\hat{y_i})+\frac{\lambda}{2}\left | w \right |^2\right \}$ </center>
+<center> $L(y_i,\hat{y_i}):$ 기존의 Cost function</center>
 <p>기존의 오차함수에 가중치의 크기가 포함되면서 가중치가 너무 큰 방향으로 학습되지 않도록 하는 항을 추가해 주었습니다. 이때 $\lambda$는 학습률로 정규화의 효과를 조절하는 항으로 사용됩니다.<br />
 $L1$ Regularization과 $L2$ Regularization의 차이는 $L2$ Regularization는 미분이 가능하여 Gradient-based learning이 가능하다는 점입니다.</p>
 
@@ -510,6 +510,37 @@ $L1$ Regularization과 $L2$ Regularization의 차이는 $L2$ Regularization는 �
           
           
 
+          <a href="./uda-cnn.html" class="recent-item-img" style="background: url('./assets/img//deeplearning/cnn.png') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>[Udacity] Deep Learning (6) - Convolutional Nerual Network(작성중)</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        2 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
           <a href="./i2n-signal.html" class="recent-item-img" style="background: url('./assets/img/posts/20210324/starting_adventure.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>Indoor 2D Navigation - 개요 & 좌표범위내 신호 출력 노드</span>
@@ -587,37 +618,6 @@ $L1$ Regularization과 $L2$ Regularization의 차이는 $L2$ Regularization는 �
     <p class="page_meta-readtime">
       
         7 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./ros2-custom_param.html" class="recent-item-img" style="background: url('./assets/img/posts/20210324/starting_adventure.jpg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>ROS2 첫걸음 (14) - 파라미터 사용(Python)</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        3 minute read
       
     </p>
   

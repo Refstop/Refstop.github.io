@@ -1,4 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://refstop.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://refstop.github.io/" rel="alternate" type="text/html" /><updated>2021-07-01T12:29:54+09:00</updated><id>https://refstop.github.io/feed.xml</id><title type="html">Refstop의 연구일지</title><subtitle>Deep Learning 및 SLAM을 공부하고 있습니다.</subtitle><author><name>Refstop</name></author><entry><title type="html">Indoor 2D Navigation - 개요 &amp;amp; 좌표범위내 신호 출력 노드</title><link href="https://refstop.github.io/i2n-signal.html" rel="alternate" type="text/html" title="Indoor 2D Navigation - 개요 &amp;amp; 좌표범위내 신호 출력 노드" /><published>2021-03-02T12:41:24+09:00</published><updated>2021-03-02T12:41:24+09:00</updated><id>https://refstop.github.io/i2n-signal</id><content type="html" xml:base="https://refstop.github.io/i2n-signal.html">&lt;h1 id=&quot;프로젝트의-목적&quot;&gt;프로젝트의 목적&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://refstop.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://refstop.github.io/" rel="alternate" type="text/html" /><updated>2021-07-04T21:34:57+09:00</updated><id>https://refstop.github.io/feed.xml</id><title type="html">Refstop의 연구일지</title><subtitle>Deep Learning 및 SLAM을 공부하고 있습니다.</subtitle><author><name>Refstop</name></author><entry><title type="html">[Udacity] Deep Learning (6) - Convolutional Nerual Network(작성중)</title><link href="https://refstop.github.io/uda-cnn.html" rel="alternate" type="text/html" title="[Udacity] Deep Learning (6) - Convolutional Nerual Network(작성중)" /><published>2021-07-04T15:41:24+09:00</published><updated>2021-07-04T15:41:24+09:00</updated><id>https://refstop.github.io/uda-cnn</id><content type="html" xml:base="https://refstop.github.io/uda-cnn.html">&lt;p align=&quot;center&quot;&gt;
+  &lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/assets/img/deeplearning/cnn.png&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt;지금까지 우리는 심층 신경망(Deep Nerual Network)을 구성하기까지의 과정을 살펴보았습니다. 이제 이 심층 신경망으로 구성할 수 있는 네트워크 중 이미지 학습에 최적화된 &lt;strong&gt;합성곱 신경망(Convolutional Nerual Network, CNN)&lt;/strong&gt;에 대해서 알아보겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;cnn이-되기까지&quot;&gt;CNN이 되기까지&lt;/h2&gt;
+&lt;p&gt;CNN이 고안되기 전에는 이미지를 Fully Connected Nerual Network라는 1차원 벡터 형태의 데이터를 학습하는 형태의 신경망 구조를 사용했습니다. 하지만 FNN은 몇 가지 단점이 있습니다.&lt;br /&gt;
+ 첫번째로 이미지 데이터를 평면화 시키는 과정에서 이미지의 인접한 픽셀 간의 정보가 유실된다는 점입니다. FNN은 1차원 벡터 형태의 데이터를 입력받기 때문에 이미지의 인접 픽셀간의 상관관계를 반영할 수 없습니다. 반면 CNN은 이미지의 특징을 보존한 채로 학습을 진행하기 때문에 인접 픽셀간의 정보 유식을 막을 수 있습니다.&lt;br /&gt;
+ 두번째 FNN의 문제점은 막대한 양의 model parameter입니다. 만약 FNN을 사용하여 (1024,1024)크기의 컬러 이미지를 처리하고자 한다면 FNN에 입력되는 벡터의 차원은 1024$\times$1024$\times$3=315만 개입니다. 약 300만 차원의 데이터를 처리하기 위해서는 막대한 양의 뉴런이 필요하고 이에 따라 model parameter의 개수는 더욱 많은 양이 필요할 것입니다. 하지만 CNN의 경우 필터들을&lt;/p&gt;
+
+&lt;h2 id=&quot;1-cnn의-주요-용어-정리&quot;&gt;1. CNN의 주요 용어 정리&lt;/h2&gt;
+&lt;p&gt;CNN에는 다음과 같은 용어들이 사용됩니다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Convolution(합성곱)&lt;/li&gt;
+  &lt;li&gt;채널(Channel)&lt;/li&gt;
+  &lt;li&gt;필터(Filter)&lt;/li&gt;
+  &lt;li&gt;커널(Kernel)&lt;/li&gt;
+  &lt;li&gt;스트라이드(Stride)&lt;/li&gt;
+  &lt;li&gt;패딩(Padding)&lt;/li&gt;
+  &lt;li&gt;피처 맵(Feature Map)&lt;/li&gt;
+  &lt;li&gt;액티베이션 맵(Activation Map)&lt;/li&gt;
+  &lt;li&gt;풀링(Pooling) 레이어
+각 용어에 대해서 간략하게 정리하겠습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;11-convolution합성곱&quot;&gt;1.1 Convolution(합성곱)&lt;/h3&gt;
+&lt;p&gt;Convolution은 합성곱이라는 의미인데, input 함수(신호)와 임펄스 응답 함수(신호)를 반전 이동한 값을 곱하여 적분한 값입니다. 원래의 의미는 이렇지만, 이해하기 너무 어려우므로 다음 gif 파일을 통해 쉽게 알 수 있습니다.&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+  &lt;img width=&quot;80%&quot; height=&quot;80%&quot; src=&quot;/assets/img/deeplearning/conv.gif&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt;위의 gif 파일은 입력된 이미지 데이터를 필터를 통해 Feature Map을 만드는 과정입니다. 필터로 이미지를 훑어가면서 각각의 합성곱 결과를 저장하여 Feature Map을 구성합니다. CNN의 첫번째 과정인 Convolution Layer는 바로 이 Feature Map을 생성하는 과정입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;12-채널channel&quot;&gt;1.2 채널(Channel)&lt;/h3&gt;
+&lt;p&gt;채널은 이미지를 구성하고 있는 실수값의 차원입니다. 이미지를 색 공간에 따라서 분리할 때, RGB의 3채널로 분리할 수 있습니다. 이미지를 구성하는 각 픽셀은 실수로 표현한 3차원 데이터입니다. 각각의 차원은 R, G, B의 3색을 나타내는 실수로, 이때의 RGB를 채널이라고 합니다.&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+  &lt;img width=&quot;80%&quot; height=&quot;80%&quot; src=&quot;/assets/img/deeplearning/channel.jpg&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt;Convolution Layer에 입력되는 데이터는 필터가 적용되고, 하나의 필터당 하나의 Feature Map이 생성됩니다. 따라서 Convolution Layer에 n개의 필터가 적용된다면 출력되는 Feature Map은 n개의 채널을 갖게 됩니다.&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+  &lt;img width=&quot;80%&quot; height=&quot;80%&quot; src=&quot;/assets/img/deeplearning/nfeaturemap.png&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt;하지만 이번 게시글에서는 필터의 개수가 1개뿐인 모델만 다룰 것입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;13-필터filter-커널kernel--스트라이드stride&quot;&gt;1.3 필터(Filter), 커널(Kernel) &amp;amp; 스트라이드(Stride)&lt;/h3&gt;
+&lt;p&gt;필터는 이미지의 특징을 찾아내기 위한 공용 파라미터입니다. 일반적으로 (4,4), (3,3)같은 정방행렬로 표현되고 사용 방법은 1.1의 gif 이미지에 잘 표현되어 있습니다. 필터는 이미지를 순회하면서 합성곱을 계산하여 Feature Map을 생성합니다. 이때 필터가 한번에 이동하는 간격을 Stride라고 합니다. Stride는 직역하면 보폭이라는 뜻으로 말 그대로 “필터가 한 걸음에 얼마나 가냐”를 의미하는 값입니다. 위의 gif 이미지의 Stride는 1입니다. 아래 이미지는 Stride가 1이고, 이미지 픽셀이 (16,16), 필터 크기가 (2,2)일때의 Feature Map 생성 과정을 나타낸 사진입니다.&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+  &lt;img width=&quot;80%&quot; height=&quot;80%&quot; src=&quot;/assets/img/deeplearning/filter.jpg&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt;입력 데이터가 여러 채널을 갖는 경우, 각 채널의 Feature Map을 모두 더한 값이 최종 출력이 됩니다. 따라서 입력 데이터의 채널 수와는 상관없이 필터의 개수에 따라 결정된다는 것을 알 수 있습니다.&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+  &lt;img width=&quot;80%&quot; height=&quot;80%&quot; src=&quot;/assets/img/deeplearning/channelfeaturemap.jpg&quot; /&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://taewan.kim/post/cnn/&quot;&gt;TAEWAN.KIM 블로그 - “CNN, Convolutional Neural Network 요약”&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://untitledtblog.tistory.com/150&quot;&gt;Untitled 블로그 - “[머신 러닝/딥 러닝] 합성곱 신경망 (Convolutional Neural Network, CNN)과 학습 알고리즘”&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://yjjo.tistory.com/8&quot;&gt;YJJo 블로그 - “Convolution Nerual Networks (합성곱 신경망)”&lt;/a&gt;&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Udacity" /><category term="Deep Learning" /><summary type="html">지금까지 우리는 심층 신경망(Deep Nerual Network)을 구성하기까지의 과정을 살펴보았습니다. 이제 이 심층 신경망으로 구성할 수 있는 네트워크 중 이미지 학습에 최적화된 합성곱 신경망(Convolutional Nerual Network, CNN)에 대해서 알아보겠습니다.</summary></entry><entry><title type="html">Indoor 2D Navigation - 개요 &amp;amp; 좌표범위내 신호 출력 노드</title><link href="https://refstop.github.io/i2n-signal.html" rel="alternate" type="text/html" title="Indoor 2D Navigation - 개요 &amp;amp; 좌표범위내 신호 출력 노드" /><published>2021-03-02T12:41:24+09:00</published><updated>2021-03-02T12:41:24+09:00</updated><id>https://refstop.github.io/i2n-signal</id><content type="html" xml:base="https://refstop.github.io/i2n-signal.html">&lt;h1 id=&quot;프로젝트의-목적&quot;&gt;프로젝트의 목적&lt;/h1&gt;
 &lt;p&gt;본 프로젝트의 목적은 Kobuki 로봇을 사용하여 대학의 로봇관 건물을 자율주행 할 수 있도록 여러 SLAM 기법이나 Navigation 패키지를 사용해 보고, ROS 패키지를 제작하여 ROS와 우분투 환경에 익숙해지는 것입니다. 차후 있을 3D 라이다를 사용한 실내 자율주행 로봇 과제 등을 수행하기 위해 기본적인 사용법을 익히는 것을 목표로 하고 있습니다.&lt;/p&gt;
 
 &lt;h1 id=&quot;프로젝트-계획&quot;&gt;프로젝트 계획&lt;/h1&gt;
@@ -90,7 +146,7 @@ y: 20
 &lt;/p&gt;
 &lt;p&gt;이런 식으로 다수의 뉴런으로 심층 신경망을 구현하여 가중치를 구할 수 있습니다.&lt;/p&gt;
 
-&lt;h1 id=&quot;과적합을-방지하는-방법들&quot;&gt;과적합을 방지하는 방법들&lt;/h1&gt;
+&lt;h1 id=&quot;과적합-방지법&quot;&gt;과적합 방지법&lt;/h1&gt;
 &lt;p&gt;과적합은 훈련 데이터에 모델이 과도하게 회귀되어 오히려 실제 사용에서 성능이 떨어지는 현상입니다. 훈련 데이터에 대한 노이즈까지 학습을 해버려서 일어나는 현상인데, 훈련 데이터에서는 높은 정확도를 보이지만 검증 데이터나 테스트 데이터에서는 제대로 동작하지 않습니다. 이러한 현상을 방지할 수 있는 방법에 대해서 정리하였습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;1-데이터-양을-늘리기&quot;&gt;1. 데이터 양을 늘리기&lt;/h2&gt;
@@ -101,26 +157,26 @@ y: 20
 &lt;p&gt;데이터 정규화에는 $L1$ 정규화와 $L2$ 정규화가 있습니다. 이에 따라 필요한 용어부터 살펴보도록 하겠습니다.&lt;/p&gt;
 &lt;h3 id=&quot;l1-norm--l2-norm&quot;&gt;$L1$ Norm &amp;amp; $L2$ Norm&lt;/h3&gt;
 &lt;p&gt;$L1$ 정규화와 $L2$ 정규화를 설명하기에 앞서 $L1$, $L2$ Norm에 대해서 설명하겠습니다. 우선 Norm이란 것은 벡터의 거리를 측정하는 방법입니다. 이를 표현한 수식은 다음과 같습니다.&lt;/p&gt;
-&lt;center&gt; $\large{\left \| x \right \|_p:=\left (\sum_{i=1}^{n}\left | x_i \right |^p\right )^{1/p}}$ &lt;/center&gt;
+&lt;center&gt; $\left \| x \right \|_p:=\left (\sum_{i=1}^{n}\left | x_i \right |^p\right )^{1/p}$ &lt;/center&gt;
 &lt;p&gt;이때 p값은 Norm의 차수를 의미합니다. $L1$, $L2$에 있는 숫자가 바로 p입니다. 이 공식에 따르면 $L1$ Norm과 $L2$ Norm은 다음과 같습니다.&lt;/p&gt;
-&lt;center&gt; $\large{p=(p_1, p_2, \cdots, p_n), q=(q_1, q_2, \cdots, q_n)}$ 일 때, &lt;/center&gt;
-&lt;center&gt; $\large{L1\;Norm: \; \left \| x \right \|_1=\sum_{i=1}^{n}\left | p_i-q_i \right |}$ &lt;/center&gt;
-&lt;center&gt; $\large{\begin{align*} L2\;Norm: \;\left \| x \right \|_2&amp;amp;=\left (\sum_{i=1}^{n}\left | p_i-q_i \right |^2\right )^{1/2} \\
+&lt;center&gt; $p=(p_1, p_2, \cdots, p_n), q=(q_1, q_2, \cdots, q_n)$ 일 때, &lt;/center&gt;
+&lt;center&gt; $L1\;Norm: \; \left \| x \right \|_1=\sum_{i=1}^{n}\left | p_i-q_i \right |$ &lt;/center&gt;
+&lt;center&gt; $\begin{align*} L2\;Norm: \;\left \| x \right \|_2&amp;amp;=\left (\sum_{i=1}^{n}\left | p_i-q_i \right |^2\right )^{1/2} \\
 &amp;amp;= \sqrt{(p_1-q_1)^2+(p_2-q_2)^2+\cdots+(p_n-q_n)^2}
-\end{align*}}$ &lt;/center&gt;
+\end{align*}$ &lt;/center&gt;
 &lt;p&gt;$L1$ Norm은 각 $p,q$원소들 간의 직선거리입니다. $L2$ Norm은 $p, q$ 벡터 사이의 직선거리입니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;l1-loss--l2-loss&quot;&gt;$L1$ Loss &amp;amp; $L2$ Loss&lt;/h3&gt;
 &lt;p&gt;이러한 방식으로 $L1$ Loss와 $L2$ Loss 함수를 구현할 수 있습니다. $p$ 벡터를 실제 값으로, $q$ 벡터를 예측치로 치환하면 두 식은 다음과 같습니다.&lt;/p&gt;
-&lt;center&gt; $\large{L1\;Loss=\sum_{i=1}^{n}\left | y_i-f(x_i) \right |}$&lt;/center&gt;
-&lt;center&gt; $\large{L2\;Loss=\sum_{i=1}^{n}\left ( y_i-f(x_i) \right )^2}$&lt;/center&gt;
+&lt;center&gt; $L1\;Loss=\sum_{i=1}^{n}\left | y_i-f(x_i) \right |$&lt;/center&gt;
+&lt;center&gt; $L2\;Loss=\sum_{i=1}^{n}\left ( y_i-f(x_i) \right )^2$&lt;/center&gt;
 &lt;p&gt;$L1$ Loss와 $L2$ Loss의 차이는 잘못된 값에 대해서 $L2$ Loss의 경우 오차의 제곱을 더해 주기 때문에 $L2$ Loss가 Outlier에 더 민감하다는 점입니다. 따라서 Outlier가 적당히 무시되길 원하면 $L1$ Loss를 사용하고, Outlier의 등장에 신경써야 한다면 $L2$ Loss를 사용하는 것이 좋습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;l1-regularization--l2-regularization&quot;&gt;$L1$ Regularization &amp;amp; $L2$ Regularization&lt;/h2&gt;
 &lt;p&gt;위의 Loss 함수를 원래 모델에서 사용하던 Cost 함수에 추가하면 다음과 같은 결과를 얻을 수 있습니다.&lt;/p&gt;
-&lt;center&gt; $\large{L1\;Regularization:\;\; cost(W,b)=\frac{1}{n} \sum_{i=1}^{n} \left \{ L(y_i,\hat{y_i})+\frac{\lambda}{2}\left | w \right |\right \}}$ &lt;/center&gt;
-&lt;center&gt; $\large{L2\;Regularization:\;\; cost(W,b)=\frac{1}{n} \sum_{i=1}^{n} \left \{ L(y_i,\hat{y_i})+\frac{\lambda}{2}\left | w \right |^2\right \}}$ &lt;/center&gt;
-&lt;center&gt; $\large{L(y_i,\hat{y_i}):}$ 기존의 Cost function&lt;/center&gt;
+&lt;center&gt; $L1\;Regularization:\;\; cost(W,b)=\frac{1}{n} \sum_{i=1}^{n} \left \{ L(y_i,\hat{y_i})+\frac{\lambda}{2}\left | w \right |\right \}$ &lt;/center&gt;
+&lt;center&gt; $L2\;Regularization:\;\; cost(W,b)=\frac{1}{n} \sum_{i=1}^{n} \left \{ L(y_i,\hat{y_i})+\frac{\lambda}{2}\left | w \right |^2\right \}$ &lt;/center&gt;
+&lt;center&gt; $L(y_i,\hat{y_i}):$ 기존의 Cost function&lt;/center&gt;
 &lt;p&gt;기존의 오차함수에 가중치의 크기가 포함되면서 가중치가 너무 큰 방향으로 학습되지 않도록 하는 항을 추가해 주었습니다. 이때 $\lambda$는 학습률로 정규화의 효과를 조절하는 항으로 사용됩니다.&lt;br /&gt;
 $L1$ Regularization과 $L2$ Regularization의 차이는 $L2$ Regularization는 미분이 가능하여 Gradient-based learning이 가능하다는 점입니다.&lt;/p&gt;
 
@@ -1697,123 +1753,4 @@ a: 2 b: 3 c: 1
 &lt;p&gt;이번 게시글에서는 직접 msg 파일과 srv 파일을 만들어 보았습니다. 다음 시간에는 노드 소스 파일에서 파라미터를 사용하는 방법을 알아보겠습니다.&lt;/p&gt;
 
 &lt;h1 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://index.ros.org/doc/ros2/Tutorials/Workspace/Creating-A-Workspace/&quot;&gt;ROS Index-ROS2 튜토리얼 나만의 msg와 srv 파일 작성 편&lt;/a&gt;&lt;/p&gt;</content><author><name>Refstop</name></author><category term="ROS2" /><summary type="html">커스텀 메시지와 서비스 파일 메시지와 서비스 파일이 무엇인지는 이전 강의들에서 설명했습니다. 이번 게시글에서는 나만의 msg와 srv 파일을 만들어 사용하는 방식을 익혀보도록 합시다. 과정은 다음과 같습니다. msg &amp;amp; srv 전용 패키지 생성 msg &amp;amp; srv 파일 작성 이전에 사용했던 publisher &amp;amp; subscriber 수정 이전에 사용했던 server &amp;amp; client 수정 빌드 &amp;amp; 소스(적용), 실행 조금 길어 보이지만, 각각 짧은 과정들이니 빠르게 해 봅시다.</summary></entry><entry><title type="html">Single Neuron Perceptron</title><link href="https://refstop.github.io/single-neuron-perceptron.html" rel="alternate" type="text/html" title="Single Neuron Perceptron" /><published>2021-01-26T04:32:20+09:00</published><updated>2021-01-26T04:32:20+09:00</updated><id>https://refstop.github.io/single-neuron-perceptron</id><content type="html" xml:base="https://refstop.github.io/single-neuron-perceptron.html">&lt;p&gt;As an entry point to learning python and getting into Machine Learning, I decided to code from scratch the Hello World! of the field, a single neuron perceptron.&lt;/p&gt;
-
-&lt;h2 id=&quot;what-is-a-perceptron&quot;&gt;What is a perceptron?&lt;/h2&gt;
-
-&lt;p&gt;A perceptron is the basic building block of a neural network, it can be compared to a neuron, And its conception is what detonated the vast field of Artificial Intelligence nowadays.&lt;/p&gt;
-
-&lt;p&gt;Back in the late 1950’s, a young &lt;a href=&quot;https://en.wikipedia.org/wiki/Frank_Rosenblatt&quot;&gt;Frank Rosenblatt&lt;/a&gt; devised a very simple algorithm as a foundation to construct a machine that could learn to perform different tasks.&lt;/p&gt;
-
-&lt;p&gt;In its essence, a perceptron is nothing more than a collection of values and rules for passing information through them, but in its simplicity lies its power.&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;./assets/img/posts/20210125/Perceptron.png&quot; /&gt;&lt;/center&gt;
-
-&lt;p&gt;Imagine you have a ‘neuron’ and to ‘activate’ it, you pass through several input signals, each signal connects to the neuron through a synapse, once the signal is aggregated in the perceptron, it is then passed on to one or as many outputs as defined. A perceptron is but a neuron and its collection of synapses to get a signal into it and to modify a signal to pass on.&lt;/p&gt;
-
-&lt;p&gt;In more mathematical terms, a perceptron is an array of values (let’s call them weights), and the rules to apply such values to an input signal.&lt;/p&gt;
-
-&lt;p&gt;For instance a perceptron could get 3 different inputs as in the image, lets pretend that the inputs it receives as signal are: $x_1 = 1, \; x_2 = 2\; and \; x_3 = 3$, if it’s weights are $w_1 = 0.5,\; w_2 = 1\; and \; w_3 = -1$ respectively, then what the perceptron will do when the signal is received is to multiply each input value by its corresponding weight, then add them up.&lt;/p&gt;
-
-&lt;p style=&quot;text-align:center&quot;&gt;\(&lt;br /&gt;
-\begin{align}
-\begin{split}
-\left(x_1 * w_1\right) + \left(x_2 * w_2\right) + \left(x_3 * w_3\right)
-\end{split}
-\end{align}
-\)&lt;/p&gt;
-
-&lt;p style=&quot;text-align:center&quot;&gt;\(&lt;br /&gt;
-\begin{align}&lt;br /&gt;
-\begin{split}&lt;br /&gt;
-\left(0.5 * 1\right) + \left(1 * 2\right) + \left(-1 * 3\right) = 0.5 + 2 - 3 = -0.5
-\end{split}&lt;br /&gt;
-\end{align}&lt;br /&gt;
-\)&lt;/p&gt;
-
-&lt;p&gt;Typically when this value is obtained, we need to apply an “activation” function to smooth the output, but let’s say that our activation function is linear, meaning that we keep the value as it is, then that’s it, that is the output of the perceptron, -0.5.&lt;/p&gt;
-
-&lt;p&gt;In a practical application, the output means something, perhaps we want our perceptron to classify a set of data and if the perceptron outputs a negative number, then we know the data is of type A, and if it is a positive number then it is of type B.&lt;/p&gt;
-
-&lt;p&gt;Once we understand this, the magic starts to happen through a process called backpropagation, where we “educate” our tiny one neuron brain to have it learn how to do its job.&lt;/p&gt;
-
-&lt;tweet&gt;The magic starts to happen through a process called backpropagation, where we &quot;educate&quot; our tiny one neuron brain to have it learn how to do its job.&lt;/tweet&gt;
-
-&lt;p&gt;For this we need a set of data that it is already classified, we call this a training set. This data has inputs and their corresponding correct output. So we can tell the little brain when it misses in its prediction, and by doing so, we also adjust the weights a bit in the direction where we know the perceptron committed the mistake hoping that after many iterations like this the weights will be so that most of the predictions will be correct.&lt;/p&gt;
-
-&lt;p&gt;After the model trains successfully we can have it classify data it has never seen before, and we have a fairly high confidence that it will do so correctly.&lt;/p&gt;
-
-&lt;p&gt;The math behind this magical property of the perceptron is called gradient descent, and is just a bit of differential calculus that helps us convert the error the brain is having into tiny nudges of value of the weights towards their optimum. &lt;a href=&quot;https://www.youtube.com/watch?v=aircAruvnKk&amp;amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&quot;&gt;This video series by 3 blue 1 brown explains it wonderfuly.&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;My program creates a single neuron neural network tuned to guess if a point is above or below a randomly generated line and generates a visualization based on graphs to see how the neural network is learning through time.&lt;/p&gt;
-
-&lt;p&gt;The neuron has 3 inputs and weights to calculate its output:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input 1 is the X coordinate of the point,
-Input 2 is the y coordinate of the point,
-Input 3 is the bias and it is always 1
-
-Input 3 or the bias is required for lines that do not cross the origin (0,0)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The Perceptron starts with weights all set to zero and learns by using 1,000 random points per each iteration.&lt;/p&gt;
-
-&lt;p&gt;The output of the perceptron is calculated with the following activation function:
-    if x * weight_x + y weight_y + weight_bias is positive then 1 else 0&lt;/p&gt;
-
-&lt;p&gt;The error for each point is calculated as the expected outcome of the perceptron minus the real outcome therefore there are only 3 possible error values:&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Expected&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Calculated&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Error&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;-1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;-1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;-1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;-1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;-1&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;With every point that is learned if the error is not 0 the weights are adjusted according to:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;New_weight = Old_weight + error * input * learning_rate
-for example: New_weight_x = Old_weight_x + error * x * learning rate
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;A very useful parameter in all of neural networks is teh learning rate, which is basically a measure on how tiny our nudge to the weights is going to be.&lt;/p&gt;
-
-&lt;p&gt;In this particular case, I coded the learning_rate to decrease with every iteration as follows:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;learning_rate = 0.01 / (iteration + 1)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;this is important to ensure that once the weights are nearing the optimal values the adjustment in each iteration is subsequently more subtle.&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;./assets/img/posts/20210125/Learning_1000_points_per_iteration.jpg&quot; /&gt;&lt;/center&gt;
-
-&lt;p&gt;In the end, the perceptron always converges into a solution and finds with great precision the line we are looking for.&lt;/p&gt;
-
-&lt;p&gt;Perceptrons are quite a revelation in that they can resolve equations by learning, however they are very limited. By their nature they can only resolve linear equations, so their problem space is quite narrow.&lt;/p&gt;
-
-&lt;p&gt;Nowadays the neural networks consist of combinations of many perceptrons, in many layers, and other types of “neurons”, like convolution, recurrent, etc. increasing significantly the types of problems they solve.&lt;/p&gt;</content><author><name>Armando Maynez</name></author><category term="machine learning" /><category term="coding" /><category term="neural networks" /><summary type="html">As an entry point to learning python and getting into Machine Learning, I decided to code from scratch the Hello World! of the field, a single neuron perceptron.</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;https://index.ros.org/doc/ros2/Tutorials/Workspace/Creating-A-Workspace/&quot;&gt;ROS Index-ROS2 튜토리얼 나만의 msg와 srv 파일 작성 편&lt;/a&gt;&lt;/p&gt;</content><author><name>Refstop</name></author><category term="ROS2" /><summary type="html">커스텀 메시지와 서비스 파일 메시지와 서비스 파일이 무엇인지는 이전 강의들에서 설명했습니다. 이번 게시글에서는 나만의 msg와 srv 파일을 만들어 사용하는 방식을 익혀보도록 합시다. 과정은 다음과 같습니다. msg &amp;amp; srv 전용 패키지 생성 msg &amp;amp; srv 파일 작성 이전에 사용했던 publisher &amp;amp; subscriber 수정 이전에 사용했던 server &amp;amp; client 수정 빌드 &amp;amp; 소스(적용), 실행 조금 길어 보이지만, 각각 짧은 과정들이니 빠르게 해 봅시다.</summary></entry></feed>

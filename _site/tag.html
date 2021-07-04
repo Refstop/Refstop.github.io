@@ -409,8 +409,36 @@
 					<a class="post-list-title" href="./realsense2.html">Camera_calibration(1) 내부 파라미터의 구성요소</a>
 					
 
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2020-11-03T18:00:00+09:00">November 3, 2020</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        1 minute read
+      
+    </span>
+  
+  
+  </span>
+
 					<div class="post-excerpt">
-						<hr /> <p>layout: post read_time: true show_date: true title: “Camera_calibration(1) 내부 파라미터의 구성요소” date: 2020-11-03 18:00:00 +/-TTTT tags: [RealSense, Camera Calibration] —</p> <h1 id="camera_calibration">Camera_calibration</h1> <p>Camera calibration을 하는 이유는 2d 평면을 3d 모델로 해석하기 위해서 필요한 파라미터를 구하는 것이다.<br /> <img src="https://t1.daumcdn.net/cfile/tistory/24758441510E994028" alt="핀홀 카메라 모델" /><br /> A[R/t] 행렬에서 A행렬이다.<br /> A행렬은 내부 파라미터(intrinsic calibration)라고 하는데 이의 구성은</p> <h2 id="1-초점거리-fx-fy">1. 초점거리 fx, fy</h2> <p><img src="https://t1.daumcdn.net/cfile/tistory/22504A475344768E06" alt="" /> 실제 단위: mm, 카메라 모델 단위: pixel<br /> pixel은 이미지 센서의 셀 크기에 대해 상대적인 값으로 표현<br /> 예를 들어 셀 크기: 0.1mm, 초점거리가 500mm면 렌즈 중심에서 이미지 센서까지의 거리는 이미지 센서 셀 크기의...<a class="read-more" href="./realsense2.html"> read more</a>
+						<h1 id="camera_calibration">Camera_calibration</h1> <p>Camera calibration을 하는 이유는 2d 평면을 3d 모델로 해석하기 위해서 필요한 파라미터를 구하는 것이다.<br /> <img src="https://t1.daumcdn.net/cfile/tistory/24758441510E994028" alt="핀홀 카메라 모델" /><br /> A[R/t] 행렬에서 A행렬이다.<br /> A행렬은 내부 파라미터(intrinsic calibration)라고 하는데 이의 구성은</p> <h2 id="1-초점거리-fx-fy">1. 초점거리 fx, fy</h2> <p><img src="https://t1.daumcdn.net/cfile/tistory/22504A475344768E06" alt="" /> 실제 단위: mm, 카메라 모델 단위: pixel<br /> pixel은 이미지 센서의 셀 크기에 대해 상대적인 값으로 표현<br /> 예를 들어 셀 크기: 0.1mm, 초점거리가 500mm면 렌즈 중심에서 이미지 센서까지의 거리는 이미지 센서 셀 크기의 500배, 50mm라는 뜻이다. 실제 단위를 셀 크기와 초점거리로 표현해 놓은 것이다. 왜? 값을 이미지 센서에 종속시킴으로서 영상에서의 기하학적 해석을 용이하게 하기 위해서.</p>...<a class="read-more" href="./realsense2.html"> read more</a>
 					</div>
 				</div>
 			
@@ -554,6 +582,45 @@
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./uda-cnn.html">[Udacity] Deep Learning (6) - Convolutional Nerual Network(작성중)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-07-04T15:41:24+09:00">July 4, 2021</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p align="center"> <img width="100%" height="100%" src="/assets/img/deeplearning/cnn.png" /> </p> <p>지금까지 우리는 심층 신경망(Deep Nerual Network)을 구성하기까지의 과정을 살펴보았습니다. 이제 이 심층 신경망으로 구성할 수 있는 네트워크 중 이미지 학습에 최적화된 <strong>합성곱 신경망(Convolutional Nerual Network, CNN)</strong>에 대해서 알아보겠습니다.</p> <h2 id="cnn이-되기까지">CNN이 되기까지</h2> <p>CNN이 고안되기 전에는 이미지를 Fully Connected Nerual Network라는 1차원 벡터 형태의 데이터를 학습하는 형태의 신경망 구조를 사용했습니다. 하지만 FNN은 몇 가지 단점이 있습니다.<br /> 첫번째로 이미지 데이터를 평면화 시키는 과정에서 이미지의 인접한 픽셀 간의 정보가 유실된다는 점입니다. FNN은 1차원 벡터 형태의 데이터를 입력받기 때문에 이미지의 인접 픽셀간의 상관관계를 반영할 수 없습니다. 반면 CNN은 이미지의 특징을 보존한 채로 학습을 진행하기 때문에 인접...<a class="read-more" href="./uda-cnn.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./uda-dnn.html">[Udacity] Deep Learning (5) - Deep Nerual Network</a>
 					
 
@@ -626,45 +693,6 @@
 
 					<div class="post-excerpt">
 						<h1 id="왜-tensowflow-인가">왜 Tensowflow 인가</h1> <h2 id="tensorflow란">Tensorflow란?</h2> <p>지난 시간까지 신경망을 쌓으면서 모델을 학습, 즉 적절한 가중치와 바이어스를 구하는 방법을 이론적으로 알아보았습니다. 이번 게시글에선 이 방법들을 물리적인 코드로 구현해 보겠습니다. 하지만 코드로 구현한다고 하여 덧셈 뺄셈 연산자를 이용하여 밑바닥부터 구현한다는 의미는 아닙니다. 이미 시중에는 딥러닝을 초보자도 쉽게(?) 구현할 수 있도록 제작해 놓은 여러 라이브러리들이 있습니다. 이 중 우리는 가장 많은 사람들이 사용하는 <strong>Tensorflow</strong>를 사용할 것입니다. <img src="/assets/img/deeplearning/tensor flow.png" alt="tensor flow" width="90%" height="90%" /><br /> Tensorflow는 구글에서 만든 딥러닝을 쉽게 구현할 수 있도록 기능을 제공하는 라이브러리입니다. 위 그림과 같이 딥러닝을 할 사용되는 텐서 형태의 데이터들이 모델을 구성하는 연산들의 그래프를 따라 흐르면서 연산이 일어납니다....<a class="read-more" href="./uda-dl-tensorflow.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./uda-dl-nnnl.html">[Udacity] Deep Learning (3) - Nerual Network 비선형 모델</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2021-02-08T16:24:39+09:00">February 8, 2021</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<h1 id="지난-게시글의-복습">지난 게시글의 복습</h1> <p>지난 게시글들에서는 뉴럴 네트워크를 활성화 함수에 따라 이산 모델, 연속 모델로 나누어서 살펴보았습니다. 뉴럴 네트워크의 최종 목적은 정확한 예측 모델, 선형 함수를 만드는 것입니다. 이 선형 함수를 이산 모델에서는 Step Function, 연속 모델에서는 Sigmoid 또는 Softmax 함수에 대입합니다. 그 후 이산 모델에서는 퍼셉트론 알고리즘으로 가중치를 조절, 연속 모델에서는 Cross-Entropy 오차함수와 경사하강법을 사용하여 가중치를 조절합니다. 그 결과, 뉴럴 네트워크의 예측 모델인 선형 함수를 도출할 수 있습니다.</p> <h1 id="비선형-모델---다층-신경망">비선형 모델 - 다층 신경망</h1> <p>이번 게시글에서는 비선형 모델에 대해서 알아보겠습니다. 비선형 모델은 어떤 식으로 찾을 수 있을까요? 바로 선형 함수를 여러개 합치는 것입니다. 간단한 예시를 보겠습니다.<br /> <img src="/assets/img/deeplearning/nonlinearex1.png"...<a class="read-more" href="./uda-dl-nnnl.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1437,8 +1465,36 @@
 					<a class="post-list-title" href="./realsense2.html">Camera_calibration(1) 내부 파라미터의 구성요소</a>
 					
 
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2020-11-03T18:00:00+09:00">November 3, 2020</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        1 minute read
+      
+    </span>
+  
+  
+  </span>
+
 					<div class="post-excerpt">
-						<hr /> <p>layout: post read_time: true show_date: true title: “Camera_calibration(1) 내부 파라미터의 구성요소” date: 2020-11-03 18:00:00 +/-TTTT tags: [RealSense, Camera Calibration] —</p> <h1 id="camera_calibration">Camera_calibration</h1> <p>Camera calibration을 하는 이유는 2d 평면을 3d 모델로 해석하기 위해서 필요한 파라미터를 구하는 것이다.<br /> <img src="https://t1.daumcdn.net/cfile/tistory/24758441510E994028" alt="핀홀 카메라 모델" /><br /> A[R/t] 행렬에서 A행렬이다.<br /> A행렬은 내부 파라미터(intrinsic calibration)라고 하는데 이의 구성은</p> <h2 id="1-초점거리-fx-fy">1. 초점거리 fx, fy</h2> <p><img src="https://t1.daumcdn.net/cfile/tistory/22504A475344768E06" alt="" /> 실제 단위: mm, 카메라 모델 단위: pixel<br /> pixel은 이미지 센서의 셀 크기에 대해 상대적인 값으로 표현<br /> 예를 들어 셀 크기: 0.1mm, 초점거리가 500mm면 렌즈 중심에서 이미지 센서까지의 거리는 이미지 센서 셀 크기의...<a class="read-more" href="./realsense2.html"> read more</a>
+						<h1 id="camera_calibration">Camera_calibration</h1> <p>Camera calibration을 하는 이유는 2d 평면을 3d 모델로 해석하기 위해서 필요한 파라미터를 구하는 것이다.<br /> <img src="https://t1.daumcdn.net/cfile/tistory/24758441510E994028" alt="핀홀 카메라 모델" /><br /> A[R/t] 행렬에서 A행렬이다.<br /> A행렬은 내부 파라미터(intrinsic calibration)라고 하는데 이의 구성은</p> <h2 id="1-초점거리-fx-fy">1. 초점거리 fx, fy</h2> <p><img src="https://t1.daumcdn.net/cfile/tistory/22504A475344768E06" alt="" /> 실제 단위: mm, 카메라 모델 단위: pixel<br /> pixel은 이미지 센서의 셀 크기에 대해 상대적인 값으로 표현<br /> 예를 들어 셀 크기: 0.1mm, 초점거리가 500mm면 렌즈 중심에서 이미지 센서까지의 거리는 이미지 센서 셀 크기의 500배, 50mm라는 뜻이다. 실제 단위를 셀 크기와 초점거리로 표현해 놓은 것이다. 왜? 값을 이미지 센서에 종속시킴으로서 영상에서의 기하학적 해석을 용이하게 하기 위해서.</p>...<a class="read-more" href="./realsense2.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1780,6 +1836,45 @@ realsense d435i와 rviz 연동해봄.<br />
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./uda-cnn.html">[Udacity] Deep Learning (6) - Convolutional Nerual Network(작성중)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-07-04T15:41:24+09:00">July 4, 2021</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p align="center"> <img width="100%" height="100%" src="/assets/img/deeplearning/cnn.png" /> </p> <p>지금까지 우리는 심층 신경망(Deep Nerual Network)을 구성하기까지의 과정을 살펴보았습니다. 이제 이 심층 신경망으로 구성할 수 있는 네트워크 중 이미지 학습에 최적화된 <strong>합성곱 신경망(Convolutional Nerual Network, CNN)</strong>에 대해서 알아보겠습니다.</p> <h2 id="cnn이-되기까지">CNN이 되기까지</h2> <p>CNN이 고안되기 전에는 이미지를 Fully Connected Nerual Network라는 1차원 벡터 형태의 데이터를 학습하는 형태의 신경망 구조를 사용했습니다. 하지만 FNN은 몇 가지 단점이 있습니다.<br /> 첫번째로 이미지 데이터를 평면화 시키는 과정에서 이미지의 인접한 픽셀 간의 정보가 유실된다는 점입니다. FNN은 1차원 벡터 형태의 데이터를 입력받기 때문에 이미지의 인접 픽셀간의 상관관계를 반영할 수 없습니다. 반면 CNN은 이미지의 특징을 보존한 채로 학습을 진행하기 때문에 인접...<a class="read-more" href="./uda-cnn.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./uda-dnn.html">[Udacity] Deep Learning (5) - Deep Nerual Network</a>
 					
 
@@ -1852,45 +1947,6 @@ realsense d435i와 rviz 연동해봄.<br />
 
 					<div class="post-excerpt">
 						<h1 id="왜-tensowflow-인가">왜 Tensowflow 인가</h1> <h2 id="tensorflow란">Tensorflow란?</h2> <p>지난 시간까지 신경망을 쌓으면서 모델을 학습, 즉 적절한 가중치와 바이어스를 구하는 방법을 이론적으로 알아보았습니다. 이번 게시글에선 이 방법들을 물리적인 코드로 구현해 보겠습니다. 하지만 코드로 구현한다고 하여 덧셈 뺄셈 연산자를 이용하여 밑바닥부터 구현한다는 의미는 아닙니다. 이미 시중에는 딥러닝을 초보자도 쉽게(?) 구현할 수 있도록 제작해 놓은 여러 라이브러리들이 있습니다. 이 중 우리는 가장 많은 사람들이 사용하는 <strong>Tensorflow</strong>를 사용할 것입니다. <img src="/assets/img/deeplearning/tensor flow.png" alt="tensor flow" width="90%" height="90%" /><br /> Tensorflow는 구글에서 만든 딥러닝을 쉽게 구현할 수 있도록 기능을 제공하는 라이브러리입니다. 위 그림과 같이 딥러닝을 할 사용되는 텐서 형태의 데이터들이 모델을 구성하는 연산들의 그래프를 따라 흐르면서 연산이 일어납니다....<a class="read-more" href="./uda-dl-tensorflow.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./uda-dl-nnnl.html">[Udacity] Deep Learning (3) - Nerual Network 비선형 모델</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2021-02-08T16:24:39+09:00">February 8, 2021</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<h1 id="지난-게시글의-복습">지난 게시글의 복습</h1> <p>지난 게시글들에서는 뉴럴 네트워크를 활성화 함수에 따라 이산 모델, 연속 모델로 나누어서 살펴보았습니다. 뉴럴 네트워크의 최종 목적은 정확한 예측 모델, 선형 함수를 만드는 것입니다. 이 선형 함수를 이산 모델에서는 Step Function, 연속 모델에서는 Sigmoid 또는 Softmax 함수에 대입합니다. 그 후 이산 모델에서는 퍼셉트론 알고리즘으로 가중치를 조절, 연속 모델에서는 Cross-Entropy 오차함수와 경사하강법을 사용하여 가중치를 조절합니다. 그 결과, 뉴럴 네트워크의 예측 모델인 선형 함수를 도출할 수 있습니다.</p> <h1 id="비선형-모델---다층-신경망">비선형 모델 - 다층 신경망</h1> <p>이번 게시글에서는 비선형 모델에 대해서 알아보겠습니다. 비선형 모델은 어떤 식으로 찾을 수 있을까요? 바로 선형 함수를 여러개 합치는 것입니다. 간단한 예시를 보겠습니다.<br /> <img src="/assets/img/deeplearning/nonlinearex1.png"...<a class="read-more" href="./uda-dl-nnnl.html"> read more</a>
 					</div>
 				</div>
 			
@@ -2349,7 +2405,7 @@ realsense d435i와 rviz 연동해봄.<br />
                 <li><a href="./tag.html?tag=Computer+Vision" class="tag">Computer Vision <span>(4)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=Deep+Learning" class="tag">Deep Learning <span>(9)</span></a></li>
+                <li><a href="./tag.html?tag=Deep+Learning" class="tag">Deep Learning <span>(10)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=Kalman+Filter" class="tag">Kalman Filter <span>(1)</span></a></li>
@@ -2394,7 +2450,7 @@ realsense d435i와 rviz 연동해봄.<br />
                 <li><a href="./tag.html?tag=Turtlebot3" class="tag">Turtlebot3 <span>(1)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=Udacity" class="tag">Udacity <span>(9)</span></a></li>
+                <li><a href="./tag.html?tag=Udacity" class="tag">Udacity <span>(10)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=coding" class="tag">coding <span>(1)</span></a></li>

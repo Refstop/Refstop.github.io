@@ -240,6 +240,45 @@
 		<div class="post">
 			
 
+			<a class="post-list-title" href="./uda-cnn.html">[Udacity] Deep Learning (6) - Convolutional Nerual Network(작성중)</a>
+			
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-07-04T15:41:24+09:00">July 4, 2021</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+			<div class="post-excerpt">
+				<p align="center"> <img width="100%" height="100%" src="/assets/img/deeplearning/cnn.png" /></p><p>지금까지 우리는 심층 신경망(Deep Nerual Network)을 구성하기까지의 과정을 살펴보았습니다. 이제 이 심층 신경망으로 구성할 수 있는 네트워크 중 이미지 학습에 최적화된 <strong>합성곱 신경망(Convolutional Nerual Network, CNN)</strong>에 대해서 알아보겠습니다.</p><h2 id="cnn이-되기까지">CNN이 되기까지</h2><p>CNN이 고안되기 전에는 이미지를 Fully Connected Nerual Network라는 1차원 벡터 형태의 데이터를 학습하는 형태의 신경망 구조를 사용했습니다. 하지만 FNN은 몇 가지 단점이 있습니다.<br /> 첫번째로 이미지 데이터를 평면화 시키는 과정에서 이미지의 인접한 픽셀 간의 정보가 유실된다는 점입니다. FNN은 1차원 벡터 형태의 데이터를 입력받기 때문에 이미지의 인접 픽셀간의 상관관계를 반영할 수 없습니다. 반면 CNN은 이미지의 특징을 보존한 채로 학습을 진행하기 때문에 인접 픽셀간의 정보 유식을 막을...<a class="read-more" href="./uda-cnn.html"> read more</a>
+			</div>
+		</div>
+	
+		<div class="post">
+			
+
 			<a class="post-list-title" href="./i2n-signal.html">Indoor 2D Navigation - 개요 & 좌표범위내 신호 출력 노드</a>
 			
 
@@ -312,45 +351,6 @@
 
 			<div class="post-excerpt">
 				<h1 id="deep-nerual-network">Deep Nerual Network</h1><p>지금까지 정리한 Nerual Network는 모두 layer가 하나뿐인 단층 신경망(Single-Layer Perceptron)입니다. 하지만 단층 신경망으로는 비선형 모델을 구현할 수 없습니다. <a href="https://refstop.github.io/udacity/deep%20learning/uda-dl-nnnl#1">지난 게시글</a>에서 언급한 바와 같이 비선형 모델은 입력층(Input layer), 은닉층(Hidden layer), 출력층(Output layer)으로 이루어진 $^{1)}$심층 신경망(Deep Neural Network)으로 구현할 수 있습니다. 따라서 인공 신경망의 성능 향상을 위해서는 심층 신경망의 사용은 필수적이라고 할 수 있습니다.</p><h2 id="relu-activation-function">ReLU Activation Function</h2><p>심층 신경망에 대해서 정리하기 전에 <strong>ReLU 활성화 함수</strong>에 대해서 알아보고 넘어가겠습니다. 활성화 함수는 각 층의 신경망의 출력을 결정하는 함수입니다. 또한 활성화 함수가 없다면 심층 신경망은 $y=W_{1}W_{2}W_{3} \cdots x=Wx$가 되므로 비선형 모델이라고 볼 수 없는 결과가 나옵니다. 이러한 문제를 해결하기 위해서 넣은 활성화...<a class="read-more" href="./uda-dnn.html"> read more</a>
-			</div>
-		</div>
-	
-		<div class="post">
-			
-
-			<a class="post-list-title" href="./uda-dl-tensorflow.html">[Udacity] Deep Learning (4) - Tensorflow</a>
-			
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2021-03-01T21:14:35+09:00">March 1, 2021</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        7 minute read
-      
-    </span>
-  
-  
-  </span>
-
-			<div class="post-excerpt">
-				<h1 id="왜-tensowflow-인가">왜 Tensowflow 인가</h1><h2 id="tensorflow란">Tensorflow란?</h2><p>지난 시간까지 신경망을 쌓으면서 모델을 학습, 즉 적절한 가중치와 바이어스를 구하는 방법을 이론적으로 알아보았습니다. 이번 게시글에선 이 방법들을 물리적인 코드로 구현해 보겠습니다. 하지만 코드로 구현한다고 하여 덧셈 뺄셈 연산자를 이용하여 밑바닥부터 구현한다는 의미는 아닙니다. 이미 시중에는 딥러닝을 초보자도 쉽게(?) 구현할 수 있도록 제작해 놓은 여러 라이브러리들이 있습니다. 이 중 우리는 가장 많은 사람들이 사용하는 <strong>Tensorflow</strong>를 사용할 것입니다.<img src="/assets/img/deeplearning/tensor flow.png" alt="tensor flow" width="90%" height="90%" /><br />Tensorflow는 구글에서 만든 딥러닝을 쉽게 구현할 수 있도록 기능을 제공하는 라이브러리입니다. 위 그림과 같이 딥러닝을 할 사용되는 텐서 형태의 데이터들이 모델을 구성하는 연산들의 그래프를 따라 흐르면서 연산이 일어납니다. 데이터를 의미하는 텐서(tensor)와 데이터...<a class="read-more" href="./uda-dl-tensorflow.html"> read more</a>
 			</div>
 		</div>
 	

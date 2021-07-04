@@ -1,0 +1,40 @@
+I"^<p align="center">
+  <img width="100%" height="100%" src="/assets/img/deeplearning/cnn.png" />
+</p>
+<p>지금까지 우리는 심층 신경망(Deep Nerual Network)을 구성하기까지의 과정을 살펴보았습니다. 이제 이 심층 신경망으로 구성할 수 있는 네트워크 중 이미지 학습에 최적화된 <strong>합성곱 신경망(Convolutional Nerual Network, CNN)</strong>에 대해서 알아보겠습니다.</p>
+
+<h2 id="cnn이-되기까지">CNN이 되기까지</h2>
+<p>CNN이 고안되기 전에는 이미지를 Fully Connected Layer라는 1차원 배열 형태의 데이터로 변환하여 학습했습니다. 하지만 Fully Connected Layer는 이미지 데이터를 평면화 시키는 과정에서 이미지의 공간 정보가 유실되는 현상이 발생하여 인공 신경망 학습이 비효율적이라는 단점이 있습니다. 이러한 점을 보완하여 이미지의 공간 정보를 유지한 채로 학습이 가능한 모델이 바로 CNN입니다.</p>
+
+<h2 id="1-cnn의-주요-용어-정리">1. CNN의 주요 용어 정리</h2>
+<p>CNN에는 다음과 같은 용어들이 사용됩니다.</p>
+<ul>
+  <li>Convolution(합성곱)</li>
+  <li>채널(Channel)</li>
+  <li>필터(Filter)</li>
+  <li>커널(Kernel)</li>
+  <li>스트라이드(Stride)</li>
+  <li>패딩(Padding)</li>
+  <li>피처 맵(Feature Map)</li>
+  <li>액티베이션 맵(Activation Map)</li>
+  <li>풀링(Pooling) 레이어
+각 용어에 대해서 간략하게 정리하겠습니다.</li>
+</ul>
+
+<h3 id="11-convolution합성곱">1.1 Convolution(합성곱)</h3>
+<p>Convolution은 합성곱이라는 의미인데, input 함수(신호)와 임펄스 응답 함수(신호)를 반전 이동한 값을 곱하여 적분한 값입니다. 원래의 의미는 이렇지만, 이해하기 너무 어려우므로 다음 gif 파일을 통해 쉽게 알 수 있습니다.</p>
+<p align="center">
+  <img width="80%" height="80%" src="/assets/img/deeplearning/conv.gif" />
+</p>
+<p>위의 gif 파일은 입력된 이미지 데이터를 필터를 통해 Feature Map을 만드는 과정입니다. 필터로 이미지를 훑어가면서 각각의 합성곱 결과를 저장하여 Feature Map을 구성합니다.</p>
+
+<h3 id="12-채널channel">1.2 채널(Channel)</h3>
+<p>채널은 이미지를 구성하고 있는 실수값의 차원입니다. 이미지를 색 공간에 따라서 분리할 때, RGB의 3채널로 분리할 수 있습니다. 이미지를 구성하는 각 픽셀은 실수로 표현한 3차원 데이터입니다. 각각의 차원은 R, G, B의 3색을 나타내는 실수로, 이때의 RGB를 채널이라고 합니다.</p>
+<p align="center">
+  <img width="80%" height="80%" src="/assets/img/deeplearning/channel.jpg" />
+</p>
+
+<p>###</p>
+<h2 id="참고-사이트">참고 사이트</h2>
+<p><a href="http://taewan.kim/post/cnn/">TAEWAN.KIM 블로그 - “CNN, Convolutional Neural Network 요약”</a></p>
+:ET
