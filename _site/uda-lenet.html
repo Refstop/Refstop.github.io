@@ -7,7 +7,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중) - Refstop의 연구일지</title>
+	<title>[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5 - Refstop의 연구일지</title>
 	<link rel="canonical" href="https://Refstop.github.io/uda-lenet.html">
 	<meta name="description" content="Deep Learning 및 SLAM을 공부하고 있습니다.">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,10 +19,10 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://Refstop.github.io"},
-  "headline": "[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)",
+  "headline": "[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5",
   "abstract": "",
     "keywords": "Udacity, Deep Learning",
-    "wordcount": "128",
+    "wordcount": "843",
     "image": ["https://Refstop.github.io/assets/img/deeplearning/lenet.png"],
   "datePublished": "2021-07-05 01:11:24 +0900",
   "dateModified": "2021-07-05 01:11:24 +0900",
@@ -42,27 +42,27 @@
 <!-- Open Graph data -->
 <meta property="og:url" content="https://Refstop.github.io/uda-lenet.html"/>
 <meta property="og:type" content="article"/>
-<meta property="og:title" content="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)"/>
+<meta property="og:title" content="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5"/>
 <meta property="og:description" content=""/>
 <meta property="og:image" content="https://Refstop.github.io/assets/img/deeplearning/lenet.png"/>
-<meta property="og:image:alt" content="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)"/>
+<meta property="og:image:alt" content="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5"/>
 <meta property="og:site_name" content="Refstop의 연구일지" />
 <meta property="article:published_time" content="2021-07-05 01:11:24 +0900" />
 <meta property="article:modified_time" content="2021-07-05 01:11:24 +0900" />
 <meta property="article:tag" content="Udacity, Deep Learning" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
-<meta itemprop="name" content="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)">
+<meta itemprop="name" content="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5">
 <meta itemprop="description" content="">
 <meta itemprop="image" content="https://Refstop.github.io/assets/img/deeplearning/lenet.png">
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@MvmThe">
-<meta name="twitter:title" content="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)">
+<meta name="twitter:title" content="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5">
 <meta name="twitter:description" content="">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="128"/>
+<meta data-rh="true" name="twitter:data1" content="843"/>
 <meta name="twitter:image:src" content="https://Refstop.github.io/assets/img//deeplearning/lenet.png">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -139,7 +139,7 @@
 
 <section class="hidden">
   <div class="post">
-      <a  class="post-list-title" href="./uda-lenet.html">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)</a>
+      <a  class="post-list-title" href="./uda-lenet.html">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5</a>
       
 
   <span class = "post-card-meta">
@@ -163,7 +163,7 @@
     
     <span class="page_meta-readtime">
       
-        less than 1 minute read
+        4 minute read
       
     </span>
   
@@ -171,7 +171,7 @@
   </span>
 
         <div class="post-excerpt">
-            <p>지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.</p><h2 id="1-cnn의-구성">1. CNN의 구성</h2><p>CNN의 구성을 공부하는 예시로서 대표적으로 사용되는 LeNet-5 모델으로 정리하겠습니다.</p><h3 id="lenet-5-네트워크란">LeNet-5 네트워크란?</h3><p align="center"> <img width="100%" height="100%" src="/assets/img/deeplearning/lenet.png" /></p><p>LeNet-5 네트워크는 CNN을 처음으로 개발한 Yann Lecun 연구팀이 개발한 CNN 알고리즘의 이름입니다. 이 알고리즘이 소개된 논문 제목은 Gradient-based learning applied to document recognition”입니다.<br />LeNet-5 네트워크는 Input-C1-S2-C3-S4-C5-F6-Output으로 이루어져 있고, Convolution layer, Pooling layer 두 쌍과 Fully Connected layer 3개로 구성되어 있습니다. 원래 논문에서는 활성화 함수로서 tanh 함수를 사용했지만, 제 코드에서는 ReLU 함수를 사용하였습니다.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.models import Sequentialfrom keras.layers.convolutional import Conv2Dfrom keras.layers.convolutional import MaxPooling2Dfrom keras.layers import Densefrom keras.layers import Flattenmodel =...<a class="read-more" href="./uda-lenet.html"> read more</a>
+            <p>지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input 1 is the X coordinate of the point,Input 2 is the y coordinate of the point,</code></pre></div></div><p>^^^왜인지 버그가 나서 아무말이나 지껴둔것</p><h2 id="1-cnn의-구성">1. CNN의 구성</h2><p>CNN의 구성을 공부하는 예시로서 대표적으로 사용되는 LeNet-5 모델으로 정리하겠습니다.</p><h3 id="lenet-5-네트워크란">LeNet-5 네트워크란?</h3><p align="center"> <img width="100%" height="100%" src="/assets/img/deeplearning/lenet.png" /></p><p>LeNet-5 네트워크는 CNN을 처음으로 개발한 Yann Lecun 연구팀이 개발한 CNN 알고리즘의 이름입니다. 이 알고리즘이 소개된 논문 제목은 Gradient-based learning applied to document recognition”입니다.<br />LeNet-5 네트워크는 Input-C1-S2-C3-S4-C5-F6-Output으로 이루어져 있고, Convolution layer, Pooling layer 두 쌍(C1-S2-C3-S4)과 Flatten layer(C5), Fully Connected layer(F6) 1개로 구성되어 있습니다. 원래 논문에서는 활성화 함수로서 tanh 함수를...<a class="read-more" href="./uda-lenet.html"> read more</a>
         </div>
   </div>
 </section>
@@ -269,7 +269,7 @@
 </header> <!-- End Header -->
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)">
+    <meta itemprop="headline" content="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5">
 
 <meta itemprop="datePublished" content="2021-07-05T01:11:24+09:00">
 
@@ -279,7 +279,7 @@
     <div class="wrapper">
       <div class="page-content">
         <div class="header-page">
-          <h1 class="page-title">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)</h1>
+          <h1 class="page-title">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5</h1>
           
 
   <span class = "post-page-meta">
@@ -303,7 +303,7 @@
     
     <span class="page_meta-readtime">
       
-        less than 1 minute read
+        4 minute read
       
     </span>
   
@@ -333,11 +333,11 @@
     <div class="share-hover side">
         <span class="share-button side"><svg fill="currentColor" width="25" height="25" class="side"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons side" id="sidebar-icons">
-            <a class="twitter" href="https://twitter.com/intent/tweet?text=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)&url=https://Refstop.github.io/uda-lenet.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="twitter" href="https://twitter.com/intent/tweet?text=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5&url=https://Refstop.github.io/uda-lenet.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             <a class="facebook" href="https://facebook.com/sharer.php?u=https://Refstop.github.io/uda-lenet.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=https://Refstop.github.io/uda-lenet.html&title=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a>
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https://Refstop.github.io/uda-lenet.html&title=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)&summary=&source=https://Refstop.github.io/uda-lenet.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)&body=%0A%0ARead more here: https://Refstop.github.io/uda-lenet.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=https://Refstop.github.io/uda-lenet.html&title=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a>
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https://Refstop.github.io/uda-lenet.html&title=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5&summary=&source=https://Refstop.github.io/uda-lenet.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5&body=%0A%0ARead more here: https://Refstop.github.io/uda-lenet.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="side" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -348,6 +348,13 @@
         
         
         <p>지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input 1 is the X coordinate of the point,
+Input 2 is the y coordinate of the point,
+</code></pre></div></div>
+
+<p>^^^왜인지 버그가 나서 아무말이나 지껴둔것</p>
+
 <h2 id="1-cnn의-구성">1. CNN의 구성</h2>
 <p>CNN의 구성을 공부하는 예시로서 대표적으로 사용되는 LeNet-5 모델으로 정리하겠습니다.</p>
 <h3 id="lenet-5-네트워크란">LeNet-5 네트워크란?</h3>
@@ -355,7 +362,8 @@
   <img width="100%" height="100%" src="/assets/img/deeplearning/lenet.png" />
 </p>
 <p>LeNet-5 네트워크는 CNN을 처음으로 개발한 Yann Lecun 연구팀이 개발한 CNN 알고리즘의 이름입니다. 이 알고리즘이 소개된 논문 제목은 Gradient-based learning applied to document recognition”입니다.<br />
-LeNet-5 네트워크는 Input-C1-S2-C3-S4-C5-F6-Output으로 이루어져 있고, Convolution layer, Pooling layer 두 쌍과 Fully Connected layer 3개로 구성되어 있습니다. 원래 논문에서는 활성화 함수로서 tanh 함수를 사용했지만, 제 코드에서는 ReLU 함수를 사용하였습니다.</p>
+LeNet-5 네트워크는 Input-C1-S2-C3-S4-C5-F6-Output으로 이루어져 있고, Convolution layer, Pooling layer 두 쌍(C1-S2-C3-S4)과 Flatten layer(C5), Fully Connected layer(F6) 1개로 구성되어 있습니다. 원래 논문에서는 활성화 함수로서 tanh 함수를 사용했지만, 제 코드에서는 ReLU 함수를 사용하였습니다.</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.models import Sequential
 from keras.layers.convolutional import Conv2D
 from keras.layers.convolutional import MaxPooling2D
@@ -365,10 +373,10 @@ from keras.layers import Flatten
 model = keras.Sequential()
 
 model.add(layers.Conv2D(filters=6, kernel_size=(3, 3), activation='relu', input_shape=(64,64,3)))
-model.add(layers.MaxPooling2D())
+model.add(layers.MaxPooling2D(pool_size=(2, 2)))
 
 model.add(layers.Conv2D(filters=16, kernel_size=(3, 3), activation='relu'))
-model.add(layers.MaxPooling2D())
+model.add(layers.MaxPooling2D(pool_size=(2, 2)))
 
 model.add(layers.Flatten())
 
@@ -376,9 +384,278 @@ model.add(layers.Dense(units=120, activation='relu'))
 
 model.add(layers.Dense(units=84, activation='relu'))
 
-model.add(layers.Dense(units=10, activation = 'softmax')) # class 개수에 맞게
+model.add(layers.Dense(units=10, activation = 'softmax'))
 </code></pre></div></div>
+
 <p>실제 사용결과는 나중에 올리도록 하겠습니다….</p>
+
+<h2 id="2-cnn-입출력-파라미터-계산">2. CNN 입출력, 파라미터 계산</h2>
+<p>사용한 예시에서의 입출력 표를 정리하면 다음과 같습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><center>layer</center></th>
+      <th style="text-align: center"><center>Input Channel</center></th>
+      <th style="text-align: center"><center>Filter</center></th>
+      <th style="text-align: center"><center>Output Channel</center></th>
+      <th style="text-align: center"><center>Stride</center></th>
+      <th style="text-align: center"><center>Max Pooling</center></th>
+      <th style="text-align: right"><center>Activation Function</center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><center>Convolution Layer 1</center></td>
+      <td style="text-align: center"><center>3 </center></td>
+      <td style="text-align: center"><center>(3,3) </center></td>
+      <td style="text-align: center"><center>6 </center></td>
+      <td style="text-align: center"><center>1 </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: right"><center>relu </center></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><center>Max Pooling Layer 1</center></td>
+      <td style="text-align: center"><center>6 </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>6 </center></td>
+      <td style="text-align: center"><center>1 </center></td>
+      <td style="text-align: center"><center>(2,2) </center></td>
+      <td style="text-align: right"><center>X </center></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><center>Convolution Layer 2</center></td>
+      <td style="text-align: center"><center>6 </center></td>
+      <td style="text-align: center"><center>(4,4) </center></td>
+      <td style="text-align: center"><center>16 </center></td>
+      <td style="text-align: center"><center>1 </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: right"><center>relu </center></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><center>Max Pooling Layer 2</center></td>
+      <td style="text-align: center"><center>16 </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>16 </center></td>
+      <td style="text-align: center"><center>1 </center></td>
+      <td style="text-align: center"><center>(2,2) </center></td>
+      <td style="text-align: right"><center>X </center></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><center>Flatten</center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: right"><center>X </center></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><center>Fully Connected layer</center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: right"><center>softmax </center></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Convolution layer의 학습 파라미터 수는 <strong>입력채널수 $\times$ 필터 폭 $\times$ 필터 높이 $\times$ 출력채널수</strong>로 계산됩니다.</p>
+
+<h3 id="21-layer-1의-shape와-파라미터">2.1 Layer 1의 Shape와 파라미터</h3>
+<p>Layer 1은 1개의 Convolution layer와 1개의 Pooling layer로 구성되어 있습니다.</p>
+
+<h4 id="211-convolution-layer-1">2.1.1 Convolution layer 1</h4>
+<p>Convolution layer 1의 기본 정보는 다음과 같습니다.</p>
+<ul>
+  <li>입력 데이터 Shape = (64,64,3)</li>
+  <li>입력 채널 = 3</li>
+  <li>필터 = (3,3)</li>
+  <li>출력 채널 = 6</li>
+  <li>Stride = 1
+입력 이미지에 Shape가 (3,3)인 필터를 6개 적용할 경우에, 출력 데이터(Activation Map)의 Shape를 계산하는 과정은 다음과 같습니다.</li>
+</ul>
+<center>$Row\;Size=\frac{N-F}{Stride}+1=\frac{64-3}{1}+1=62$</center>
+<center>$Column\;Size=\frac{N-F}{Stride}+1=\frac{64-3}{1}+1=62$</center>
+<p>위 식으로 계산된 Activation Map 사이즈는 (62,62,6)입니다. 따라서 이 레이어의 학습 파라미터는 다음과 같이 계산할 수 있습니다.</p>
+<ul>
+  <li>입력 채널: 3</li>
+  <li>출력 데이터(Activation Map) Shape: (62,62,6)</li>
+  <li>학습 파라미터: 162개 (3$\times$3$\times$3$\times$6)</li>
+</ul>
+
+<h4 id="212-max-pooling-layer-1">2.1.2 Max Pooling layer 1</h4>
+<p>Max Pooling layer 1의 입력 데이터 Shape은 (62,62,6)입니다. 채널 수는 바뀌지 않고, Max Pooling 사이즈가 (2,2)이기 때문에 출력 데이터 크기는 다음과 같습니다.</p>
+<center>$Row\;Size=\frac{62}{2}=31$</center>
+<center>$Column\;Size=\frac{62}{2}=31$</center>
+<p>위 식으로 계산된 출력 사이즈는 (31,31,6)입니다. 따라서 이 레이어의 학습 파라미터는 다음과 같이 계산할 수 있습니다.</p>
+<ul>
+  <li>입력 채널: 6</li>
+  <li>출력 데이터 Shape: (31,31,6)</li>
+  <li>학습 파라미터: 0개</li>
+</ul>
+
+<h3 id="22-layer-2의-shape와-파라미터">2.2 Layer 2의 Shape와 파라미터</h3>
+<p>Layer 2도 마찬가지로 Convolution layer와 Pooling layer로 구성되어 있습니다.</p>
+
+<h4 id="221-convolution-layer-2">2.2.1 Convolution layer 2</h4>
+<p>Convolution layer 2의 기본 정보는 다음과 같습니다.</p>
+<ul>
+  <li>입력 데이터 Shape = (31,31,6)</li>
+  <li>입력 채널 = 6</li>
+  <li>필터 = (4,4)</li>
+  <li>출력 채널 = 16</li>
+  <li>Stride = 1
+입력 이미지에 Shape가 (4,4)인 필터를 16개 적용할 경우에, 출력 데이터(Activation Map)의 Shape를 계산하는 과정은 다음과 같습니다.</li>
+</ul>
+<center>$Row\;Size=\frac{N-F}{Stride}+1=\frac{31-4}{1}+1=28$</center>
+<center>$Column\;Size=\frac{N-F}{Stride}+1=\frac{31-4}{1}+1=28$</center>
+<p>위 식으로 계산된 Activation Map 사이즈는 (28,28,16)입니다. 따라서 이 레이어의 학습 파라미터는 다음과 같이 계산할 수 있습니다.</p>
+<ul>
+  <li>입력 채널: 6</li>
+  <li>출력 데이터(Activation Map) Shape: (28,28,16)</li>
+  <li>학습 파라미터: 1536개 (6$\times$4$\times$4$\times$16)</li>
+</ul>
+
+<h4 id="222-max-pooling-layer-2">2.2.2 Max Pooling layer 2</h4>
+<p>Max Pooling layer 1의 입력 데이터 Shape은 (28,28,16)입니다. 채널 수는 바뀌지 않고, Max Pooling 사이즈가 (2,2)이기 때문에 출력 데이터 크기는 다음과 같습니다.</p>
+<center>$Row\;Size=\frac{28}{2}=14$</center>
+<center>$Column\;Size=\frac{28}{2}=14$</center>
+<p>위 식으로 계산된 출력 사이즈는 (14,14,16)입니다. 따라서 이 레이어의 학습 파라미터는 다음과 같이 계산할 수 있습니다.</p>
+<ul>
+  <li>입력 채널: 16</li>
+  <li>출력 데이터 Shape: (14,14,16)</li>
+  <li>학습 파라미터: 0개</li>
+</ul>
+
+<h3 id="23-flatten-layer">2.3 Flatten layer</h3>
+<p>Flatten layer는 CNN의 데이터를 Fully Connected Nerual Network에 사용되는 1차원 벡터로 바꿔주는 layer입니다. 파라미터는 존재하지 않고 이전 layer의 출력을 1차원 벡터로 바꾸는 역할만 합니다.</p>
+<ul>
+  <li>입력 데이터 Shape: (14,14,16)</li>
+  <li>출력 데이터 Shape: (3136,1)
+원래 LeNet-5 네트워크에서는 Flatten 층의 입력 데이터 Shape와 같은 크기의 필터를 Convolution하고 출력 채널을 조절하여 1차원 벡터의 형태로 변환합니다. 하지만 Flatten 함수로도 충분히 이미지의 특성을 지닌 1차원 벡터로 변환할 수 있으므로 Flatten 함수를 사용합니다.</li>
+</ul>
+
+<h3 id="24-fully-connected-layersoftmax-layer">2.4 Fully Connected layer(Softmax layer)</h3>
+<p>마지막 출력층에 해당하는 FNN입니다. 입력 데이터의 class를 분류해야 하는 layer이기 때문에 Softmax 함수를 사용하여 출력층을 구성합니다. 입력 데이터의 Shape는 이전 Flatten layer의 출력인 (3136,1)입니다. 최종 출력 데이터는 원래 입력 데이터의 분류 class만큼이 되므로, 예를 들어 분류할 class가 10개라면 출력 데이터의 Shape는 (10,1)이 됩니다. 파라미터를 계산하면 다음과 같습니다.</p>
+<ul>
+  <li>입력 데이터 Shape: (3136,1)</li>
+  <li>출력 데이터 Shape: (10,1)</li>
+  <li>Softmax layer의 파라미터 수: 31360개 (3136$\times$10)</li>
+</ul>
+
+<h2 id="3-전체-파라미터-수와-레이어별-inputoutput-요약">3. 전체 파라미터 수와 레이어별 Input/Output 요약</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><center>layer</center></th>
+      <th style="text-align: center"><center>Input Channel</center></th>
+      <th style="text-align: center"><center>Filter</center></th>
+      <th style="text-align: center"><center>Output Channel</center></th>
+      <th style="text-align: center"><center>Stride</center></th>
+      <th style="text-align: center"><center>Max Pooling</center></th>
+      <th style="text-align: right"><center>Activation Function</center></th>
+      <th style="text-align: center"><center>Input Shape</center></th>
+      <th style="text-align: center"><center>Output Shape</center></th>
+      <th style="text-align: right"><center>파라미터 수</center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><center>Conv1</center></td>
+      <td style="text-align: center"><center>3 </center></td>
+      <td style="text-align: center"><center>(3,3) </center></td>
+      <td style="text-align: center"><center>6 </center></td>
+      <td style="text-align: center"><center>1 </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: right"><center>relu </center></td>
+      <td style="text-align: center"><center>(64,64,3) </center></td>
+      <td style="text-align: center"><center>(62,62,6) </center></td>
+      <td style="text-align: right"><center>162 </center></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><center>MaxPooling1</center></td>
+      <td style="text-align: center"><center>6 </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>6 </center></td>
+      <td style="text-align: center"><center>1 </center></td>
+      <td style="text-align: center"><center>(2,2) </center></td>
+      <td style="text-align: right"><center>X </center></td>
+      <td style="text-align: center"><center>(62,62,6) </center></td>
+      <td style="text-align: center"><center>(31,31,6) </center></td>
+      <td style="text-align: right"><center>0 </center></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><center>Conv2</center></td>
+      <td style="text-align: center"><center>6 </center></td>
+      <td style="text-align: center"><center>(4,4) </center></td>
+      <td style="text-align: center"><center>16 </center></td>
+      <td style="text-align: center"><center>1 </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: right"><center>relu </center></td>
+      <td style="text-align: center"><center>(31,31,6) </center></td>
+      <td style="text-align: center"><center>(28,28,16) </center></td>
+      <td style="text-align: right"><center>1536 </center></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><center>MaxPooling2</center></td>
+      <td style="text-align: center"><center>16 </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>16 </center></td>
+      <td style="text-align: center"><center>1 </center></td>
+      <td style="text-align: center"><center>(2,2) </center></td>
+      <td style="text-align: right"><center>X </center></td>
+      <td style="text-align: center"><center>(28,28,16) </center></td>
+      <td style="text-align: center"><center>(14,14,16) </center></td>
+      <td style="text-align: right"><center>0 </center></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><center>Flatten</center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: right"><center>X </center></td>
+      <td style="text-align: center"><center>(14,14,16) </center></td>
+      <td style="text-align: center"><center>(3136,1) </center></td>
+      <td style="text-align: right"><center>0 </center></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><center>FC</center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: right"><center>softmax </center></td>
+      <td style="text-align: center"><center>(3136,1) </center></td>
+      <td style="text-align: center"><center>(10,1) </center></td>
+      <td style="text-align: right"><center>31360 </center></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><center>합계</center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: right"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: center"><center>X </center></td>
+      <td style="text-align: right"><center>33058 </center></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="4-fully-connected-nerual-network와의-비교">4. Fully Connected Nerual Network와의 비교</h2>
+<p>이 모델을 FNN의 파라미터 수와 비교한다면, 우선 입력층의 데이터가 (64,64,3)이므로 $64^2\times3=12288$개의 원소를 가진 1차원 벡터가 됩니다. 또한 이 벡터를 Fully Connected layer에 입력하여 class 개수가 10개인 출력을 갖는다면 파라미터 수는 $12288\times10=122880$개가 됩니다. layer를 하나만 가지고 있음에도 불구하고 CNN 구조의 네트워크보다 약 4배 더 많은 연산량을 가지게 됩니다. 따라서 이러한 점에서 CNN은 FNN에 비해 학습이 쉽고 네트워크 처리 속도가 빠르다는 장점을 갖고 있습니다.</p>
+
+<h2 id="참고-사이트">참고 사이트</h2>
+<p><a href="http://taewan.kim/post/cnn/">TAEWAN.KIM 블로그 - “CNN, Convolutional Neural Network 요약”</a></p>
 
         <aside class="sidebar inline" id="post-end">
     
@@ -400,11 +677,11 @@ model.add(layers.Dense(units=10, activation = 'softmax')) # class 개수에 맞�
     <div class="share-hover inline">
         <span class="share-button inline"><svg fill="currentColor" width="25" height="25" class="inline"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons inline" id="post-end-icons">
-            <a class="twitter" href="https://twitter.com/intent/tweet?text=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)&url=https://Refstop.github.io/uda-lenet.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="twitter" href="https://twitter.com/intent/tweet?text=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5&url=https://Refstop.github.io/uda-lenet.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             <a class="facebook" href="https://facebook.com/sharer.php?u=https://Refstop.github.io/uda-lenet.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=https://Refstop.github.io/uda-lenet.html&title=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a>
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https://Refstop.github.io/uda-lenet.html&title=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)&summary=&source=https://Refstop.github.io/uda-lenet.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)&body=%0A%0ARead more here: https://Refstop.github.io/uda-lenet.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=https://Refstop.github.io/uda-lenet.html&title=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a>
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https://Refstop.github.io/uda-lenet.html&title=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5&summary=&source=https://Refstop.github.io/uda-lenet.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5&body=%0A%0ARead more here: https://Refstop.github.io/uda-lenet.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="inline" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -456,7 +733,7 @@ model.add(layers.Dense(units=10, activation = 'softmax')) # class 개수에 맞�
 
           <a href="./uda-lenet.html" class="recent-item-img" style="background: url('./assets/img//deeplearning/lenet.png') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
-              <span>[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5(작성중)</span>
+              <span>[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5</span>
               
 
   <span class = "recent-item-meta">
@@ -468,7 +745,7 @@ model.add(layers.Dense(units=10, activation = 'softmax')) # class 개수에 맞�
     
     <p class="page_meta-readtime">
       
-        less than 1 minute read
+        4 minute read
       
     </p>
   
@@ -695,7 +972,7 @@ model.add(layers.Dense(units=10, activation = 'softmax')) # class 개수에 맞�
     var sw = document.getElementById('theme-switch');
     var html = document.getElementsByTagName('html')[0];
     var logo = document.getElementById('logo');
-    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var nightModeOption = ('manual' || 'auto').toLowerCase();
     var storage = nightModeOption === 'manual'
         ? localStorage
         : sessionStorage;

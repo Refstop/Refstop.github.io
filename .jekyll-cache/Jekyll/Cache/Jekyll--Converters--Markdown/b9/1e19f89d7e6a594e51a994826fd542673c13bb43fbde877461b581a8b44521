@@ -1,9 +1,0 @@
-I"�<p>지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.</p>
-<h2 id="1-cnn의-구성">1. CNN의 구성</h2>
-<p>CNN의 구성을 공부하는 예시로서 대표적으로 사용되는 LeNet-5 모델으로 정리하겠습니다.</p>
-<h3 id="lenet-5-네트워크란">LeNet-5 네트워크란?</h3>
-<p align="center">
-  <img width="100%" height="100%" src="/assets/img/deeplearning/lenet.png" />
-</p>
-
-:ET

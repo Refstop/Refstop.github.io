@@ -7,7 +7,6 @@ date: 2020-12-17 13:28:23 +/-TTTT
 tags: [Probabilistic Robotics, SLAM, Particle Filter]
 mathjax: yes
 ---
-
 # Particle Filter란?
 노이즈가 있는 환경에서 측정된 데이터를 필터를 사용해 실제 위치를 추정하는 도구이다. 선형 시스템과 가우시안 잡음(Gaussian Noise)가 적용되는 Kalman Filter와는 달리 비선형, 가우시안 분포가 적용되지 않는 환경에서 사용된다. turtlebot에서는 위치 추정에 사용된다. 아직은 크게 와닿지 않는 개념이다. 좀 더 알아보자.
 
@@ -16,10 +15,10 @@ Particle Filter는 이름처럼 Particle을 사용하는 필터 기법이다. �
 
 ## Stage 1
 
-|좌표  	| 1 	| 2    	| 3  	| 4 	| 5  	| 6 	| 7 	| 8  	| 9 	| 10 	|
-|:---:	|:---:	|:----:	|:----:	|:---:	|:----:	|:---:	|:---:	|:----:	|:---:	|:----:	|
-|벽	|   	|      	| 문 	|   	| 문 	|   	|   	| 문 	|   	|    	|
-|복도	|   	| 로봇 	|  	|   	|    	|   	|   	|    	|   	|    	|
+|좌표  	| 1 	| 2    	| 3  	| 4 	| 5  	| 6 	| 7 	| 8  	| 9 	| 10 |
+|:---:	|:---:	|:----:	|:----:	|:---:	|:----:	|:---:	|:---:	|:----:	|:---:	|:----:|
+|벽	|   	|      	| 문 	|   	| 문 	|   	|   	| 문 	|   	|    |
+|복도	|   	| 로봇 	|  	|   	|    	|   	|   	|    	|   	|    |
 
 위의 표를 복도를 이동하는 로봇을 나타낸 것이라고 가정하자. 첫번째 행이 좌표, 두번째 행이 문의 위치, 세번째 행이 로봇이 이동하는 복도이다.
 처음에 로봇은 자신의 위치는 모르지만 자신이 있는 곳의 지도를 갖고있다. 따라서 지금 장님 로봇은 자신이 복도상의 어떤 지점에 존재할 확률을 **모든 지점에서 균등하게** 보고 있다.
@@ -120,22 +119,4 @@ Particle Filter는 이름처럼 Particle을 사용하는 필터 기법이다. �
 [Youtube 채널 Team Jupeter의 Particle Filter 강의](https://www.youtube.com/playlist?list=PLIZKwnpVunbWZ-metR7rQMkavgPIKxWe6) 강추  
 [Tuttlebot의 Particle Filter 적용 방식](https://www.youtube.com/watch?v=NrzmH_yerBU) 한번에 이해된다. 강추  
 [쉽게 설명한 파티클 필터(particle filter) 동작 원리와 예제 (사진 출처: Ryan Blog)](https://ryanclaire.blogspot.com/2020/06/particle-filter-principle.html)  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
