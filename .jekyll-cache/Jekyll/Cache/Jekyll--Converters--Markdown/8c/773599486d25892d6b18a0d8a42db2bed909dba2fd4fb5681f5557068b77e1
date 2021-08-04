@@ -1,4 +1,4 @@
-I"�<h1 id="프로젝트의-목적">프로젝트의 목적</h1>
+I"X<h1 id="프로젝트의-목적">프로젝트의 목적</h1>
 <p>본 프로젝트의 목적은 Kobuki 로봇을 사용하여 대학의 로봇관 건물을 자율주행 할 수 있도록 여러 SLAM 기법이나 Navigation 패키지를 사용해 보고, ROS 패키지를 제작하여 ROS와 우분투 환경에 익숙해지는 것입니다. 차후 있을 3D 라이다를 사용한 실내 자율주행 로봇 과제 등을 수행하기 위해 기본적인 사용법을 익히는 것을 목표로 하고 있습니다.</p>
 
 <h1 id="프로젝트-계획">프로젝트 계획</h1>
@@ -54,7 +54,27 @@ y: 20
 
 <h2 id="dynamic-reconfigure">dynamic reconfigure</h2>
 <p>dynamic reconfigure는 동적 파라미터 수정으로, 노드에 설정되는 파라미터를 수정해 줌으로서 프로그램 실행 중에도 계속 파라미터를 바꿀 수 있도록 하는 도구입니다. <code class="language-plaintext highlighter-rouge">rosparam</code> 명령어 또는 yaml 파일로도 계속하여 수정해 줄 수 있지만 매번 명령어를 치거나 <code class="language-plaintext highlighter-rouge">catkin_make</code>를 해야 하는 번거로움이 있습니다. dynamic reconfigure는 GUI를 지원하는 rqt를 통해 수정할 수 있습니다. 이번 프로젝트 같은 경우 처음에는 특정 좌표를 소스 상에서 설정해 주었으나, dynamic reconfigure 기능을 통해 좌표를 계속해서 재설정할 수 있도록 기능을 추가하였습니다. 소스는 다음과 같습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(소스)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;ros/ros.h&gt;
+#include &lt;dynamic_reconfigure/server.h&gt;
+#include &lt;indoor_2d_nav/dyn_reconfig_testConfig.h&gt;
+
+void callback(indoor_2d_nav::dyn_reconfig_testConfig &amp;config, uint32_t level) {
+    ROS_INFO("\nstr_posexy: %s", config.str_posexy);
+}
+
+int main(int argc, char **argv) {
+
+    ros::init(argc, argv, "dynamic_reconfigure_test");
+
+    dynamic_reconfigure::Server&lt;indoor_2d_nav::dyn_reconfig_testConfig&gt; server;
+    dynamic_reconfigure::Server&lt;indoor_2d_nav::dyn_reconfig_testConfig&gt;::CallbackType f;
+
+    f = boost::bind(&amp;callback, _1, _2);
+    server.setCallback(f);
+
+    ros::spin();
+    return 0;
+}
 </code></pre></div></div>
 
 <h1 id="다음-게시글">다음 게시글</h1>

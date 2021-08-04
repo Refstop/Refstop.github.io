@@ -293,36 +293,6 @@
     
       
   {
-  "tag" : "coding",
-  "posts" : [
-      
-      "./single-neuron-perceptron.html"
-      
-    ]
-  } ,
-    
-      
-  {
-  "tag" : "machine learning",
-  "posts" : [
-      
-      "./single-neuron-perceptron.html"
-      
-    ]
-  } ,
-    
-      
-  {
-  "tag" : "neural networks",
-  "posts" : [
-      
-      "./single-neuron-perceptron.html"
-      
-    ]
-  } ,
-    
-      
-  {
   "tag" : "모두를 위한 딥러닝",
   "posts" : [
       

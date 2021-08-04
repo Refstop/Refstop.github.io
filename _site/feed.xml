@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://refstop.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://refstop.github.io/" rel="alternate" type="text/html" /><updated>2021-07-05T16:43:11+09:00</updated><id>https://refstop.github.io/feed.xml</id><title type="html">Refstop의 연구일지</title><subtitle>Deep Learning 및 SLAM을 공부하고 있습니다.</subtitle><author><name>Refstop</name></author><entry><title type="html">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5</title><link href="https://refstop.github.io/uda-lenet.html" rel="alternate" type="text/html" title="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5" /><published>2021-07-05T01:11:24+09:00</published><updated>2021-07-05T01:11:24+09:00</updated><id>https://refstop.github.io/uda-lenet</id><content type="html" xml:base="https://refstop.github.io/uda-lenet.html">&lt;p&gt;지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://refstop.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://refstop.github.io/" rel="alternate" type="text/html" /><updated>2021-07-27T01:13:24+09:00</updated><id>https://refstop.github.io/feed.xml</id><title type="html">Refstop의 연구일지</title><subtitle>Deep Learning 및 SLAM을 공부하고 있습니다.</subtitle><author><name>Refstop</name></author><entry><title type="html">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5</title><link href="https://refstop.github.io/uda-lenet.html" rel="alternate" type="text/html" title="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5" /><published>2021-07-05T01:11:24+09:00</published><updated>2021-07-05T01:11:24+09:00</updated><id>https://refstop.github.io/uda-lenet</id><content type="html" xml:base="https://refstop.github.io/uda-lenet.html">&lt;p&gt;지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input 1 is the X coordinate of the point,
 Input 2 is the y coordinate of the point,
@@ -407,10 +407,10 @@ CNN에서는 주로 Max pooling을 사용합니다.&lt;/li&gt;
 &lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;http://taewan.kim/post/cnn/&quot;&gt;TAEWAN.KIM 블로그 - “CNN, Convolutional Neural Network 요약”&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://untitledtblog.tistory.com/150&quot;&gt;Untitled 블로그 - “[머신 러닝/딥 러닝] 합성곱 신경망 (Convolutional Neural Network, CNN)과 학습 알고리즘”&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://yjjo.tistory.com/8&quot;&gt;YJJo 블로그 - “Convolution Nerual Networks (합성곱 신경망)”&lt;/a&gt;&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Udacity" /><category term="Deep Learning" /><summary type="html">지금까지 우리는 심층 신경망(Deep Nerual Network)을 구성하기까지의 과정을 살펴보았습니다. 이제 이 심층 신경망으로 구성할 수 있는 네트워크 중 이미지 학습에 최적화된 합성곱 신경망(Convolutional Nerual Network, CNN)에 대해서 알아보겠습니다.</summary></entry><entry><title type="html">Indoor 2D Navigation - 개요 &amp;amp; 좌표범위내 신호 출력 노드</title><link href="https://refstop.github.io/i2n-signal.html" rel="alternate" type="text/html" title="Indoor 2D Navigation - 개요 &amp;amp; 좌표범위내 신호 출력 노드" /><published>2021-03-02T12:41:24+09:00</published><updated>2021-03-02T12:41:24+09:00</updated><id>https://refstop.github.io/i2n-signal</id><content type="html" xml:base="https://refstop.github.io/i2n-signal.html">&lt;h1 id=&quot;프로젝트의-목적&quot;&gt;프로젝트의 목적&lt;/h1&gt;
+&lt;a href=&quot;https://yjjo.tistory.com/8&quot;&gt;YJJo 블로그 - “Convolution Nerual Networks (합성곱 신경망)”&lt;/a&gt;&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Udacity" /><category term="Deep Learning" /><summary type="html">지금까지 우리는 심층 신경망(Deep Nerual Network)을 구성하기까지의 과정을 살펴보았습니다. 이제 이 심층 신경망으로 구성할 수 있는 네트워크 중 이미지 학습에 최적화된 합성곱 신경망(Convolutional Nerual Network, CNN)에 대해서 알아보겠습니다.</summary></entry><entry><title type="html">Indoor 2D Navigation - 개요 &amp;amp; 좌표범위내 신호 출력 노드</title><link href="https://refstop.github.io/i2n-signal.html" rel="alternate" type="text/html" title="Indoor 2D Navigation - 개요 &amp;amp; 좌표범위내 신호 출력 노드" /><published>2021-03-02T12:41:24+09:00</published><updated>2021-03-02T12:41:24+09:00</updated><id>https://refstop.github.io/i2n-signal</id><content type="html" xml:base="https://refstop.github.io/i2n-signal.html">&lt;h2 id=&quot;프로젝트의-목적&quot;&gt;프로젝트의 목적&lt;/h2&gt;
 &lt;p&gt;본 프로젝트의 목적은 Kobuki 로봇을 사용하여 대학의 로봇관 건물을 자율주행 할 수 있도록 여러 SLAM 기법이나 Navigation 패키지를 사용해 보고, ROS 패키지를 제작하여 ROS와 우분투 환경에 익숙해지는 것입니다. 차후 있을 3D 라이다를 사용한 실내 자율주행 로봇 과제 등을 수행하기 위해 기본적인 사용법을 익히는 것을 목표로 하고 있습니다.&lt;/p&gt;
 
-&lt;h1 id=&quot;프로젝트-계획&quot;&gt;프로젝트 계획&lt;/h1&gt;
+&lt;h2 id=&quot;프로젝트-계획&quot;&gt;프로젝트 계획&lt;/h2&gt;
 &lt;p&gt;프로젝트의 진행 계획은 다음과 같습니다. 이 계획은 진행 상황에 따라 수정될 수 있습니다.&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;Kobuki 패키지 작성&lt;/li&gt;
@@ -421,8 +421,8 @@ CNN에서는 주로 Max pooling을 사용합니다.&lt;/li&gt;
   &lt;li&gt;move_base를 사용한 자율주행&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h1 id=&quot;패키지-작성-전-prerequisite&quot;&gt;패키지 작성 전 Prerequisite&lt;/h1&gt;
-&lt;h2 id=&quot;1-kobuki-패키지-설치&quot;&gt;1. Kobuki 패키지 설치&lt;/h2&gt;
+&lt;h2 id=&quot;패키지-작성-전-prerequisite&quot;&gt;패키지 작성 전 Prerequisite&lt;/h2&gt;
+&lt;h3 id=&quot;1-kobuki-패키지-설치&quot;&gt;1. Kobuki 패키지 설치&lt;/h3&gt;
 &lt;p&gt;Kobuki 운용을 위해서는 Kobuki 패키지 설치를 해야합니다. 기존에 사용하던 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;catkin_ws&lt;/code&gt;를 사용해도 되지만 저는 새로운 작업공간 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kobuki_ws&lt;/code&gt;를 생성했습니다.&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir -p kobuki_ws/src
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -439,7 +439,7 @@ $ sudo apt-get install ros-melodic-ecl*
 $ rosdep install --from-paths src --ignore-src -r -y
 $ catkin_make
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;2-turtlebot3-패키지-설치-선택&quot;&gt;2. Turtlebot3 패키지 설치 (선택)&lt;/h2&gt;
+&lt;h3 id=&quot;2-turtlebot3-패키지-설치-선택&quot;&gt;2. Turtlebot3 패키지 설치 (선택)&lt;/h3&gt;
 &lt;p&gt;패키지를 작성할 때 Turtlebot3 패키지를 참고할 일이 많기 때문에 Turtlebot3 패키지를 설치해 두는 편이 좋습니다. 직접적인 사용은 하지 않을 것이기에, 설치하기 싫다면 필요할 때마다 &lt;a href=&quot;https://github.com/ROBOTIS-GIT/turtlebot3.git&quot;&gt;Turtlebot3 github 링크&lt;/a&gt;를 참고해도 괜찮습니다.&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd ~/kobuki_ws/src
 $ git clone -b melodic-devel --single-branch https://github.com/ROBOTIS-GIT/turtlebot3.git
@@ -448,25 +448,45 @@ $ rosdep install --from-paths src --ignore-src -r -y
 $ catkin_make
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h1 id=&quot;map에서-특정-좌표-범위-내-위치시-신호-출력-노드&quot;&gt;map에서 특정 좌표 범위 내 위치시 신호 출력 노드&lt;/h1&gt;
+&lt;h2 id=&quot;map에서-특정-좌표-범위-내-위치시-신호-출력-노드&quot;&gt;map에서 특정 좌표 범위 내 위치시 신호 출력 노드&lt;/h2&gt;
 &lt;p&gt;첫번째로 저희가 시도한 것은 map의 특정 좌표를 주고, 로봇이 그 좌표로부터 일정 범위 내에 들어가면 신호를 보내는 것이었습니다. map 좌표계로부터 로봇의 base_link(base_footprint) 좌표계로 transform(좌표계 변환)하여 map 좌표계를 기준으로 로봇이 어느 좌표에 있는지를 알 수 있습니다.&lt;/p&gt;
 &lt;center&gt; &lt;iframe width=&quot;560&quot; height=&quot;400&quot; src=&quot;https://youtu.be/pEbvt-Pv_hU&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt; &lt;/center&gt;
 &lt;p&gt;사실 조금 진행된 프로젝트라서 이미 앞서 정리할 여러 기능들이 추가되어 있습니다. 동영상에 나오는 기능은 신호 출력 노드와 dynamic reconfigure(동적 파라미터 수정), 그 외에 Kobuki를 조종하거나 lidar 동작 기능을 포함하였습니다.&lt;/p&gt;
 
-&lt;h1 id=&quot;좌표를-파라미터화-yaml-dynamic-reconfigure&quot;&gt;좌표를 파라미터화 (yaml, dynamic reconfigure)&lt;/h1&gt;
-&lt;h2 id=&quot;yaml-파일-작성&quot;&gt;yaml 파일 작성&lt;/h2&gt;
+&lt;h2 id=&quot;좌표를-파라미터화-yaml-dynamic-reconfigure&quot;&gt;좌표를 파라미터화 (yaml, dynamic reconfigure)&lt;/h2&gt;
+&lt;h3 id=&quot;yaml-파일-작성&quot;&gt;yaml 파일 작성&lt;/h3&gt;
 &lt;p&gt;yaml 파일은 패키지의 설정값을 저장하는 파일입니다. 노드는 이 파일을 참고하여 소스에 값을 전달합니다. 예를 들어 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;point.yaml&lt;/code&gt; 파일의 내용물이 다음과 같다고 합시다.&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;x: 13
 y: 20
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;저희가 만든 패키지의 소스에 필요한 특정 좌표 부분을 yaml 파일로 작성한 것입니다. 노드를 실행하였을 때, 자동으로 yaml 파일을 참고하여 $x$, $y$ 값을 가져오면, 매번 소스를 건드리지 않고도 설정을 바꿔 줄 수 있습니다. 하지만 yaml 파일을 수정할 때 마다 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;catkin_make&lt;/code&gt;를 다시 해 주어야 하니 번거롭기는 합니다.&lt;/p&gt;
 
-&lt;h2 id=&quot;dynamic-reconfigure&quot;&gt;dynamic reconfigure&lt;/h2&gt;
+&lt;h3 id=&quot;dynamic-reconfigure&quot;&gt;dynamic reconfigure&lt;/h3&gt;
 &lt;p&gt;dynamic reconfigure는 동적 파라미터 수정으로, 노드에 설정되는 파라미터를 수정해 줌으로서 프로그램 실행 중에도 계속 파라미터를 바꿀 수 있도록 하는 도구입니다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rosparam&lt;/code&gt; 명령어 또는 yaml 파일로도 계속하여 수정해 줄 수 있지만 매번 명령어를 치거나 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;catkin_make&lt;/code&gt;를 해야 하는 번거로움이 있습니다. dynamic reconfigure는 GUI를 지원하는 rqt를 통해 수정할 수 있습니다. 이번 프로젝트 같은 경우 처음에는 특정 좌표를 소스 상에서 설정해 주었으나, dynamic reconfigure 기능을 통해 좌표를 계속해서 재설정할 수 있도록 기능을 추가하였습니다. 소스는 다음과 같습니다.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(소스)
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;ros/ros.h&amp;gt;
+#include &amp;lt;dynamic_reconfigure/server.h&amp;gt;
+#include &amp;lt;indoor_2d_nav/dyn_reconfig_testConfig.h&amp;gt;
+
+void callback(indoor_2d_nav::dyn_reconfig_testConfig &amp;amp;config, uint32_t level) {
+    ROS_INFO(&quot;\nstr_posexy: %s&quot;, config.str_posexy);
+}
+
+int main(int argc, char **argv) {
+
+    ros::init(argc, argv, &quot;dynamic_reconfigure_test&quot;);
+
+    dynamic_reconfigure::Server&amp;lt;indoor_2d_nav::dyn_reconfig_testConfig&amp;gt; server;
+    dynamic_reconfigure::Server&amp;lt;indoor_2d_nav::dyn_reconfig_testConfig&amp;gt;::CallbackType f;
+
+    f = boost::bind(&amp;amp;callback, _1, _2);
+    server.setCallback(f);
+
+    ros::spin();
+    return 0;
+}
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h1 id=&quot;다음-게시글&quot;&gt;다음 게시글&lt;/h1&gt;
+&lt;h2 id=&quot;다음-게시글&quot;&gt;다음 게시글&lt;/h2&gt;
 &lt;p&gt;오랜만에 게시글을 수정하여 바뀐 점이 많습니다. 우선 다음 게시글에서는 Cartographer 사용법에 관하여 정리하도록 하겠습니다.&lt;/p&gt;</content><author><name>Refstop</name></author><category term="실내 자율 주행" /><category term="Kobuki" /><summary type="html">프로젝트의 목적 본 프로젝트의 목적은 Kobuki 로봇을 사용하여 대학의 로봇관 건물을 자율주행 할 수 있도록 여러 SLAM 기법이나 Navigation 패키지를 사용해 보고, ROS 패키지를 제작하여 ROS와 우분투 환경에 익숙해지는 것입니다. 차후 있을 3D 라이다를 사용한 실내 자율주행 로봇 과제 등을 수행하기 위해 기본적인 사용법을 익히는 것을 목표로 하고 있습니다.</summary></entry><entry><title type="html">[Udacity] Deep Learning (5) - Deep Nerual Network</title><link href="https://refstop.github.io/uda-dnn.html" rel="alternate" type="text/html" title="[Udacity] Deep Learning (5) - Deep Nerual Network" /><published>2021-03-02T12:34:24+09:00</published><updated>2021-03-02T12:34:24+09:00</updated><id>https://refstop.github.io/uda-dnn</id><content type="html" xml:base="https://refstop.github.io/uda-dnn.html">&lt;h1 id=&quot;deep-nerual-network&quot;&gt;Deep Nerual Network&lt;/h1&gt;
 &lt;p&gt;지금까지 정리한 Nerual Network는 모두 layer가 하나뿐인 단층 신경망(Single-Layer Perceptron)입니다. 하지만 단층 신경망으로는 비선형 모델을 구현할 수 없습니다. &lt;a href=&quot;https://refstop.github.io/udacity/deep%20learning/uda-dl-nnnl#1&quot;&gt;지난 게시글&lt;/a&gt;에서 언급한 바와 같이 비선형 모델은 입력층(Input layer), 은닉층(Hidden layer), 출력층(Output layer)으로 이루어진 $^{1)}$심층 신경망(Deep Neural Network)으로 구현할 수 있습니다. 따라서 인공 신경망의 성능 향상을 위해서는 심층 신경망의 사용은 필수적이라고 할 수 있습니다.&lt;/p&gt;
 
