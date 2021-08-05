@@ -1,4 +1,141 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://refstop.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://refstop.github.io/" rel="alternate" type="text/html" /><updated>2021-07-27T01:13:24+09:00</updated><id>https://refstop.github.io/feed.xml</id><title type="html">Refstop의 연구일지</title><subtitle>Deep Learning 및 SLAM을 공부하고 있습니다.</subtitle><author><name>Refstop</name></author><entry><title type="html">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5</title><link href="https://refstop.github.io/uda-lenet.html" rel="alternate" type="text/html" title="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5" /><published>2021-07-05T01:11:24+09:00</published><updated>2021-07-05T01:11:24+09:00</updated><id>https://refstop.github.io/uda-lenet</id><content type="html" xml:base="https://refstop.github.io/uda-lenet.html">&lt;p&gt;지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://refstop.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://refstop.github.io/" rel="alternate" type="text/html" /><updated>2021-08-05T20:03:35+09:00</updated><id>https://refstop.github.io/feed.xml</id><title type="html">Refstop의 연구일지</title><subtitle>Deep Learning 및 SLAM을 공부하고 있습니다.</subtitle><author><name>Refstop</name></author><entry><title type="html">Kalman Filter와 EKF(1) - 선형 KF와 EKF</title><link href="https://refstop.github.io/kf-ekf.html" rel="alternate" type="text/html" title="Kalman Filter와 EKF(1) - 선형 KF와 EKF" /><published>2021-08-05T11:36:24+09:00</published><updated>2021-08-05T11:36:24+09:00</updated><id>https://refstop.github.io/kf-ekf</id><content type="html" xml:base="https://refstop.github.io/kf-ekf.html">&lt;p&gt;이 게시글에서는 SLAM에서의 KF와 EKF를 기준으로 설명할 예정입니다.&lt;/p&gt;
+&lt;h2 id=&quot;kalman-filter란&quot;&gt;Kalman Filter란?&lt;/h2&gt;
+&lt;p&gt;칼만 필터는 현재 상태(state) $\mu$와 공분산(covariance) $\Sigma$를 기반으로 다음 상태를 추정하는 방법입니다. $\mu$와 $\Sigma$만으로 나타낼 수 있는 Gaussian 분포를 따르며, 지난 게시글의 &lt;a href=&quot;https://refstop.github.io/uda-loc-markov.html&quot;&gt;Bayesian Filter&lt;/a&gt;와도 관계가 있습니다. 선형 칼만 필터를 설명하기 전에 가우시안 분포에 대해서 조금 설명하도록 하겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;gaussian-분포&quot;&gt;Gaussian 분포&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;단일 변수 가우시안 분포&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;center&gt;$p(x)=\frac{1}{ \sqrt{2 \sigma^2 \pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$&lt;/center&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;다변수 가우시안 분포&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;center&gt;$p(x)=\frac{1}{ \sqrt{det(2\pi\Sigma)}}e^{-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)}$&lt;/center&gt;
+
+&lt;p&gt;가우시안 분포는 단일 변수(single variable)과 다변수(multi variable)의 표현 방식이 있으며, SLAM 에서는 로봇의 현재 state를 벡터 $(x,y,\phi)$로 표시하기 때문에 다변수 가우시안 분포를 사용하는 것이 좋습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;선형-모델의-가우시안-분포&quot;&gt;선형 모델의 가우시안 분포&lt;/h2&gt;
+&lt;p&gt;일반적으로, 선형 모델은 다음과 같이 표현할 수 있습니다.&lt;/p&gt;
+&lt;center&gt;$Y=AX+B$&lt;/center&gt;
+&lt;p&gt;이때, $X$가 가우시안 분포를 따른다고 할 때, 확률은 다음과 같이 나타낼 수 있습니다.&lt;/p&gt;
+&lt;center&gt;$X \sim N(\mu_x, \Sigma_x)$&lt;/center&gt;
+&lt;p&gt;선형 변환 후의 확률변수 $Y$의 분포는 다음과 같습니다.&lt;/p&gt;
+&lt;center&gt;$Y \sim N(A\mu_x+B, A\Sigma_xA^T)$&lt;/center&gt;
+
+&lt;h3 id=&quot;유도과정&quot;&gt;유도과정&lt;/h3&gt;
+&lt;p&gt;$X$의 평균인 $\mu_x$의 선형변환 $\mu_y$는 직관적으로 이해되지만, 공분산 $\Sigma_y$는 조금 의문이 남습니다. 유도과정을 간단히 정리하겠습니다.&lt;/p&gt;
+&lt;center&gt; $\begin{align*} \mu_y &amp;amp;= E((y-\mu_y)(y-\mu_y)^T) \\
+&amp;amp;= E((y-(A\mu_{x}+B))(y-(A\mu_{x}+B))^T) \\
+&amp;amp;= E(((AX+B)-(A\mu_{x}+B))((AX+B)-(A\mu_{x}+B))^T) \\
+&amp;amp;= E(\left [ A(X-\mu_x) \right ] \left [ A(X-\mu_x) \right ]^T) \\
+&amp;amp;= E( A(X-\mu_x)(X-\mu_x)^{T} A^T) \\
+&amp;amp;= AE((X-\mu_x)(X-\mu_x)^T)A^T \\
+&amp;amp;= A \Sigma_x A^T
+\end{align*}$ &lt;/center&gt;
+
+&lt;h2 id=&quot;선형-kalman-filter&quot;&gt;선형 Kalman Filter&lt;/h2&gt;
+&lt;p&gt;선형 칼만 필터는 motion model과 observation model을 선형으로 가정합니다.&lt;/p&gt;
+&lt;center&gt; motion model: $x_t = A_tx_{t-1}+B_tu_t+\epsilon_t$ &lt;/center&gt;
+&lt;center&gt; observation model: $z_t = H_tx_t+\delta_t$ &lt;/center&gt;
+&lt;ul&gt;
+  &lt;li&gt;$A_t$: control input $u_t$와 노이즈($\epsilon_t$)가 없을 때의 t-1과 t의 state 사이의 관계, n*n matrix&lt;/li&gt;
+  &lt;li&gt;$B_t$: control input $u_t$가 다음 state $x_t$에 어떤 영향을 미치는지를 나타낸 matrix, n*l matrix&lt;/li&gt;
+  &lt;li&gt;$H_t$: 현재 로봇의 상태를 나타내는 state $x_t$와 센서의 관측 정보(observation)의 관계, k*n matrix&lt;/li&gt;
+  &lt;li&gt;$\epsilon_t,\;\delta_t$: 평균이 0이며 공분산이 각각 $R_t,\;Q_t$인 확률변수, 가우시안 표준정규분포를 따름.&lt;br /&gt;
+따라서 이를 가우시안 분포 공식에 적용하면, Bayesian Filter의 motion model과 observation model 확률을 구할 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;Motion model&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;$p(x_t|u_t,x_{t-1})=\frac{1}{ \sqrt{det(2\pi R_t)}}e^{-\frac{1}{2}(x-A_tx_{t-1}-B_tu_t)^TR_t^{-1}(x-A_tx_{t-1}-B_tu_t)}$&lt;/center&gt;
+&lt;ul&gt;
+  &lt;li&gt;Observation model&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;$p(z_t|x_t)=\frac{1}{ \sqrt{det(2\pi Q_t)}}e^{-\frac{1}{2}(x-H_tx_t)^TR_t^{-1}(x-H_tx_t)}$&lt;/center&gt;
+&lt;p&gt;Motion model은 prediction step에서, Observation model은 correction step에 적용됩니다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Prediction step&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;$\overline{bel}(x_t)=\int_{x_{t-1}}p(x_t|u_t,x_{t-1})bel(x_{t-1})dx_{t-1}$&lt;/center&gt;
+&lt;ul&gt;
+  &lt;li&gt;Correction step&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;$bel(x_t) = \eta p(z_t|x_t)\overline{bel}(x_t)$&lt;/center&gt;
+&lt;p&gt;t에서의 state 확률 $\overline{bel}(x_t)$은 motion model에 의해 결정되고(prediction step), prediction step에서 계산된 t에서의 state 확률 $\overline{bel}(x_t)$은 observation model에 의해서 보정됩니다.&lt;br /&gt;
+이때, 모든 확률 분포를 Gaussian 확률 분포를 따른다고 가정하는 모델이 바로 Kalman Filter입니다. Gaussian 분포를 따른다고 가정하면 간단히 평균 $\mu$과 분산(공분산) $\sigma(\Sigma)$로 표시하기 때문에 두개의 파라미터만으로 확률분포를 표현할 수 있는 장점이 있습니다. Kalman Filter 알고리즘은 다음과 같습니다.&lt;/p&gt;
+&lt;center&gt;
+$\begin{align*} 1&amp;amp;: Kalman filter(\mu_t{t-1}, \Sigma_{t-1}, u_t, z_t) \\
+&amp;amp; [Prediction\;step] \\
+2&amp;amp;: \overline{\mu}_t=A_t\mu_{t-1}+B_tu_t+\epsilon_t \\
+3&amp;amp;: \overline{\Sigma}_t=A_t\Sigma_{t-1}A_t^T \\
+&amp;amp; [Correction\;step] \\
+4&amp;amp;: K_t=\overline{\Sigma}_tH_t^T(H_t\overline{\Sigma}_tH_t^T+Q_t)^{-1}\\
+5&amp;amp;: \mu_t = \overline{\mu}_t+K_t(z_t-H_t\mu_t) \\
+6&amp;amp;: \Sigma_t = (I-K_tH_t)\overline{\Sigma}_t \\ 
+7&amp;amp;: return\;\mu_t, \Sigma_t
+\end{align*}$
+&lt;/center&gt;
+
+&lt;p&gt;Kalman Filter는 Bayesian Filter이기 때문에 predicton step과 correction step을 갖고 있습니다. 각 단계에 대해 Kalman Filter 알고리즘을 관찰해 봅시다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Prediction step&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+$\begin{align*} 1&amp;amp;: Kalman filter(\mu_t{t-1}, \Sigma_{t-1}, u_t, z_t) \\
+&amp;amp; [Prediction\;step] \\
+2&amp;amp;: \overline{\mu}_t=A_t\mu_{t-1}+B_tu_t+\epsilon_t \\
+3&amp;amp;: \overline{\Sigma}_t=A_t\Sigma_{t-1}A_t^T
+\end{align*}$
+&lt;/center&gt;
+&lt;p&gt;prediction step은 다음 state를 motion model을 통해 예측하는 단계입니다. 계속 똑같은 말을 반복하는거 같긴 하지만, 우선 알아보도록 합시다. 이전 state와 motion $u_t$의 결합을 통해 다음 단계의 평균을 추측합니다. 하지만 이때는 아직 완전히 정확하지 않은 상태이므로 준 현재 state라는 의미로 평균과 공분산 기호 위에 작대기를 그어 표현해 줍니다. 다음 correction 단계에서 추가적인 과정을 통해 더 정확한 위치를 잡을 것입니다.&lt;br /&gt;
+이때 $R_t$는 process noise로, control inpud $u_t$의 공분산 $M_t$에서 선형 변환을 한번 더 거친 형태의 공분산입니다. 그 형태는 다음과 같습니다.&lt;/p&gt;
+&lt;center&gt; $R_t=B_tM_tB_t^T$ &lt;/center&gt;
+&lt;p&gt;일반적으로 모바일 로봇에서 control input은 wheel encoder로부터 구해진 odometry가 들어가고, encoder에 대한 uncertainty가 공분산 $M_t$가 됩니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Correction step&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+$\begin{align*} 
+&amp;amp; [Correction\;step] \\
+4&amp;amp;: K_t=\overline{\Sigma}_tH_t^T(H_t\overline{\Sigma}_tH_t^T+Q_t)^{-1}\\
+5&amp;amp;: \mu_t = \overline{\mu}_t+K_t(z_t-H_t\mu_t) \\
+6&amp;amp;: \Sigma_t = (I-K_tH_t)\overline{\Sigma}_t \\ 
+7&amp;amp;: return\;\mu_t, \Sigma_t
+\end{align*}$
+&lt;/center&gt;
+&lt;p&gt;Correction 단계는 칼만 게인을 구하여 조금 부정확했던 현재 state $\overline{\mu}_t$를 보정해 주는 과정입니다. 칼만 게인 $K_t$는 현재 예측값 $\overline{\mu}_t$와 관측을 통해 예측한 값 $z_t-H_tx_t$ 중 어떤 것을 더 많이 보정에 반영할지, 즉 센서를 더 믿을 것인가, 기댓값을 더 믿을 것인가를 조절해 주는 가중치입니다.&lt;br /&gt;
+예를 들어 observation 공분산 $Q_t$가 무한대의 값을 가지는 대각행렬이라고 하면 observation의 uncertainty가 무한대, 즉 센서 관측값을 전혀 못 믿겠다는 의미가 됩니다. 그렇다면, 칼만 게인의 분모값(다변수 일때는 역행렬값)이 무한대가 되고, 칼만 게인 값은 0에 수렴할 것입니다. 그 결과, 최종 평균은 $\mu_t=\overline{\mu}_t$이 됩니다. 반대로 $Q_t$의 값이 0의 대각행렬이라면 칼만 게인은 $K_t=C_t^{-1}$이 되고, 최종 평균은 $\mu_t=H_t^{-1}z_t$이 됩니다.&lt;br /&gt;
+결국 &lt;strong&gt;예측 평균&lt;/strong&gt;과 &lt;strong&gt;관측을 통한 예측 평균&lt;/strong&gt;을 저울질하여 더 실제와 가까운 쪽으로 잘 섞어 주는 과정입니다.&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+  &lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/assets/img/kalman filter/kalman_fig.png&quot; /&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&quot;ekf-extended-kalman-filter&quot;&gt;EKF (Extended Kalman Filter)&lt;/h2&gt;
+&lt;p&gt;확장 칼만 필터(Extended Kalman Filter)는 칼만 필터를 비선형 모델에 적용할 수 있도록 한 방식입니다. 지금까지 다뤘던 motion model과 observation model은 선형이었지만, 일반적으로 선형보다 비선형 모델이 더 많기 때문에 EKF를 사용합니다. 비선형 모델을 적용한 motion model과 observation model은 다음과 같습니다.&lt;/p&gt;
+&lt;center&gt;$x_t=g(u_t, x_{t-1})+\epsilon_t$&lt;/center&gt;
+&lt;center&gt;$z_t=h(x_t)+\delta_t$&lt;/center&gt;
+&lt;p&gt;하지만 이 모델을 그대로 칼만 필터에 적용할 경우 아래 이미지와 같은 문제가 발생합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width=&quot;50%&quot; height=&quot;50%&quot; src=&quot;/assets/img/kalman filter/ekf_problem.png&quot; align=&quot;left&quot; /&gt;&lt;br /&gt;
+&lt;img width=&quot;50%&quot; height=&quot;50%&quot; src=&quot;/assets/img/kalman filter/ekf_problem2.png&quot; align=&quot;right&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;왼쪽 이미지처럼 선형 모델에선 입력이 가우시안 분포를 따른다면 선형성에 의해서 출력도 가우시안 분포를 따릅니다. 하지만 비선형 모델에서는 입력이 가우시안 분포를 따른다고 해도, 출력은 가우시안 분포를 따르지 않는 문제가 발생합니다. 이런 점을 해결하기 위해서 비선형 함수의 선형화(Linearization) 시키는 과정이 필요합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;선형화linearization&quot;&gt;선형화(Linearization)&lt;/h2&gt;
+&lt;p&gt;EKF에서 비선형 함수를 선형화 시키기 위해서 1차 Taylor 근사법을 사용하는데, 선형 근사화된 모델은 다음과 같습니다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Motion model&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;$g(u_t,x_{t-1})\approx g(u_t, \mu_{t-1})+\frac{\partial g(u_t, \mu_{t-1})}{\partial x_{t-1}}(x_{t-1}-\mu_{t-1})$&lt;/center&gt;
+&lt;ul&gt;
+  &lt;li&gt;Observation model&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;$h(x_t)\approx h(\overline{\mu}_t)+\frac{\partial h(\overline{\mu}_t}{\partial x_t}(x_t-\overline{\mu}_t)$&lt;/center&gt;
+
+&lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://jinyongjeong.github.io/2017/02/14/lec03_kalman_filter_and_EKF/&quot;&gt;Jinyoung - [SLAM] Kalman filter and EKF(Extended Kalman Filter)&lt;/a&gt;&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Kalman Filter" /><category term="EKF" /><summary type="html">이 게시글에서는 SLAM에서의 KF와 EKF를 기준으로 설명할 예정입니다. Kalman Filter란? 칼만 필터는 현재 상태(state) $\mu$와 공분산(covariance) $\Sigma$를 기반으로 다음 상태를 추정하는 방법입니다. $\mu$와 $\Sigma$만으로 나타낼 수 있는 Gaussian 분포를 따르며, 지난 게시글의 Bayesian Filter와도 관계가 있습니다. 선형 칼만 필터를 설명하기 전에 가우시안 분포에 대해서 조금 설명하도록 하겠습니다.</summary></entry><entry><title type="html">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5</title><link href="https://refstop.github.io/uda-lenet.html" rel="alternate" type="text/html" title="[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5" /><published>2021-07-05T01:11:24+09:00</published><updated>2021-07-05T01:11:24+09:00</updated><id>https://refstop.github.io/uda-lenet</id><content type="html" xml:base="https://refstop.github.io/uda-lenet.html">&lt;p&gt;지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input 1 is the X coordinate of the point,
 Input 2 is the y coordinate of the point,
@@ -1234,562 +1371,4 @@ y=\left\{\begin{matrix}
 &lt;/ol&gt;
 
 &lt;h1 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h1&gt;
-&lt;p&gt;Udacity Self-driving car nanodegree - Neural Network(링크 공유 불가능)&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Udacity" /><category term="Deep Learning" /><summary type="html">Neural Network란? 뉴럴 네트워크는 우리말로 신경망이라는 의미입니다. 옛날 옛적 공학자들은 컴퓨터에 지능, 즉 학습능력을 부여할 방법을 고민했고, 결국 사람의 뇌 구조를 모방하는 방법을 고안했습니다. 우리 뇌 속의 뉴런 세포가 연결 및 신호를 주고받는 방식을 알고리즘으로 구현하여 신경망이라는 것을 만들었습니다. 위 그림을 보면 뉴런 세포의 가지돌기(Dendrite)로 전기 신호가 전달되어 핵(Nucleus)을 통해 축삭(Axon)으로 전기 신호가 나갑니다. 지금부터 이러한 뉴런의 구조를 어떻게 구현했는지 알아볼 것입니다.</summary></entry><entry><title type="html">[Udacity] Computer Vision (4) - Advanced CV</title><link href="https://refstop.github.io/uda-cv-adcv.html" rel="alternate" type="text/html" title="[Udacity] Computer Vision (4) - Advanced CV" /><published>2021-02-04T14:44:23+09:00</published><updated>2021-02-04T14:44:23+09:00</updated><id>https://refstop.github.io/uda-cv-adcv</id><content type="html" xml:base="https://refstop.github.io/uda-cv-adcv.html">&lt;h1 id=&quot;곡선-차선-검출&quot;&gt;곡선 차선 검출&lt;/h1&gt;
-&lt;p&gt;지금까지 우리는 단지 차선을 검출한 방법에 대해서 공부했습니다. 하지만 직선이 아닌 곡선 차선일 경우 어떻게 자동차의 방향을 조절할 수 있을까요? 이번 게시글에서는 그 방법에 대해서 정리합니다. 대략적인 과정은 다음과 같습니다.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;히스토그램 구하기&lt;/li&gt;
-  &lt;li&gt;슬라이드 윈도우 생성 (시각화)&lt;/li&gt;
-  &lt;li&gt;곡률 반경 구하기&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;방향 조절을 위해서 곡률 반경을 구해야 합니다. 모터 제어값같은 하드웨어적 출력을 주는 코드는 컴퓨터 비전과는 관계가 없으므로, 결론적으로 곡률 반경을 구하는 것이 목적입니다.&lt;br /&gt;
-&lt;img src=&quot;/assets/img/vision/warped_example.png&quot; alt=&quot;warped_example&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;br /&gt;
-이번 강의에서는 위의 이미지를 예시로 사용합니다. 이 이미지는 저번 강의에서 사용했던 조감도(bird’s eye view)와 Gradient 검출 알고리즘으로 차선만을 흰색으로 검출한 결과입니다. 이번 강의는 거의 대부분이 코드 분석을 중심으로 진행됩니다. 단계별로 알아보도록 합시다.&lt;/p&gt;
-
-&lt;h1 id=&quot;1-히스토그램-구하기&quot;&gt;1. 히스토그램 구하기&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/img/vision/histogram.png&quot; alt=&quot;histogram&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;br /&gt;
-히스토그램은 통계학에서 나오는 막대그래프를 말합니다. $x$축의 각 좌표별, 즉 표본별 자료값을 나타낸 그래프입니다. 우리는 차선만을 검출하기 위해 히스토그램을 사용합니다. 코드를 통해 살펴봅시다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;# 이미지의 하단부만 취함
-bottom_half = img[height//2:,:]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;먼저 이미지의 하단부만을 취하는 구문입니다. 다음 과정은 이미지의 세로 픽셀값을 모두 합하여 1차원 배열로 나타내는 것입니다. 따라서 그 과정의 계산을 줄이기 위해, 그리고 차선 시작점을 찾아야 하기 때문에 하단부 반쪽만 남겨서 계산합니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;# 이미지 하단부의 세로값을 모두 합침.
-histogram = np.sum(bottom_half, axis=0)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;이미지 세로값을 모두 합쳐 1차원 배열로 나타내는 구문입니다. 이때 결과로 나오는 배열이 히스토그램의 $y$축 값입니다. 이 배열을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;plt.plot&lt;/code&gt; 함수를 사용하여 이미지 위에 출력하여 결과를 봅시다.&lt;/p&gt;
-&lt;h2 id=&quot;히스토그램-구하기-예제&quot;&gt;히스토그램 구하기 예제&lt;/h2&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;import numpy as np
-import matplotlib.image as mpimg
-import matplotlib.pyplot as plt
-
-img = mpimg.imread('/home/이미지 경로/warped_example.png')
-
-height = img.shape[0]
-width  = img.shape[1]
-
-def hist(img):
-    # 이미지의 하단부만 취함
-    bottom_half = img[height//2:,:]
-
-    # 이미지 하단부의 세로값을 모두 합침.
-    histogram = np.sum(bottom_half, axis=0)
-    
-    return bottom_half, histogram
-
-bottom_half, histogram = hist(img)
-
-# 히스토그램 시각화 - 값이 비약적으로 높은 부분이 차선(흰색값)
-plt.imshow(bottom_half, extent=[0, width, 0, height/2])
-plt.plot(histogram)
-plt.show()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Input:&lt;br /&gt;
-&lt;img src=&quot;/assets/img/vision/warped_example.png&quot; alt=&quot;warped_example&quot; width=&quot;60%&quot; height=&quot;60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Output:&lt;br /&gt;
-&lt;img src=&quot;/assets/img/vision/histogramresult.png&quot; alt=&quot;histogramresult&quot; width=&quot;90%&quot; height=&quot;90%&quot; /&gt;&lt;br /&gt;
-결과를 보면 이미지를 반토막내서 히스토그램을 구한 것을 볼 수 있습니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;2-슬라이드-윈도우-생성&quot;&gt;2. 슬라이드 윈도우 생성&lt;/h1&gt;
-&lt;p&gt;다음 과정은 슬라이드 윈도우를 생성하는 것입니다. 코드는 크게 2가지 함수로 나누어집니다.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;윈도우 내의 픽셀 좌표 찾기
-    &lt;ol&gt;
-      &lt;li&gt;히스토그램 추출 &amp;amp; 최댓값(차선 중심 좌표) 구하기&lt;/li&gt;
-      &lt;li&gt;윈도우 파라미터 설정&lt;/li&gt;
-      &lt;li&gt;윈도우 그리기 &amp;amp; 차선 픽셀 검출&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;차선을 의미하는 2차함수 곡선 구하기 &amp;amp; 시각화
-    &lt;ol&gt;
-      &lt;li&gt;ployfit 함수 사용: 계수 찾기&lt;/li&gt;
-      &lt;li&gt;차선, 곡선 시각화&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;윈도우 내의 픽셀 좌표를 찾는 함수와 그 픽셀 및 곡선을 시각화하는 함수로 나눌 수 있습니다. 각각의 함수 내의 단계를 코드를 보면서 알아보겠습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;윈도우-내의-픽셀-좌표-찾기&quot;&gt;윈도우 내의 픽셀 좌표 찾기&lt;/h2&gt;
-&lt;p&gt;함수를 선언한 후 내용을 보겠습니다. 시각화 함수에서 사용할 것이므로 선언부를 적어두겠습니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;def find_lane_pixels(binary_warped):
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&quot;1-히스토그램-추출--최댓값차선-중심-좌표-구하기&quot;&gt;1. 히스토그램 추출 &amp;amp; 최댓값(차선 중심 좌표) 구하기&lt;/h3&gt;
-&lt;p&gt;먼저 앞선 과정에서 알아봤던 히스토그램을 구합니다. 이제는 한줄로 축약해서 구할 수 있습니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;histogram = np.sum(binary_warped[binary_warped.shape[0]//2:,:], axis=0)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;그 후, 이미지의 좌측과 우측에서 각각 히스토그램 최댓값을 구합니다. 그 지점(leftx_base, rightx_base)을 첫번째 윈도우의 중심점으로 사용할 것입니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;# 좌측 차선/우측 차선을 나누기 위해 이미지의 중심점 설정.
-midpoint = np.int(histogram.shape[0]//2)
-# 히스토그램에서 최댓값 취하기=차선이 있는 곳
-leftx_base = np.argmax(histogram[:midpoint])
-rightx_base = np.argmax(histogram[midpoint:]) + midpoint
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;2-윈도우-파라미터-설정&quot;&gt;2. 윈도우 파라미터 설정&lt;/h3&gt;
-&lt;p&gt;다음 과정으로 윈도우 파라미터들을 설정합니다. 파라미터는 윈도우 갯수, 윈도우 너비, 최소 픽셀 갯수 등의 처음 설정값입니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;# HYPERPARAMETERS
-# 윈도우 갯수
-nwindows = 9
-# 중심을 기준으로 좌우 윈도우 너비(100*2(양옆))
-margin = 100
-# 다음 중심을 정하기 위해 필요한 최소 픽셀 갯수
-minpix = 50
-
-# 윈도우의 높이 설정 - 이미지 세로/윈도우 갯수
-window_height = np.int(binary_warped.shape[0]//nwindows)
-# 이미지에서 0(검정색)이 아닌 픽셀 좌표
-nonzero = binary_warped.nonzero()
-nonzeroy = np.array(nonzero[0])
-nonzerox = np.array(nonzero[1])
-# 윈도우가 생겨날 중심, 계속 업데이트 됨
-leftx_current = leftx_base
-rightx_current = rightx_base
-
-# 차선 픽셀들이 저장될 리스트
-left_lane_inds = []
-right_lane_inds = []
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;3-윈도우-그리기--차선-검출&quot;&gt;3. 윈도우 그리기 &amp;amp; 차선 검출&lt;/h3&gt;
-&lt;p&gt;윈도우 갯수는 위의 파라미터에서 설정한 것과 같이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nwindows&lt;/code&gt;개 입니다. 따라서 반복문을 사용하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nwindows&lt;/code&gt;번 반복합니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;# 윈도우 하나씩 만들어 보자.
-for window in range(nwindows):
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;먼저 윈도우 사각형의 범위를 지정하고 그립니다. OpenCV에 내장된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rectangle&lt;/code&gt; 함수를 사용합니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;# window번째 윈도우의 범위 지정
-# 세로 범위
-win_y_low = binary_warped.shape[0] - (window+1)*window_height
-win_y_high = binary_warped.shape[0] - window*window_height
-# 왼쪽 가로 범위
-win_xleft_low = leftx_current - margin
-win_xleft_high = leftx_current + margin
-# 오른쪽 가로 범위
-win_xright_low = rightx_current - margin
-win_xright_high = rightx_current + margin
-      
-# 윈도우 사각형 그리기
-cv2.rectangle(out_img, (win_xleft_low, win_y_low), (win_xleft_high, win_y_high), (0,255,0), 2)
-cv2.rectangle(out_img, (win_xright_low, win_y_low), (win_xright_high, win_y_high), (0,255,0), 2)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;그 다음, 윈도우 범위 내의 차선으로 예상되는 픽셀들을 구하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;leftx_lane_inds&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rightx_lane_inds&lt;/code&gt; 리스트에 저장합니다. 취한 픽셀 갯수가 설정해준 최솟값 이상일 때, 다음 윈도우의 중심을 픽셀들의 $x$좌표의 평균으로 저장합니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;# 윈도우 범위 안에 있는 (차선으로 예상되는) nonzero 픽셀 취하기(1차원 배열)
-# good_left_inds: (차선으로 예상되는) nonzero 픽셀 위치 리스트
-good_left_inds = ((nonzeroy &amp;gt;= win_y_low) &amp;amp; (nonzeroy &amp;lt; win_y_high) &amp;amp; 
-(nonzerox &amp;gt;= win_xleft_low) &amp;amp;  (nonzerox &amp;lt; win_xleft_high)).nonzero()[0]
-good_right_inds = ((nonzeroy &amp;gt;= win_y_low) &amp;amp; (nonzeroy &amp;lt; win_y_high) &amp;amp; 
-(nonzerox &amp;gt;= win_xright_low) &amp;amp;  (nonzerox &amp;lt; win_xright_high)).nonzero()[0]
-       
-# 취한 nonzero array(픽셀 리스트) 저장 (array, array, ...) 형태로 저장(술에 취한 아님)
-# left_lane_inds: 각 층의 윈도우 안의 차선으로 예상되는 픽셀 리스트
-left_lane_inds.append(good_left_inds)
-right_lane_inds.append(good_right_inds)
-       
-# 취한 nonzero 픽셀 갯수가 minpix 이상일 때, 다음 차선의 중심(윈도우가 생겨날 곳)을 픽셀들의 x좌표의 평균으로 취함.
-if len(good_left_inds) &amp;gt; minpix:
-    leftx_current = np.int(np.mean(nonzerox[good_left_inds]))
-if len(good_right_inds) &amp;gt; minpix:        
-    rightx_current = np.int(np.mean(nonzerox[good_right_inds]))
-# 배열1[배열2]: 배열2의 내용의 위치의 배열1 원소를 반환(numpy array만 가능)
-# ex) a=[1,2,3,4,5] b=[2,3] -&amp;gt; a[b]=[3,4]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;그리고 어차피 이 좌표들은 차원이 상관 없기에 그냥 다 합쳐서 1차원 배열로 만듭니다. 그리고 좌우 차선을 의미하는 윈도우 안의 픽셀들과 이미지를 반환합니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;# 그냥 1차원 배열로 퉁침
-try:
-    left_lane_inds = np.concatenate(left_lane_inds)
-    right_lane_inds = np.concatenate(right_lane_inds)
-except ValueError:
-    # Avoids an error if the above is not implemented fully
-    pass
-
-# 좌우 윈도우 안의 픽셀 좌표들
-leftx = nonzerox[left_lane_inds]
-lefty = nonzeroy[left_lane_inds] 
-rightx = nonzerox[right_lane_inds]
-righty = nonzeroy[right_lane_inds]
-
-return leftx, lefty, rightx, righty, out_img
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;이로써 사실상 윈도우 안의 차선 검출은 끝났습니다. 하지만 진짜로 되었는지 확인하기 위해서 시각화 함수를 만들어 보겠습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;차선을-의미하는-2차함수-곡선-구하기--시각화&quot;&gt;차선을 의미하는 2차함수 곡선 구하기 &amp;amp; 시각화&lt;/h2&gt;
-&lt;p&gt;함수 선언부는 다음과 같습니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;def fit_polynomial(binary_warped):
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&quot;1-ployfit-함수-사용-계수-찾기&quot;&gt;1. ployfit 함수 사용: 계수 찾기&lt;/h3&gt;
-&lt;p&gt;이번 과정에서는 차선 픽셀을 보고 ployfit 함수로 2차함수의 계수를 찾습니다. 그리고 그 계수로 그래프를 그릴 수 있도록 방정식을 선언합니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;# 차선 픽셀 먼저 찾고
-leftx, lefty, rightx, righty, out_img = find_lane_pixels(binary_warped)
-
-# 차선을 2차함수로 보고 계수 구하기
-left_fit = np.polyfit(lefty, leftx, 2)
-right_fit = np.polyfit(righty, rightx, 2)
-
-# 그래프를 그리기 위한 방정식
-ploty = np.linspace(0, binary_warped.shape[0]-1, binary_warped.shape[0] )
-try:
-    left_fitx = left_fit[0]*ploty**2 + left_fit[1]*ploty + left_fit[2]
-    right_fitx = right_fit[0]*ploty**2 + right_fit[1]*ploty + right_fit[2]
-except TypeError:
-    # Avoids an error if `left` and `right_fit` are still none or incorrect
-    print('The function failed to fit a line!')
-    left_fitx = 1*ploty**2 + 1*ploty
-    right_fitx = 1*ploty**2 + 1*ploty
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&quot;2-차선-곡선-시각화&quot;&gt;2. 차선, 곡선 시각화&lt;/h3&gt;
-&lt;p&gt;차선과 곡선을 시각화 하기 위해 색상을 입힙니다. 이때 위에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dstack&lt;/code&gt; 함수로 3채널로 만들어 주었던 보람이 생깁니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;## 시각화 ##
-# 좌/우 차선 색상 입히기
-out_img[lefty, leftx] = [255, 0, 0]
-out_img[righty, rightx] = [0, 0, 255]
-
-# 좌/우 차선의 그래프 그리기(노란색)
-plt.plot(left_fitx, ploty, color='yellow')
-plt.plot(right_fitx, ploty, color='yellow')
-
-return out_img
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;좌측 차선에 빨간색을, 우측 차선에 파란색을 입혔습니다. 2차 함수에는 노란색을 주어 잘 보이도록 했습니다.&lt;/p&gt;
-
-&lt;p&gt;이 함수들을 실행하여 적절한 출력을 내는 코드를 작성하면, 다음과 같습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;슬라이드-윈도우-예제&quot;&gt;슬라이드 윈도우 예제&lt;/h2&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;import numpy as np
-import matplotlib.image as mpimg
-import matplotlib.pyplot as plt
-import cv2
-
-img = mpimg.imread('/home/이미지 경로/warped_example.png')
-# 채널 1로 줄이기 - 원본 코드에서는 이 과정이 없었으나 채널 문제로 인한 오류로 구문을 추가하였음.
-# 원본 이미지는 채널이 4여서 채널 3을 요구하는 함수에서 오류가 발생했음.
-binary_warped = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-
-def find_lane_pixels(binary_warped):
-    # 히스토그램 추출
-    histogram = np.sum(binary_warped[binary_warped.shape[0]//2:,:], axis=0)
-    # 시각화를 위한 채널 나누기, 각각 RGB 채널로 활용될 예정.
-    out_img = np.dstack((binary_warped, binary_warped, binary_warped))
-    # 좌측 차선/우측 차선을 나누기 위해 이미지의 중심점 설정.
-    midpoint = np.int(histogram.shape[0]//2)
-    # 히스토그램에서 최댓값 취하기=차선이 있는 곳
-    leftx_base = np.argmax(histogram[:midpoint])
-    rightx_base = np.argmax(histogram[midpoint:]) + midpoint
-
-    # HYPERPARAMETERS
-    # 윈도우 갯수
-    nwindows = 9
-    # 중심을 기준으로 좌우 윈도우 너비(100*2(양옆))
-    margin = 100
-    # 다음 중심을 정하기 위해 필요한 최소 픽셀 갯수
-    minpix = 50
-
-    # 윈도우의 높이 설정 - 이미지 세로/윈도우 갯수
-    window_height = np.int(binary_warped.shape[0]//nwindows)
-    # 이미지에서 0(검정색)이 아닌 픽셀 좌표
-    nonzero = binary_warped.nonzero()
-    nonzeroy = np.array(nonzero[0])
-    nonzerox = np.array(nonzero[1])
-    # 윈도우가 생겨날 곳, 계속 업데이트 됨
-    leftx_current = leftx_base
-    rightx_current = rightx_base
-
-    # 차선 픽셀들이 저장될 리스트
-    left_lane_inds = []
-    right_lane_inds = []
-
-    # 윈도우 하나씩 만들어 보자.
-    for window in range(nwindows):
-        # window번째 윈도우의 범위 지정
-        # 세로 범위
-        win_y_low = binary_warped.shape[0] - (window+1)*window_height
-        win_y_high = binary_warped.shape[0] - window*window_height
-        # 왼쪽 가로 범위
-        win_xleft_low = leftx_current - margin
-        win_xleft_high = leftx_current + margin
-        # 오른쪽 가로 범위
-        win_xright_low = rightx_current - margin
-        win_xright_high = rightx_current + margin
-        
-        # 윈도우 사각형 그리기
-        cv2.rectangle(out_img, (win_xleft_low, win_y_low), (win_xleft_high, win_y_high), (0,255,0), 2)
-        cv2.rectangle(out_img, (win_xright_low, win_y_low), (win_xright_high, win_y_high), (0,255,0), 2)
-        
-        # 윈도우 범위 안에 있는 (차선으로 예상되는) nonzero 픽셀 취하기(1차원 배열)
-        # good_left_inds: (차선으로 예상되는) nonzero 픽셀 위치 리스트
-        good_left_inds = ((nonzeroy &amp;gt;= win_y_low) &amp;amp; (nonzeroy &amp;lt; win_y_high) &amp;amp; 
-        (nonzerox &amp;gt;= win_xleft_low) &amp;amp;  (nonzerox &amp;lt; win_xleft_high)).nonzero()[0]
-        good_right_inds = ((nonzeroy &amp;gt;= win_y_low) &amp;amp; (nonzeroy &amp;lt; win_y_high) &amp;amp; 
-        (nonzerox &amp;gt;= win_xright_low) &amp;amp;  (nonzerox &amp;lt; win_xright_high)).nonzero()[0]
-        
-        # 취한 nonzero array(픽셀 리스트) 저장 (array, array, ...) 형태로 저장(술에 취한 아님)
-        # left_lane_inds: 각 층의 윈도우 안의 차선으로 예상되는 픽셀 리스트
-        left_lane_inds.append(good_left_inds)
-        right_lane_inds.append(good_right_inds)
-        
-        # 취한 nonzero 픽셀 갯수가 minpix 이상일 때, 다음 차선의 중심(윈도우가 생겨날 곳)을 픽셀들의 x좌표의 평균으로 취함.
-        if len(good_left_inds) &amp;gt; minpix:
-            leftx_current = np.int(np.mean(nonzerox[good_left_inds]))
-        if len(good_right_inds) &amp;gt; minpix:        
-            rightx_current = np.int(np.mean(nonzerox[good_right_inds]))
-        # 배열1[배열2]: 배열2의 내용의 위치의 배열1 원소를 반환(numpy array만 가능)
-        # ex) a=[1,2,3,4,5] b=[2,3] -&amp;gt; a[b]=[3,4]
-
-    # 그냥 1차원 배열로 퉁침.
-    try:
-        left_lane_inds = np.concatenate(left_lane_inds)
-        right_lane_inds = np.concatenate(right_lane_inds)
-    except ValueError:
-        # Avoids an error if the above is not implemented fully
-        pass
-
-    # 좌우 윈도우 안의 픽셀 좌표들
-    leftx = nonzerox[left_lane_inds]
-    lefty = nonzeroy[left_lane_inds] 
-    rightx = nonzerox[right_lane_inds]
-    righty = nonzeroy[right_lane_inds]
-
-    return leftx, lefty, rightx, righty, out_img
-
-
-def fit_polynomial(binary_warped):
-    # 차선 픽셀 먼저 찾고
-    leftx, lefty, rightx, righty, out_img = find_lane_pixels(binary_warped)
-
-    # 차선을 2차함수로 보고 계수 구하기
-    left_fit = np.polyfit(lefty, leftx, 2)
-    right_fit = np.polyfit(righty, rightx, 2)
-
-    # 그래프를 그리기 위한 방정식
-    ploty = np.linspace(0, binary_warped.shape[0]-1, binary_warped.shape[0] )
-    try:
-        left_fitx = left_fit[0]*ploty**2 + left_fit[1]*ploty + left_fit[2]
-        right_fitx = right_fit[0]*ploty**2 + right_fit[1]*ploty + right_fit[2]
-    except TypeError:
-        # Avoids an error if `left` and `right_fit` are still none or incorrect
-        print('The function failed to fit a line!')
-        left_fitx = 1*ploty**2 + 1*ploty
-        right_fitx = 1*ploty**2 + 1*ploty
-
-    ## 시각화 ##
-    # 좌/우 차선 색상 입히기
-    out_img[lefty, leftx] = [255, 0, 0]
-    out_img[righty, rightx] = [0, 0, 255]
-
-    # 좌/우 차선의 그래프 그리기(노란색)
-    plt.plot(left_fitx, ploty, color='yellow')
-    plt.plot(right_fitx, ploty, color='yellow')
-
-    return out_img
-
-
-out_img = fit_polynomial(binary_warped)
-
-plt.imshow(out_img)
-plt.show()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Input:&lt;br /&gt;
-히스토그램 구하기 예제와 같습니다.&lt;/p&gt;
-
-&lt;p&gt;Output:&lt;br /&gt;
-&lt;img src=&quot;/assets/img/vision/slidewindowresult.png&quot; alt=&quot;slidewindowresult&quot; width=&quot;90%&quot; height=&quot;90%&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;이전-프레임으로부터-윈도우-중심-찾기&quot;&gt;이전 프레임으로부터 윈도우 중심 찾기&lt;/h2&gt;
-&lt;p&gt;하지만 매 프레임마다 2차방정식 계수를 계산하는 것은 계산적으로 낭비가 많습니다. 따라서 이번에는 이전 프레임에서의 2차 방정식 계수를 기반으로 차선을 따라가는 윈도우를 작성합니다. 윈도우라기보단 한줄짜리 선을 이어붙인 도형입니다. 위의 슬라이드 윈도우 만들기와 과정은 비슷합니다. 코드를 통해 살펴도록 하겠습니다.&lt;br /&gt;
-먼저 다항식 계수를 구하는 함수입니다. 이후 작성할 함수에서 사용될 예정입니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;def fit_poly(img_shape, leftx, lefty, rightx, righty):
-    # 다항식 계수 구하기
-    # 지역 변수로서 left_fit, right_fit. 전역 변수의 수정은 없다.
-    left_fit = np.polyfit(lefty, leftx, 2)
-    right_fit = np.polyfit(righty, rightx, 2)
-    # 그래프 그리기 위해 방정식 &amp;amp; 범위 규정
-    ploty = np.linspace(0, img_shape[0]-1, img_shape[0])
-    left_fitx = left_fit[0]*ploty**2 + left_fit[1]*ploty + left_fit[2]
-    right_fitx = right_fit[0]*ploty**2 + right_fit[1]*ploty + right_fit[2]
-    
-    return left_fitx, right_fitx, ploty
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;다음 함수는 윈도우를 만드는 함수입니다. 선언부는 다음과 같습니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;def search_around_poly(binary_warped):
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;저번 윈도우와 같이 탐색할 차선의 중심 기준 좌우 범위를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;margin&lt;/code&gt;으로 놓습니다. 그 후 차선이 포함된 흰색 픽셀을 검출합니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;# HYPERPARAMETER
-margin = 100
-
-# 흰색 픽셀 검출(이미지 전체)
-nonzero = binary_warped.nonzero()
-nonzeroy = np.array(nonzero[0])
-nonzerox = np.array(nonzero[1])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;그 후 한줄짜리 윈도우를 만듭니다. 사실 사각형이 아닌 선 하나이기 때문에 한줄짜리 윈도우라고 부릅니다. 슬라이드 윈도우에서 사용했던 윈도우 중심점 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;leftx_current, rightx_current&lt;/code&gt; 대신 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;left_fit[0]*(nonzeroy**2) + left_fit[1]*nonzeroy + left_fit[2], right_fit[0]*(nonzeroy**2) + right_fit[1]*nonzeroy + right_fit[2]&lt;/code&gt;를 사용합니다. 2차 방정식의 값을 중심으로 양 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;margin&lt;/code&gt; 범위 내에서 흰색 픽셀을 찾아냅니다. 이 픽셀들을 차선으로 봅니다. 그 후 찾은 픽셀들의 $x$, $y$ 값을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;leftx, lefty, rightx, righty&lt;/code&gt; 변수에 저장합니다. 이 변수을 위에서 작성했던 다항식 계수를 구하는 함수에 대입하여 시각화를 위한 픽셀을 구합니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;# 윈도우 중심점 대신 left_fit[0]*(nonzeroy**2) + left_fit[1]*nonzeroy + left_fit[2] 를 사용.
-# 이전 프레임에서 사용했던 left, right_fit 사용, 한줄씩만 픽셀 검출
-left_lane_inds = ((nonzerox &amp;gt; (left_fit[0]*(nonzeroy**2) + left_fit[1]*nonzeroy + 
-                left_fit[2] - margin)) &amp;amp; (nonzerox &amp;lt; (left_fit[0]*(nonzeroy**2) + 
-                left_fit[1]*nonzeroy + left_fit[2] + margin)))
-right_lane_inds = ((nonzerox &amp;gt; (right_fit[0]*(nonzeroy**2) + right_fit[1]*nonzeroy + 
-                right_fit[2] - margin)) &amp;amp; (nonzerox &amp;lt; (right_fit[0]*(nonzeroy**2) + 
-                right_fit[1]*nonzeroy + right_fit[2] + margin)))
-    
-# 검출한 차선의 x, y값 저장
-leftx = nonzerox[left_lane_inds]
-lefty = nonzeroy[left_lane_inds] 
-rightx = nonzerox[right_lane_inds]
-righty = nonzeroy[right_lane_inds]
-
-# 다항식 결과물, 범위
-left_fitx, right_fitx, ploty = fit_poly(binary_warped.shape, leftx, lefty, rightx, righty)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;다음은 시각화 단계입니다. 지금까지 구한 정보를 토대로 윈도우, 그래프를 시각화합니다. 이 과정은 위의 슬라이드 윈도우 시각화 과정과 크게 다르지 않습니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;## 시각화 ##
-# 컬러 시각화를 위한 채널 추가
-out_img = np.dstack((binary_warped, binary_warped, binary_warped))*255
-window_img = np.zeros_like(out_img)
-# 좌우 차선 픽셀에 색상값 추가
-out_img[nonzeroy[left_lane_inds], nonzerox[left_lane_inds]] = [255, 0, 0]
-out_img[nonzeroy[right_lane_inds], nonzerox[right_lane_inds]] = [0, 0, 255]
-
-# cv2.fillpoly() 함수에서 사용할 한줄짜리 윈도우 픽셀 좌표
-left_line_window1 = np.array([np.transpose(np.vstack([left_fitx-margin, ploty]))])
-left_line_window2 = np.array([np.flipud(np.transpose(np.vstack([left_fitx+margin, ploty])))])
-left_line_pts = np.hstack((left_line_window1, left_line_window2))
-right_line_window1 = np.array([np.transpose(np.vstack([right_fitx-margin, ploty]))])
-right_line_window2 = np.array([np.flipud(np.transpose(np.vstack([right_fitx+margin, ploty])))])
-right_line_pts = np.hstack((right_line_window1, right_line_window2))
-
-# 선을 따라가는 한줄짜리 윈도우 시각화
-cv2.fillPoly(window_img, np.int_([left_line_pts]), (0, 255, 0))
-cv2.fillPoly(window_img, np.int_([right_line_pts]), (0, 255, 0))
-result = cv2.addWeighted(out_img, 1, window_img, 0.3, 0)
-    
-# 곡선 그래프 시각화
-plt.plot(left_fitx, ploty, color = 'yellow')
-plt.plot(right_fitx, ploty, color = 'yellow')
-    
-return result
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;이전-프레임으로부터-윈도우-중심-찾기-예제&quot;&gt;이전 프레임으로부터 윈도우 중심 찾기 예제&lt;/h3&gt;
-&lt;p&gt;지금까지 설명한 예제의 전문을 보겠습니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;import cv2
-import numpy as np
-import matplotlib.image as mpimg
-import matplotlib.pyplot as plt
-
-# Load our image - this should be a new frame since last time!
-img = mpimg.imread('/home/이미지 경로/warped_example.png')
-binary_warped = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-# 이전 프레임에서의 2차 방정식 계수, 실제 코드에선 이전 프레임 것을 사용해야 함.
-left_fit = np.array([ 2.13935315e-04, -3.77507980e-01,  4.76902175e+02])
-right_fit = np.array([4.17622148e-04, -4.93848953e-01,  1.11806170e+03])
-
-def fit_poly(img_shape, leftx, lefty, rightx, righty):
-    # 다항식 계수 구하기
-    # 지역 변수로서 left_fit, right_fit. 전역 변수의 수정은 없다.
-    left_fit = np.polyfit(lefty, leftx, 2)
-    right_fit = np.polyfit(righty, rightx, 2)
-    # 그래프 그리기 위해 방정식 &amp;amp; 범위 규정
-    ploty = np.linspace(0, img_shape[0]-1, img_shape[0])
-    left_fitx = left_fit[0]*ploty**2 + left_fit[1]*ploty + left_fit[2]
-    right_fitx = right_fit[0]*ploty**2 + right_fit[1]*ploty + right_fit[2]
-    
-    return left_fitx, right_fitx, ploty
-
-def search_around_poly(binary_warped):
-    # HYPERPARAMETER
-    margin = 100
-
-    # 흰색 픽셀 검출(이미지 전체)
-    nonzero = binary_warped.nonzero()
-    nonzeroy = np.array(nonzero[0])
-    nonzerox = np.array(nonzero[1])
-    print(nonzeroy)
-    # 윈도우 중심점 대신 left_fit[0]*(nonzeroy**2) + left_fit[1]*nonzeroy + left_fit[2] 를 사용.
-    # 이전 프레임에서 사용했던 left, right_fit 사용, 한줄씩만 픽셀 검출
-    left_lane_inds = ((nonzerox &amp;gt; (left_fit[0]*(nonzeroy**2) + left_fit[1]*nonzeroy + 
-                    left_fit[2] - margin)) &amp;amp; (nonzerox &amp;lt; (left_fit[0]*(nonzeroy**2) + 
-                    left_fit[1]*nonzeroy + left_fit[2] + margin)))
-    right_lane_inds = ((nonzerox &amp;gt; (right_fit[0]*(nonzeroy**2) + right_fit[1]*nonzeroy + 
-                    right_fit[2] - margin)) &amp;amp; (nonzerox &amp;lt; (right_fit[0]*(nonzeroy**2) + 
-                    right_fit[1]*nonzeroy + right_fit[2] + margin)))
-    
-    # 검출한 차선의 x, y값 저장
-    leftx = nonzerox[left_lane_inds]
-    lefty = nonzeroy[left_lane_inds] 
-    rightx = nonzerox[right_lane_inds]
-    righty = nonzeroy[right_lane_inds]
-
-    # 다항식 결과물, 범위
-    left_fitx, right_fitx, ploty = fit_poly(binary_warped.shape, leftx, lefty, rightx, righty)
-
-    ## 시각화 ##
-    # 컬러 시각화를 위한 채널 추가
-    out_img = np.dstack((binary_warped, binary_warped, binary_warped))*255
-    window_img = np.zeros_like(out_img)
-    # 좌우 차선 픽셀에 색상값 추가
-    out_img[nonzeroy[left_lane_inds], nonzerox[left_lane_inds]] = [255, 0, 0]
-    out_img[nonzeroy[right_lane_inds], nonzerox[right_lane_inds]] = [0, 0, 255]
-
-    # cv2.fillpoly() 함수에서 사용할 한줄짜리 윈도우 픽셀 좌표
-    left_line_window1 = np.array([np.transpose(np.vstack([left_fitx-margin, ploty]))])
-    left_line_window2 = np.array([np.flipud(np.transpose(np.vstack([left_fitx+margin, ploty])))])
-    left_line_pts = np.hstack((left_line_window1, left_line_window2))
-    right_line_window1 = np.array([np.transpose(np.vstack([right_fitx-margin, ploty]))])
-    right_line_window2 = np.array([np.flipud(np.transpose(np.vstack([right_fitx+margin, ploty])))])
-    right_line_pts = np.hstack((right_line_window1, right_line_window2))
-
-    # 선을 따라가는 한줄짜리 윈도우 시각화
-    cv2.fillPoly(window_img, np.int_([left_line_pts]), (0, 255, 0))
-    cv2.fillPoly(window_img, np.int_([right_line_pts]), (0, 255, 0))
-    result = cv2.addWeighted(out_img, 1, window_img, 0.3, 0)
-    
-    # 곡선 그래프 시각화
-    plt.plot(left_fitx, ploty, color = 'yellow')
-    plt.plot(right_fitx, ploty, color = 'yellow')
-    
-    return result
-
-result = search_around_poly(binary_warped)
-
-plt.imshow(result)
-plt.show()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Input:&lt;br /&gt;
-히스토그램 구하기 예제와 같습니다.&lt;/p&gt;
-
-&lt;p&gt;Output:&lt;br /&gt;
-&lt;img src=&quot;/assets/img/vision/preframeresult.png&quot; alt=&quot;preframeresult&quot; width=&quot;90%&quot; height=&quot;90%&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;3-곡률-반경-구하기&quot;&gt;3. 곡률 반경 구하기&lt;/h1&gt;
-&lt;p&gt;곡선 차선을 검출하여 차량 방향을 조향하기 위한 마지막 단계입니다. 이 과정은 2차 방정식으로 곡률 반경을 찾는 과정입니다. 2차 방정식으로부터 곡률 반경을 찾는 공식은 다음과 같습니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-R_{curve}=\frac{(1+(\frac{dy}{dx})^2)^\frac{3}{2}}{|\frac{d^2y}{dx^2}|}
-}$&lt;/center&gt;
-&lt;center&gt;$\large{
-f(x)=y=Ax^2+Bx+C
-}$&lt;/center&gt;
-&lt;center&gt;$\large{
-f'(x)=y'=2Ax+B
-}$&lt;/center&gt;
-&lt;center&gt;$\large{
-f''(x)=y''=2A
-}$&lt;/center&gt;
-&lt;center&gt;$\large{
-R_{curve}=\frac{(1+(2Ax+B)^2)^\frac{3}{2}}{|2A|}
-}$&lt;/center&gt;
-&lt;p&gt;이 공식을 참고하여 코드를 작성합니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;곡률-반경-구하기-예제&quot;&gt;곡률 반경 구하기 예제&lt;/h2&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;# 슬라이드 윈도우 단계에서 구한 ploty, left_fit, right_fit를 파라미터로 사용
-def measure_curvature_pixels(ploty, left_fit, right_fit):
-    # 곡률 반경을 볼 지점 선택, 이 예제에서는 이미지 제일 하단의 지점을 선택했습니다.
-    y_eval = np.max(ploty)
-    
-    # 곡률 반경 공식
-    left_curverad = ((1 + (2*left_fit[0]*y_eval + left_fit[1])**2)**1.5) / np.absolute(2*left_fit[0])
-    right_curverad = ((1 + (2*right_fit[0]*y_eval + right_fit[1])**2)**1.5) / np.absolute(2*right_fit[0])
-    
-    return left_curverad, right_curverad
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h1&gt;
-&lt;p&gt;Udacity Self-driving car nanodegree - Advanced CV(링크 공유 불가능)&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Udacity" /><category term="Computer Vision" /><summary type="html">곡선 차선 검출 지금까지 우리는 단지 차선을 검출한 방법에 대해서 공부했습니다. 하지만 직선이 아닌 곡선 차선일 경우 어떻게 자동차의 방향을 조절할 수 있을까요? 이번 게시글에서는 그 방법에 대해서 정리합니다. 대략적인 과정은 다음과 같습니다. 히스토그램 구하기 슬라이드 윈도우 생성 (시각화) 곡률 반경 구하기</summary></entry></feed>
+&lt;p&gt;Udacity Self-driving car nanodegree - Neural Network(링크 공유 불가능)&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Udacity" /><category term="Deep Learning" /><summary type="html">Neural Network란? 뉴럴 네트워크는 우리말로 신경망이라는 의미입니다. 옛날 옛적 공학자들은 컴퓨터에 지능, 즉 학습능력을 부여할 방법을 고민했고, 결국 사람의 뇌 구조를 모방하는 방법을 고안했습니다. 우리 뇌 속의 뉴런 세포가 연결 및 신호를 주고받는 방식을 알고리즘으로 구현하여 신경망이라는 것을 만들었습니다. 위 그림을 보면 뉴런 세포의 가지돌기(Dendrite)로 전기 신호가 전달되어 핵(Nucleus)을 통해 축삭(Axon)으로 전기 신호가 나갑니다. 지금부터 이러한 뉴런의 구조를 어떻게 구현했는지 알아볼 것입니다.</summary></entry></feed>

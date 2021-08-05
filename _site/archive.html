@@ -240,6 +240,37 @@
 		<div class="post">
 			
 
+			<a class="post-list-title" href="./kf-ekf.html">Kalman Filter와 EKF(1) - 선형 KF와 EKF</a>
+			
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-08-05T11:36:24+09:00">August 5, 2021</time>
+      </span>
+    
+    
+      
+    
+  
+  
+  
+  </span>
+
+			<div class="post-excerpt">
+				<p>이 게시글에서는 SLAM에서의 KF와 EKF를 기준으로 설명할 예정입니다.</p><h2 id="kalman-filter란">Kalman Filter란?</h2><p>칼만 필터는 현재 상태(state) $\mu$와 공분산(covariance) $\Sigma$를 기반으로 다음 상태를 추정하는 방법입니다. $\mu$와 $\Sigma$만으로 나타낼 수 있는 Gaussian 분포를 따르며, 지난 게시글의 <a href="https://refstop.github.io/uda-loc-markov.html">Bayesian Filter</a>와도 관계가 있습니다. 선형 칼만 필터를 설명하기 전에 가우시안 분포에 대해서 조금 설명하도록 하겠습니다.</p><h2 id="gaussian-분포">Gaussian 분포</h2><ul> <li>단일 변수 가우시안 분포</li></ul><center>$p(x)=\frac{1}{ \sqrt{2 \sigma^2 \pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$</center><ul> <li>다변수 가우시안 분포</li></ul><center>$p(x)=\frac{1}{ \sqrt{det(2\pi\Sigma)}}e^{-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)}$</center><p>가우시안 분포는 단일 변수(single variable)과 다변수(multi variable)의 표현 방식이 있으며, SLAM 에서는 로봇의 현재 state를 벡터 $(x,y,\phi)$로 표시하기 때문에 다변수 가우시안 분포를 사용하는 것이 좋습니다.</p><h2 id="선형-모델의-가우시안-분포">선형 모델의 가우시안 분포</h2><p>일반적으로, 선형 모델은 다음과 같이 표현할 수 있습니다.</p><center>$Y=AX+B$</center><p>이때, $X$가 가우시안 분포를 따른다고 할...<a class="read-more" href="./kf-ekf.html"> read more</a>
+			</div>
+		</div>
+	
+		<div class="post">
+			
+
 			<a class="post-list-title" href="./uda-lenet.html">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5</a>
 			
 
@@ -312,45 +343,6 @@
 
 			<div class="post-excerpt">
 				<p align="center"> <img width="100%" height="100%" src="/assets/img/deeplearning/cnn.png" /></p><p>지금까지 우리는 심층 신경망(Deep Nerual Network)을 구성하기까지의 과정을 살펴보았습니다. 이제 이 심층 신경망으로 구성할 수 있는 네트워크 중 이미지 학습에 최적화된 <strong>합성곱 신경망(Convolutional Nerual Network, CNN)</strong>에 대해서 알아보겠습니다.</p><h2 id="cnn이-되기까지">CNN이 되기까지</h2><p>CNN이 고안되기 전에는 이미지를 Fully Connected Nerual Network라는 1차원 벡터 형태의 데이터를 학습하는 형태의 신경망 구조를 사용했습니다. 하지만 FNN은 몇 가지 단점이 있습니다.<br /> 첫번째로 이미지 데이터를 평면화 시키는 과정에서 이미지의 인접한 픽셀 간의 정보가 유실된다는 점입니다. FNN은 1차원 벡터 형태의 데이터를 입력받기 때문에 이미지의 인접 픽셀간의 상관관계를 반영할 수 없습니다. 반면 CNN은 이미지의 특징을 보존한 채로 학습을 진행하기 때문에 인접 픽셀간의 정보 유식을 막을...<a class="read-more" href="./uda-cnn.html"> read more</a>
-			</div>
-		</div>
-	
-		<div class="post">
-			
-
-			<a class="post-list-title" href="./i2n-signal.html">Indoor 2D Navigation - 개요 & 좌표범위내 신호 출력 노드</a>
-			
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2021-03-02T12:41:24+09:00">March 2, 2021</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        2 minute read
-      
-    </span>
-  
-  
-  </span>
-
-			<div class="post-excerpt">
-				<h2 id="프로젝트의-목적">프로젝트의 목적</h2><p>본 프로젝트의 목적은 Kobuki 로봇을 사용하여 대학의 로봇관 건물을 자율주행 할 수 있도록 여러 SLAM 기법이나 Navigation 패키지를 사용해 보고, ROS 패키지를 제작하여 ROS와 우분투 환경에 익숙해지는 것입니다. 차후 있을 3D 라이다를 사용한 실내 자율주행 로봇 과제 등을 수행하기 위해 기본적인 사용법을 익히는 것을 목표로 하고 있습니다.</p><h2 id="프로젝트-계획">프로젝트 계획</h2><p>프로젝트의 진행 계획은 다음과 같습니다. 이 계획은 진행 상황에 따라 수정될 수 있습니다.</p><ol> <li>Kobuki 패키지 작성</li> <li>map에서 특정 좌표를 기준으로 일정 범위 내에 위치하면 신호 출력 노드</li> <li>좌표를 파라미터화(yaml, dynamic_reconfigure)</li> <li>gmapping, cartographer mapping 실습</li> <li>amcl, cartographer pure localization을 사용한 localization</li> <li>move_base를 사용한 자율주행</li></ol><h2 id="패키지-작성-전-prerequisite">패키지 작성 전 Prerequisite</h2><h3 id="1-kobuki-패키지-설치">1. Kobuki 패키지...<a class="read-more" href="./i2n-signal.html"> read more</a>
 			</div>
 		</div>
 	

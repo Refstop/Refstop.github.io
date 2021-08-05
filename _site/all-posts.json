@@ -1,6 +1,8 @@
 {
   "posts" : [
     
+    "./kf-ekf.html",
+    
     "./uda-lenet.html",
     
     "./uda-cnn.html",
