@@ -1,4 +1,0 @@
-I"c<p>이 게시글에서는 SLAM에서의 KF와 EKF를 기준으로 설명할 예정입니다.</p>
-<h2 id="kalman-filter란">Kalman Filter란?</h2>
-<p>칼만 필터는 현재 상태(state) $\mu$와 공분산(covariance) $\sum$를 기반으로 다음 상태를 추정하는 방법입니다. $\mu$와 $\sum$만으로 나타낼 수 있는 Gaussian 분포를 따르며, 지난 게시글의 <a href="https://refstop.github.io/uda-loc-markov.html">Bayesian Filter</a>와도 관계가 있습니다. 선형 칼만 필터를 설명하기 전에 가우시안 분포에 대해서 조금 설명하도록 하겠습니다.</p>
-:ET
