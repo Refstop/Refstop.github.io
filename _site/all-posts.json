@@ -1,6 +1,10 @@
 {
   "posts" : [
     
+    "./indoor-nav.html",
+    
+    "./ekf-slam.html",
+    
     "./kf-ekf.html",
     
     "./uda-lenet.html",

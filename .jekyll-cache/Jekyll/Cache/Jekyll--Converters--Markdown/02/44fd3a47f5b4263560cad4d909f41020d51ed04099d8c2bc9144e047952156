@@ -1,0 +1,18 @@
+I"
+<p>지난 게시글에 이어 EKF를 사용한 SLAM 방법을 정리하겠습니다. SLAM은 로봇의 Localization과 Map을 작성하는 것이 목적으로 실시간 결과로서 로봇의 위치가, 최종적인 결과로서 로봇이 작성한 Map을 얻을 수 있습니다. 여기서 Map은 Landmark의 위치를 기록한 자료로서, 사람이 생각하는 시각적인 지도가 아닌 Landmark의 위치만을 기록한 txt 파일이 될 수도 있습니다. 이러한 SLAM의 방법으로는 Kalman Filter, Particle Filter, Graph-based 3가지로 나눌 수 있습니다. 이번 게시글에서는 EKF를 사용한 SLAM을 중심으로 설명하도록 하겠습니다.</p>
+
+<h2 id="ekf-for-online-slam">EKF for online SLAM</h2>
+<p><img width="100%" height="100%" src="/assets/img/kalman filter/ekf_slam_node.png" align="center" /><br />
+위 그림은 EKF를 이용한 online SLAM을 표현한 그림입니다. online은 실시간인 만큼 현재 로봇의 위치 state $x_t$만을 저장하는 방식으로 작동합니다. $m$은 Landmark의 위치를 의미하고, $u_t$와 $z_t$는 각각 observation과 control input입니다. 각각 measurement model과 motion model과 관련이 있는 항입니다. 이 문제를 식으로 표현하면 다음과 같습니다.</p>
+<center>$p(x_t, m|z_{1:t}, u_{1:t})$</center>
+<p>즉, 처음부터 현재 시간 $t$까지의 control input과 observation을 알고 있을 때 현재 로봇의 위치 state $x_t$와 맵을 구성하는 Landmark인 $m$을 구하는 문제입니다.</p>
+
+<h2 id="state의-표현방법">state의 표현방법</h2>
+<p>이 게시글에서 다루는 로봇의 state 모델은 2D를 기준으로 하고 있습니다. 따라서 이 로봇의 state vector는 위치와 방향을 나타내는 $x$, $y$, $\theta$로 이루어져 있는 3$\times$1 크기의 열 벡터입니다. 그리고 Landmark의 state vector는 위치만을 나타내는 $x$, $y$로 이루어져 있는 2$\times$1 크기의 열 벡터입니다. 기본적으로, EKF SLAM에서의 state vector $x_t$는 위의 로봇 state vector, Landmark state vector 두 요소로 구성되어 있습니다. 이는 위의 $p(x_t, m|z_{1:t}, u_{1:t})$ 공식에서도 볼 수 있습니다.</p>
+<center>$\begin{align*} x_t &amp;= [robot's x_t, Landmark's m] \\
+&amp;=[x,y,\theta,m_{1,x},m_{1,y},m_{2,x},m_{2,y},\cdots,m_{n,x},m_{n,y}]
+\end{align*}$</center>
+<h2 id="참고-사이트">참고 사이트</h2>
+<p><a href="http://jinyongjeong.github.io/2017/02/16/lec05_EKF_SLAM/">Jinyoung - [SLAM] Extended Kalman Filter(EKF) SLAM</a></p>
+
+:ET

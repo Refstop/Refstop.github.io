@@ -1,0 +1,22 @@
+I"<p>지난번에 작성했던 간단한 <a href="https://refstop.github.io/i2n-signal.html">실내 자율주행 로봇 패키지</a>를 조금 발전시킨 형태입니다. 정리할 내용은 다음과 같습니다.</p>
+<ul>
+  <li>Cartographer 사용법
+    <ul>
+      <li>설치 및 세팅</li>
+      <li>파라미터 사용 방법</li>
+    </ul>
+  </li>
+  <li>Waypoint Navigation
+    <ul>
+      <li>move_base Action 사용 방법</li>
+      <li>소스코드</li>
+    </ul>
+  </li>
+  <li>Aruco Marker를 사용한 EKF Localization
+    <ul>
+      <li>Fiducial Package 사용 방법</li>
+      <li>소스코드</li>
+    </ul>
+  </li>
+</ul>
+:ET

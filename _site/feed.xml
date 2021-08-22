@@ -1,4 +1,225 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://refstop.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://refstop.github.io/" rel="alternate" type="text/html" /><updated>2021-08-21T21:51:40+09:00</updated><id>https://refstop.github.io/feed.xml</id><title type="html">Refstop의 연구일지</title><subtitle>Deep Learning 및 SLAM을 공부하고 있습니다.</subtitle><author><name>Refstop</name></author><entry><title type="html">Kalman Filter와 EKF(1) - 선형 KF와 EKF</title><link href="https://refstop.github.io/kf-ekf.html" rel="alternate" type="text/html" title="Kalman Filter와 EKF(1) - 선형 KF와 EKF" /><published>2021-08-05T11:36:24+09:00</published><updated>2021-08-05T11:36:24+09:00</updated><id>https://refstop.github.io/kf-ekf</id><content type="html" xml:base="https://refstop.github.io/kf-ekf.html">&lt;p&gt;이 게시글에서는 SLAM에서의 KF와 EKF를 기준으로 설명할 예정입니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://refstop.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://refstop.github.io/" rel="alternate" type="text/html" /><updated>2021-08-23T02:01:39+09:00</updated><id>https://refstop.github.io/feed.xml</id><title type="html">Refstop의 연구일지</title><subtitle>Deep Learning 및 SLAM을 공부하고 있습니다.</subtitle><author><name>Refstop</name></author><entry><title type="html">2021 여름 프로젝트 - 실내 자율 주행 로봇</title><link href="https://refstop.github.io/indoor-nav.html" rel="alternate" type="text/html" title="2021 여름 프로젝트 - 실내 자율 주행 로봇" /><published>2021-08-22T23:07:24+09:00</published><updated>2021-08-22T23:07:24+09:00</updated><id>https://refstop.github.io/indoor-nav</id><content type="html" xml:base="https://refstop.github.io/indoor-nav.html">&lt;p&gt;지난번에 작성했던 간단한 &lt;a href=&quot;https://refstop.github.io/i2n-signal.html&quot;&gt;실내 자율주행 로봇 패키지&lt;/a&gt;를 조금 발전시킨 형태입니다. 최종적인 목표는 아래 그림과 같은 택배를 가져다주는 실내 배송 로봇입니다.
+&lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/assets/img/indoor_2d_nav/Concept.png&quot; align=&quot;center&quot; /&gt;&lt;br /&gt;
+제가 맡은 부분은 로봇 SLAM 및 네비게이션이었기 때문에 정리할 내용은 다음과 같습니다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Cartographer 사용법
+    &lt;ul&gt;
+      &lt;li&gt;설치 및 세팅&lt;/li&gt;
+      &lt;li&gt;파라미터 사용 방법&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Waypoint Navigation
+    &lt;ul&gt;
+      &lt;li&gt;move_base Action 사용 방법&lt;/li&gt;
+      &lt;li&gt;소스코드&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Aruco Marker를 사용한 EKF Localization
+    &lt;ul&gt;
+      &lt;li&gt;Fiducial Package 사용 방법&lt;/li&gt;
+      &lt;li&gt;소스코드&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Refstop</name></author><category term="실내 자율 주행" /><category term="2021 여름 프로젝트" /><summary type="html">지난번에 작성했던 간단한 실내 자율주행 로봇 패키지를 조금 발전시킨 형태입니다. 최종적인 목표는 아래 그림과 같은 택배를 가져다주는 실내 배송 로봇입니다. 제가 맡은 부분은 로봇 SLAM 및 네비게이션이었기 때문에 정리할 내용은 다음과 같습니다. Cartographer 사용법 설치 및 세팅 파라미터 사용 방법 Waypoint Navigation move_base Action 사용 방법 소스코드 Aruco Marker를 사용한 EKF Localization Fiducial Package 사용 방법 소스코드</summary></entry><entry><title type="html">Kalman Filter와 EKF(2) - EKF SLAM</title><link href="https://refstop.github.io/ekf-slam.html" rel="alternate" type="text/html" title="Kalman Filter와 EKF(2) - EKF SLAM" /><published>2021-08-22T21:49:24+09:00</published><updated>2021-08-22T21:49:24+09:00</updated><id>https://refstop.github.io/ekf-slam</id><content type="html" xml:base="https://refstop.github.io/ekf-slam.html">&lt;p&gt;지난 게시글에 이어 EKF를 사용한 SLAM 방법을 정리하겠습니다. SLAM은 로봇의 Localization과 Map을 작성하는 것이 목적으로 실시간 결과로서 로봇의 위치가, 최종적인 결과로서 로봇이 작성한 Map을 얻을 수 있습니다. 여기서 Map은 랜드마크의 위치를 기록한 자료로서, 사람이 생각하는 시각적인 지도가 아닌 랜드마크의 위치만을 기록한 txt 파일이 될 수도 있습니다. 이러한 SLAM의 방법으로는 Kalman Filter, Particle Filter, Graph-based 3가지로 나눌 수 있습니다. 이번 게시글에서는 EKF를 사용한 SLAM을 중심으로 설명하도록 하겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;ekf-for-online-slam&quot;&gt;EKF for online SLAM&lt;/h2&gt;
+&lt;p&gt;&lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/assets/img/kalman filter/ekf_slam_node.png&quot; align=&quot;center&quot; /&gt;&lt;br /&gt;
+위 그림은 EKF를 이용한 online SLAM을 표현한 그림입니다. online은 실시간인 만큼 현재 로봇의 위치 state $x_t$만을 저장하는 방식으로 작동합니다. $m$은 랜드마크의 위치를 의미하고, $u_t$와 $z_t$는 각각 observation과 control input입니다. 각각 measurement model과 motion model과 관련이 있는 항입니다. 이 문제를 식으로 표현하면 다음과 같습니다.&lt;/p&gt;
+&lt;center&gt;$p(x_t, m|z_{1:t}, u_{1:t})$&lt;/center&gt;
+&lt;p&gt;즉, 처음부터 현재 시간 $t$까지의 control input과 observation을 알고 있을 때 현재 로봇의 위치 state $x_t$와 맵을 구성하는 랜드마크인 $m$을 구하는 문제입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;state의-표현방법&quot;&gt;state의 표현방법&lt;/h2&gt;
+&lt;p&gt;이 게시글에서 다루는 로봇의 state 모델은 2D를 기준으로 하고 있습니다. 따라서 이 로봇의 state vector는 위치와 방향을 나타내는 $x$, $y$, $\theta$로 이루어져 있는 3$\times$1 크기의 열 벡터입니다. 그리고 랜드마크의 state vector는 위치만을 나타내는 $x$, $y$로 이루어져 있는 2$\times$1 크기의 열 벡터입니다. 기본적으로, EKF SLAM에서의 state vector $x_t$는 위의 로봇 state vector, 랜드마크 state vector 두 요소로 구성되어 있습니다. 이는 위의 $p(x_t, m|z_{1:t}, u_{1:t})$ 공식에서도 볼 수 있습니다.&lt;/p&gt;
+&lt;center&gt;$\begin{align*} x_t &amp;amp;= (x_R, m)^T \\
+&amp;amp;=(x,y,\theta,m_{1,x},m_{1,y},m_{2,x},m_{2,y},\cdots,m_{n,x},m_{n,y})^T
+\end{align*}$&lt;/center&gt;
+&lt;p&gt;따라서 랜드마크의 개수를 n이라고 할 때, state 벡터의 크기는 3+2n$\times$1이 됩니다. 이렇게 state vector가 정의되었을 때 공분산 행렬은 다음과 같이 정의됩니다.
+&lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/assets/img/kalman filter/ekf_cov.png&quot; align=&quot;center&quot; /&gt;&lt;br /&gt;
+&lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/assets/img/kalman filter/ekf_cov2.png&quot; align=&quot;center&quot; /&gt;&lt;br /&gt;
+&lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/assets/img/kalman filter/ekf_cov3.png&quot; align=&quot;center&quot; /&gt;&lt;br /&gt;
+노란색으로 표시된 부분이 로봇 state에 대한 공분산, 파란색으로 표시된 부분이 랜드마크 state에 대한 공분산입니다. 지난 게시글에서 말했듯이 공분산이란 uncertainty를 나타내는 값으로 이 값이 클수록 불확실한 정보를 나타낸다고 말할 수 있습니다. 랜드마크에도 공분산이 있는 이유는 Mapping을 하는 동안 랜드마크의 위치(state) 역시 불확실한 상태이므로 계속해서 수정되어질 필요가 있기 때문입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;prediction-step&quot;&gt;Prediction Step&lt;/h2&gt;
+&lt;p&gt;&lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/assets/img/kalman filter/ekf_prediction.png&quot; align=&quot;center&quot; /&gt;&lt;br /&gt;
+위 그림은 로봇이 이동하였을 때 prediction step 단계를 보여주고 있습니다. prediction step에서는 control input을 이용하여 예상되는 &lt;strong&gt;로봇의 위치&lt;/strong&gt;를 추정하는 과정입니다. 따라서 로봇의 위치인 $x_R$과 로봇의 위치에 대한 공분산행렬 $\Sigma_{x_R x_R}$, 그리고 $x_R$이 관련되어 있는 $\Sigma_{x_R m_n}$ 공분산 행렬도 update됩니다. 아직 가장 큰 공분산 행렬인 $\Sigma_{mm}$을 건드리지 않았기 때문에 계산량이 크지 않고, 이 계산량은 랜드마크의 개수에 따라서 선형적으로 증가합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;correction-step&quot;&gt;Correction Step&lt;/h2&gt;
+&lt;p&gt;&lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/assets/img/kalman filter/ekf_correction.png&quot; align=&quot;center&quot; /&gt;&lt;br /&gt;
+위 그림은 로봇이 랜드마크를 관측하여 얻은 데이터와 로봇이 알고 있는 랜드마크의 데이터를 비교하여 state를 보정하는 과정입니다. 이 과정에서 실제 observation의 uncertainty가 state에 반영이 되며, 랜드마크의 공분산 행렬에도 영향을 주게 됩니다. 따라서 correction단계에서는 state vector와 공분산 행렬의 모든 영역이 update됩니다. correction 단계의 계산량은 랜드마크의 숫자에 quadratic하게 증가합니다. 왜냐하면 Kalman gain을 구할 때 역행렬을 구하는 과정에서 행렬 크기에 quadratic하게 증가하기 때문입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;ekf-slam-example&quot;&gt;EKF SLAM Example&lt;/h2&gt;
+&lt;h3 id=&quot;example을-위한-가정&quot;&gt;Example을 위한 가정&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;로봇은 2D plane 상에서 움직입니다.&lt;/li&gt;
+  &lt;li&gt;Velocity-based motion model을 사용합니다.&lt;/li&gt;
+  &lt;li&gt;로봇은 랜드마크를 point($x$, $y$)로 인식합니다.&lt;/li&gt;
+  &lt;li&gt;Observation model은 LiDAR와 같은 Range-bearing 센서입니다.&lt;/li&gt;
+  &lt;li&gt;관측된 랜드마크와 알고있는 map상의 랜드마크와의 대응 관계는 알고 있다고 가정합니다.&lt;/li&gt;
+  &lt;li&gt;랜드마크의 개수는 미리 알고 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;초기화&quot;&gt;초기화&lt;/h3&gt;
+&lt;p&gt;SLAM의 가정에서 랜드마크의 개수는 미리 알고 있다고 하였으므로, state vector와 공분산행렬을 고정된 크기로 취급할 수 있습니다. state vector의 크기는 3+2n$\times$1, 공분산행렬의 크기는 3+2n$\times$3+2n입니다. 또한 로봇의 시작 위치는 원점이 되므로 state vector를 3+2n$\times$1 크기의 영행렬로 초기화합니다.&lt;/p&gt;
+&lt;center&gt;$\mu_0=(0,0,0,0,\cdots,0)^T$&lt;/center&gt;
+&lt;p&gt;공분산행렬의 경우 로봇의 state를 (0,0,0)으로 확실히 알고 있고(uncertainty 매우 작음), 랜드마크는 아예 어디 있는지 모른다(uncertainty 매우 큼)고 가정하여, $\Sigma_{x_R x_R}$을 3$\times$3 크기의 영행렬로, $\Sigma_{mm}$을 2n$\times$2n 크기의 무한대 대각행렬로 초기화합니다.&lt;/p&gt;
+&lt;center&gt;$\Sigma_0=\begin{pmatrix}
+0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\ 
+0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\ 
+0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\ 
+0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \infty &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\ 
+0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \infty &amp;amp; \cdots &amp;amp; 0\\ 
+\vdots &amp;amp; \vdots &amp;amp; \vdots &amp;amp; \vdots &amp;amp; \vdots &amp;amp; \vdots &amp;amp; \vdots\\ 
+0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; \infty
+\end{pmatrix}$&lt;/center&gt;
+
+&lt;h3 id=&quot;extended-kalman-filter-ekf-과정&quot;&gt;Extended Kalman Filter (EKF) 과정&lt;/h3&gt;
+&lt;center&gt;
+$\begin{align*} 1&amp;amp;: Extended Kalman filter(\mu_{t-1}, \Sigma_{t-1}, u_t, z_t) \\
+&amp;amp; [Prediction\;step] \\
+2&amp;amp;: \overline{\mu}_t=g(u_t, \mu_{t-1}) \\
+3&amp;amp;: \overline{\Sigma}_t=G_t\Sigma_{t-1}G_t^T+R_t \\
+&amp;amp; [Correction\;step] \\
+4&amp;amp;: K_t=\overline{\Sigma}_tH_t^T(H_t\overline{\Sigma}_tH_t^T+Q_t)^{-1}\\
+5&amp;amp;: \mu_t = \overline{\mu}_t+K_t(z_t-h(\overline{\mu}_t)) \\
+6&amp;amp;: \Sigma_t = (I-K_tH_t)\overline{\Sigma}_t \\ 
+7&amp;amp;: return\;\mu_t, \Sigma_t
+\end{align*}$
+&lt;/center&gt;
+&lt;p&gt;&lt;a href=&quot;https://refstop.github.io/kf-ekf.html&quot;&gt;이전 게시글&lt;/a&gt;에서 설명했었던 EKF 알고리즘에 따르면, 입력 $\mu_t{t-1}, \Sigma_{t-1}, u_t, z_t$ 중에서 $\mu_t{t-1}, \Sigma_{t-1}$을 구했고, $u_t, z_t$에 대한 입력은 각각 motion model, observation model에 관한 항이므로, 센서 입력($u_t$: 엔코더, $z_t$: 카메라, LiDAR)에 의해 결정되므로, prediction 단계와 correction 단계를 설명할 때 더욱 자세히 설명하겠습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;statemean-prediction&quot;&gt;State(Mean) Prediction&lt;/h3&gt;
+&lt;p&gt;로봇의 motion model을 나타낼 때는 주로 다음 2가지를 사용합니다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Odometry-based model&lt;/li&gt;
+  &lt;li&gt;Velocity-based model&lt;br /&gt;
+Odometry-based model은 로봇 또는 자동차의 바퀴에 달린 wheel encoder 센서 데이터를 이용한 모델이며, Velocity-based model은 imu와 같은 관성 센서(선속도, 각속도를 측정해줌)를 이용한 모델입니다. Velocity-based model은 wheel encoder와 같은 Odometry-based model을 사용할 수 없을 때 주로 사용하며, Odometry-based model보다 Velocity-based model이 더 정확한 편입니다.&lt;br /&gt;
+이번 예시에서 사용한 모델은 Velocity-based model입니다. Velocity-based model은 다음과 같습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;$\begin{bmatrix}
+x_t\\ 
+y_t\\ 
+\theta_t
+\end{bmatrix}=\begin{bmatrix}
+x_{t-1}\\ 
+y_{t-1}\\ 
+\theta_{t-1}
+\end{bmatrix}+\begin{bmatrix}
+-\frac{v_t}{w_t}sin \theta_{t-1}+\frac{v_t}{w_t}sin(\theta_{t-1}+w_t \Delta t)\\ 
+-\frac{v_t}{w_t}cos \theta_{t-1}-\frac{v_t}{w_t}cos(\theta_{t-1}+w_t \Delta t)\\ 
+w_t \Delta t
+\end{bmatrix}$&lt;/center&gt;
+&lt;p&gt;위의 motion model은 로봇의 위치에 대한 정보만을 갖고 있는 3$\times$1 크기의 vector입니다. 이 vector를 3+2n$times$1 크기의 state vector $x_t$에 더하기 위해서는 동차 행렬 $F_x$ 행렬을 이용합니다.&lt;/p&gt;
+&lt;center&gt;$F_x = \begin{bmatrix}
+1 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\ 
+0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\ 
+0 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0
+\end{bmatrix}^T$
+&lt;/center&gt;
+&lt;center&gt;$\begin{bmatrix}
+x_t\\ 
+y_t\\ 
+\theta_t
+\end{bmatrix}=\begin{bmatrix}
+x_{t-1}\\ 
+y_{t-1}\\ 
+\theta_{t-1}
+\end{bmatrix}+F_x\begin{bmatrix}
+-\frac{v_t}{w_t}sin \theta_{t-1}+\frac{v_t}{w_t}sin(\theta_{t-1}+w_t \Delta t)\\ 
+-\frac{v_t}{w_t}cos \theta_{t-1}-\frac{v_t}{w_t}cos(\theta_{t-1}+w_t \Delta t)\\ 
+w_t \Delta t
+\end{bmatrix}$&lt;/center&gt;
+&lt;p&gt;위와 같이 $F_x$ 행렬을 이용함으로서 control input에 의한 로봇 위치의 state만 변경되었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;공분산-행렬-prediction&quot;&gt;공분산 행렬 prediction&lt;/h3&gt;
+&lt;p&gt;3번 단계에서 공분산을 구하기 위해선, motion model의 자코비안 행렬인 $G_t$와 process noise인 $R_t$가 필요합니다. 이때 사용한 motion model은 Velocity-based motion model이므로, 이 motion model의 자코비안 행렬은 다음과 같습니다.&lt;/p&gt;
+&lt;center&gt;$G_t^x=\frac{\partial g(u_t,\mu_{t-1})}{\partial x_{t-1}}=\begin{pmatrix}
+1 &amp;amp; 0 &amp;amp; -\frac{v_t}{w_t}cos \theta_{t-1}+\frac{v_t}{w_t}cos(\theta_{t-1}+w_t \Delta t)\\ 
+0 &amp;amp; 1 &amp;amp; -\frac{v_t}{w_t}sin \theta_{t-1}+\frac{v_t}{w_t}sin(\theta_{t-1}+w_t \Delta t)\\ 
+0 &amp;amp; 0 &amp;amp; 1
+\end{pmatrix}$&lt;/center&gt;
+&lt;p&gt;하지만 이때 구한 $G_t^x$는 3$\times$3 행렬이므로, 3+2n$\times$3+2n 크기에 맞춰 주기 위해 다음과 같이 행렬을 수정합니다.&lt;/p&gt;
+&lt;center&gt;$G_t=\begin{pmatrix}
+G_t^x &amp;amp; 0\\ 
+0 &amp;amp; I\\ 
+\end{pmatrix}$&lt;/center&gt;
+&lt;p&gt;또한 process noise $R_t$은 다음과 같이 정의됩니다.&lt;/p&gt;
+&lt;center&gt;$R_t=V_tM_tV_t^T$&lt;/center&gt;
+&lt;p&gt;여기서 $V_t$는 $g(u_t,\mu_{t-1})$을 $u_t$로 편미분한 값입니다. Velocity-based model에서 $u_t$는 $(v_t, w_t)$로 이루어져 있으므로, 미분한 값은 다음과 같습니다.&lt;/p&gt;
+&lt;center&gt;$V_t=\frac{\partial g(u_t,\mu_{t-1})}{\partial u_t}=\begin{pmatrix}
+\frac{-sin\theta_{t-1}+sin(\theta_{t-1}+w_t\Delta t)}{w_t} &amp;amp; \frac{v_t(sin\theta_{t-1}-sin(\theta_{t-1}+w_t\Delta t))}{w_t^2}+\frac{v_t\Delta tcos(\theta_{t-1}+w_t\Delta t)}{w_t}\\ 
+\frac{cos\theta_{t-1}-cos(\theta_{t-1}+w_t\Delta t)}{w_t} &amp;amp; \frac{v_t(-cos\theta_{t-1}+cos(\theta_{t-1}+w_t\Delta t))}{w_t^2}+\frac{v_t\Delta tsin(\theta_{t-1}+w_t\Delta t)}{w_t}\\ 
+0 &amp;amp; 1
+\end{pmatrix}$&lt;/center&gt;
+&lt;p&gt;결국 $R_t$의 크기 역시 3$\times$3이므로, 동차 행렬 $F_x$을 곱하여 크기를 수정하여 3번 단계의 연산을 수행합니다.&lt;/p&gt;
+&lt;center&gt;$\overline{\Sigma}_t=G_t\Sigma_{t-1}G_t^T+F_xR_tF_x^T$&lt;/center&gt;
+
+&lt;h3 id=&quot;statemean-correction&quot;&gt;State(Mean) Correction&lt;/h3&gt;
+&lt;p&gt;EKF SLAM의 correction 단계의 과정은 다음과 같습니다.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;$c_t^i=j$는 $t$시점에서 $i$번째로 측정된 랜드마크이며 전체 랜드마크에서 $j$번째 index를 갖습니다.&lt;/li&gt;
+  &lt;li&gt;만약 랜드마크가 이전에 관측되지 않았던 랜드마크이면 현재 로봇의 위치를 기반으로 초기화합니다. 즉 랜드마크 initialization입니다.&lt;/li&gt;
+  &lt;li&gt;예상되는 observation을 계산합니다.&lt;/li&gt;
+  &lt;li&gt;비선형 함수 $h(x_t)$의 자코비안 행렬을 계산합니다.&lt;/li&gt;
+  &lt;li&gt;Kalman gain을 계산하고 correction process를 진행합니다.
+이 예제에서는 LiDAR 센서와 같은 Range-bearing observation 센서를 기반으로 합니다. Range-bearing observation model은 다음과 같습니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;center&gt;$z_t^i=\begin{pmatrix}
+r_t^i\\
+\phi_t^i
+\end{pmatrix}$&lt;/center&gt;
+&lt;p&gt;$r_t^i$는 로봇으로부터 랜드마크의 거리, $\phi_t^i$는 로봇의 헤딩 각도로부터 랜드마크까지의 방향을 의미합니다. 센서로부터 랜드마크의 데이터가 획득되었으나 이전에 관측되지 않았던 랜드마크라면 아래 식을 통해 랜드마크의 global 위치를 계산하여 state에 등록합니다.&lt;/p&gt;
+&lt;center&gt;$\begin{pmatrix}
+\overline{\mu}_{j,x}\\
+\overline{\mu}_{j,y}
+\end{pmatrix}=\begin{pmatrix}
+\overline{\mu}_{t,x}\\
+\overline{\mu}_{t,y}
+\end{pmatrix}+\begin{pmatrix}
+r_t^icos(\phi_t^i+\overline{\mu}_{t,\theta})\\
+r_t^isin(\phi_t^i+\overline{\mu}_{t,\theta})
+\end{pmatrix}$&lt;/center&gt;
+
+&lt;p&gt;$\overline{\mu}&lt;em&gt;j$는 $j$번째 랜드마크의 위치이고 위 state vector에서 $m_j$항으로 나타낼 수 있습니다. $\overline{\mu}&lt;/em&gt;{t,x}$, $\overline{\mu}&lt;em&gt;{t,y}$, $\overline{\mu}&lt;/em&gt;{t,\theta}$는 각각 현재 시점에서 로봇의 $x$, $y$, $\theta$(heading)를 의미합니다. Range-bearing observation model은 다음과 같이 계산합니다.&lt;/p&gt;
+
+&lt;center&gt;$\delta=\begin{pmatrix}
+\delta_x \\
+\delta_y
+\end{pmatrix}=\begin{pmatrix}
+\overline{\mu}_{j,x} - \overline{\mu}_{t,x} \\
+\overline{\mu}_{j,y} - \overline{\mu}_{t,y}
+\end{pmatrix}$&lt;/center&gt;
+&lt;center&gt;$q=\delta^T\delta$&lt;/center&gt;
+&lt;center&gt;$\hat{z}_t^i=\begin{pmatrix}
+\sqrt{q}\\
+arctan(\frac{\delta_y}{\delta_x}-\overline{\mu}_{t,\theta}
+\end{pmatrix}=h(\overline{\mu}_t)$&lt;/center&gt;
+&lt;p&gt;$\delta$는 로봇의 위치와 랜드마크의 위치 차를 의미하며, $\sqrt{q}$는 로봇과 랜드마크의 거리를 의미합니다. 따라서 $h(\overline{\mu}&lt;em&gt;t)$는 비선형 observation 모델이며, 현재 로봇의 위치와 랜드마크의 거리를 알고 있을 때 이 observation 모델을 이용하여 예상되는 센서의 observation을 계산할 수 있습니다. 여기서 $\overline{\mu}_t$는 로봇의 현재 위치정보($\overline{\mu}&lt;/em&gt;{t,x}$, $\overline{\mu}&lt;em&gt;{t,y}$, $\overline{\mu}&lt;/em&gt;{t,\theta}$)와 랜드마크의 위치 ($\overline{\mu}&lt;em&gt;{j,x}$, $\overline{\mu}&lt;/em&gt;{j,y}$)를 포함하고 있는 5$\times$1크기의 vector입니다.&lt;/p&gt;
+
+&lt;p&gt;이 observation model의 선형화 과정을 통해 $h(\overline{\mu}_t)$의 자코비안 행렬을 구하면 다음과 같습니다.&lt;/p&gt;
+&lt;center&gt;$^{low}\textrm{H}_t^i=\frac{\partial h(\overline{\mu}_t)}{\partial \overline{\mu}_t}=\begin{pmatrix}
+\frac{\partial \sqrt{q}}{\partial \overline{\mu}_{t,x}} &amp;amp; \frac{\partial \sqrt{q}}{\partial \overline{\mu}_{t,y}} &amp;amp; \frac{\partial \sqrt{q}}{\partial \overline{\mu}_{t,\theta}} &amp;amp; \frac{\partial \sqrt{q}}{\partial \overline{\mu}_{j,x}} &amp;amp; \frac{\partial \sqrt{q}}{\partial \overline{\mu}_{j,y}} \\
+\frac{\partial arctan(\frac{\delta_y}{\delta_x}-\overline{\mu}_{t,\theta})}{\partial \overline{\mu}_{t,x}} &amp;amp; \frac{\partial arctan(\frac{\delta_y}{\delta_x}-\overline{\mu}_{t,\theta})}{\partial \overline{\mu}_{t,y}} &amp;amp; \frac{\partial arctan(\frac{\delta_y}{\delta_x}-\overline{\mu}_{t,\theta})}{\partial \overline{\mu}_{t,\theta}} &amp;amp; \frac{\partial arctan(\frac{\delta_y}{\delta_x}-\overline{\mu}_{t,\theta})}{\partial \overline{\mu}_{j,x}} &amp;amp; \frac{\partial arctan(\frac{\delta_y}{\delta_x}-\overline{\mu}_{t,\theta})}{\partial \overline{\mu}_{j,y}}
+\end{pmatrix}=\frac{1}{q}\begin{pmatrix}
+-\sqrt{q}\delta_x &amp;amp; -\sqrt{q}\delta_y &amp;amp; 0 &amp;amp; \sqrt{q}\delta_x &amp;amp; \sqrt{q}\delta_y \\
+\delta_y &amp;amp; \delta_x &amp;amp; -q &amp;amp; -\delta_y &amp;amp; \delta_x
+\end{pmatrix}$&lt;/center&gt;
+
+&lt;p&gt;$^{low}\textrm{H}&lt;em&gt;t^i$에서 low는 아직 크기를 조정하기 전의 행렬이라는 의미로 사용되었습니다. 자코비안 행렬 $^{low}\textrm{H}_t^i$의 크기는 2$\times$5이므로 EKF correction의 update과정에 적용시키기 위해서 $F&lt;/em&gt;{x,j}$ 행렬을 이용하여 행렬의 크기를 조절합니다.&lt;/p&gt;
+
+&lt;center&gt;$H_t^i=^{low}\textrm{H}_t^iF_{x,j}$&lt;/center&gt;
+&lt;center&gt;$F_{x,j}=\begin{pmatrix}
+1 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\ 
+0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\ 
+0 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\ 
+0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\ 
+0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0
+\end{pmatrix}$&lt;/center&gt;
+
+&lt;p&gt;$F_{x,j}$ 행렬에서 1~3행은 로봇의 위치에 대한 자코비안 term을, 4~5 행은 랜드마크에 대한 자코비안 term을 원하는 위치에 입력하기 위함이여, 랜드마크의 index가 $j$인 경우 4~5행의 2$\times$2 단위행렬은 3+2(j-1)열 다음에 위치하게 됩니다. $F_{x,j}$ 행렬이 곱해진 $H_t^i$의 크기는 2$\times$3+2n입니다. 이 크기가 조절된 $H_t^i$행렬을 이용하여 칼만 게인을 구하고(4번 과정) EKF의 5, 6번 과정을 통해 최종 state와 공분산 행렬을 계산할 수 있습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://jinyongjeong.github.io/2017/02/14/lec02_motion_observation_model/&quot;&gt;Jinyoung - [SLAM] Motion &amp;amp; Observation model&lt;/a&gt;
+&lt;a href=&quot;http://jinyongjeong.github.io/2017/02/16/lec05_EKF_SLAM/&quot;&gt;Jinyoung - [SLAM] Extended Kalman Filter(EKF) SLAM&lt;/a&gt;&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Kalman Filter" /><category term="EKF" /><summary type="html">지난 게시글에 이어 EKF를 사용한 SLAM 방법을 정리하겠습니다. SLAM은 로봇의 Localization과 Map을 작성하는 것이 목적으로 실시간 결과로서 로봇의 위치가, 최종적인 결과로서 로봇이 작성한 Map을 얻을 수 있습니다. 여기서 Map은 랜드마크의 위치를 기록한 자료로서, 사람이 생각하는 시각적인 지도가 아닌 랜드마크의 위치만을 기록한 txt 파일이 될 수도 있습니다. 이러한 SLAM의 방법으로는 Kalman Filter, Particle Filter, Graph-based 3가지로 나눌 수 있습니다. 이번 게시글에서는 EKF를 사용한 SLAM을 중심으로 설명하도록 하겠습니다.</summary></entry><entry><title type="html">Kalman Filter와 EKF(1) - 선형 KF와 EKF</title><link href="https://refstop.github.io/kf-ekf.html" rel="alternate" type="text/html" title="Kalman Filter와 EKF(1) - 선형 KF와 EKF" /><published>2021-08-05T11:36:24+09:00</published><updated>2021-08-05T11:36:24+09:00</updated><id>https://refstop.github.io/kf-ekf</id><content type="html" xml:base="https://refstop.github.io/kf-ekf.html">&lt;p&gt;이 게시글에서는 SLAM에서의 KF와 EKF를 기준으로 설명할 예정입니다.&lt;/p&gt;
 &lt;h2 id=&quot;kalman-filter란&quot;&gt;Kalman Filter란?&lt;/h2&gt;
 &lt;p&gt;칼만 필터는 현재 상태(state) $\mu$와 공분산(covariance) $\Sigma$를 기반으로 다음 상태를 추정하는 방법입니다. $\mu$와 $\Sigma$만으로 나타낼 수 있는 Gaussian 분포를 따르며, 지난 게시글의 &lt;a href=&quot;https://refstop.github.io/uda-loc-markov.html&quot;&gt;Bayesian Filter&lt;/a&gt;와도 관계가 있습니다. 선형 칼만 필터를 설명하기 전에 가우시안 분포에 대해서 조금 설명하도록 하겠습니다.&lt;/p&gt;
 
@@ -1169,241 +1390,4 @@ String value is: earth
 &lt;p&gt;이번 강의에서 배운 뉴럴 네트워크는 여기까지입니다. 다음에 정리할 내용은 Tensorflow의 사용에 대해 정리해 보겠습니다.&lt;/p&gt;
 
 &lt;h1 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h1&gt;
-&lt;p&gt;Udacity Self-driving car nanodegree - Neural Network(링크 공유 불가능)&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Udacity" /><category term="Deep Learning" /><summary type="html">지난 게시글의 복습 지난 게시글들에서는 뉴럴 네트워크를 활성화 함수에 따라 이산 모델, 연속 모델로 나누어서 살펴보았습니다. 뉴럴 네트워크의 최종 목적은 정확한 예측 모델, 선형 함수를 만드는 것입니다. 이 선형 함수를 이산 모델에서는 Step Function, 연속 모델에서는 Sigmoid 또는 Softmax 함수에 대입합니다. 그 후 이산 모델에서는 퍼셉트론 알고리즘으로 가중치를 조절, 연속 모델에서는 Cross-Entropy 오차함수와 경사하강법을 사용하여 가중치를 조절합니다. 그 결과, 뉴럴 네트워크의 예측 모델인 선형 함수를 도출할 수 있습니다.</summary></entry><entry><title type="html">[Udacity] Deep Learning (2) - Nerual Network 연속 모델</title><link href="https://refstop.github.io/uda-dl-nncm.html" rel="alternate" type="text/html" title="[Udacity] Deep Learning (2) - Nerual Network 연속 모델" /><published>2021-02-06T13:35:23+09:00</published><updated>2021-02-06T13:35:23+09:00</updated><id>https://refstop.github.io/uda-dl-nncm</id><content type="html" xml:base="https://refstop.github.io/uda-dl-nncm.html">&lt;h1 id=&quot;이산-모델에서-연속-모델로&quot;&gt;이산 모델에서 연속 모델로&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://refstop.github.io/posts/uda-dl-nndm/&quot;&gt;저번 게시글&lt;/a&gt;에선 로지스틱 회귀의 이산 모델에 대해서 정리했습니다. 하지만 경사 하강법을 사용하기 위해서는 연속 모델을 사용해야 합니다. 이산 모델과 비교하여 연속 모델에서 추가된 과정은 다음과 같습니다.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Sigmoid 함수 (확률함수)&lt;/li&gt;
-  &lt;li&gt;Maximum Likelihood Estimation (최대우도법)&lt;/li&gt;
-  &lt;li&gt;Cross-Entropy&lt;/li&gt;
-  &lt;li&gt;Gradient Descent (경사 하강법)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;경사 하강법을 사용하기 위해서는 Cross-Entropy가 연속이어야 하고, Cross-Entropy에서 사용되는 최대우도법을 위해서는 확률 개념이 도입되어야 합니다. 이에 따라 선형 모델에 대한 확률을 나타낸 것이 바로 Sigmoid 함수입니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;1-sigmoid-함수&quot;&gt;1. Sigmoid 함수&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/img/deeplearning/sigmoid.png&quot; alt=&quot;sigmoid&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;br /&gt;
-저번 게시글에서도 언급했던 시그모이드 함수입니다. 활성화 함수로 사용된다는 점에서 Step Function과 같은 포지션의 함수입니다. 하지만 Step Function과는 다르게 $x=0$을 기준으로 0과 1로 딱딱 맞게 나눠지지는 않습니다. 하지만 $x$의 절댓값이 약 5인 지점까지는 시그모이드 함수의 출력이 0 또는 1이 되지 않습니다. 이러한 점에 주목해 &lt;strong&gt;시그모이드 함수를 확률함수이자 활성화 함수&lt;/strong&gt;로 사용합니다. 이 함수는 로지스틱 회귀에 활성화 함수로서 사용하기 때문에 로지스틱 함수라고도 불립니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;2-maximum-likelihood-estimation-최대우도법&quot;&gt;2. Maximum Likelihood Estimation (최대우도법)&lt;/h1&gt;
-&lt;center&gt;$\large{
-P(x|\theta)=\prod_{k=1}^{n}P(x_k|\theta)\;\;\;\;\;\;\;P(x|\theta):\;예측이\;맞을\;확률
-}$&lt;/center&gt;
-&lt;p&gt;그 다음 과정은 시그모이드 함수에서 구한 확률들에 최대우도법을 적용하여 가장 좋은 모델, 즉 가장 확률이 높은 모델을 선정합니다. 최대우도법은 &lt;strong&gt;각 데이터 샘플에서 예측이 실제와 같을 확률을 계산하여 모두 곱한 것&lt;/strong&gt;입니다. 계산된 확률을 더해주지 않고 곱해주는 것은 모든 데이터들의 추출이 &lt;strong&gt;독립적으로 동시에 일어나는 사건&lt;/strong&gt;이기 때문입니다. 따라서 최대우도법 계산 결과값이 가장 높은 것을 가장 정확한 예측으로 봅니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-ln(P(x|\theta))=\sum_{k=1}^{n}ln(P(x_k|\theta))
-}$&lt;/center&gt;
-&lt;p&gt;하지만 이 경우 하나의 확률만 바뀌어도 결과값이 심하게 바뀌므로, 곱셈을 덧셈의 형태로 표현해 줄 수 있는 로그함수를 취합니다. 덧셈으로 바꾸면 값 하나가 바뀌어도 결과값에 큰 영향이 가지 않습니다. 이 결과는 Cross-Entropy 오차함수를 만드는데 사용됩니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;3-cross-entropy-오차함수&quot;&gt;3. Cross-Entropy 오차함수&lt;/h1&gt;
-&lt;p&gt;Cross-Entropy는 오차함수로 출력값이 작을수록 모델이 정확하다는 의미를 나타냅니다. 지난 과정에서 log likelihood 함수에 1보다 작은 값인 확률을 대입하기 때문에 결과가 항상 음수입니다. 따라서 비교의 용이를 위해 (-)부호를 취해 양수로 만들어 줍니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-MLE=\sum_{k=1}^{n}ln(p_i)\rightarrow-\sum_{k=1}^{n}ln(p_i)
-}$&lt;/center&gt;
-&lt;p&gt;그 다음 이진적으로, 예를 들어 선물이 있다/없다, 샘플이 제대로 분류 되었다/되지 않았다를 판단할 때는 한쪽의 확률을 $p_i$, 다른 쪽의 확률을 $1-p_i$로 둡니다. 그리고 확률이 $p_i$일 때를 $y_i$=1, $1-p_i$일때를 $y_i$=0으로 두면 다음과 같은 식을 세울 수 있습니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-Cross-Entropy = -\sum_{k=1}^{n}\left\{\begin{matrix}
-ln(p_i)\;\;\;\;\;\;if\;y_i=1\\ 
-ln(1-p_i)\;\;\;\;if\;y_i=0
-\end{matrix}\right.
-}$&lt;/center&gt;
-&lt;p&gt;이때 $y_i$는 실제값으로 볼 수 있는데, $p(x=1)$, $p(x=0)$의 확률로 볼 수 있습니다. 이처럼 확률이 0 또는 1만으로 결과가 나오는 확률변수를 베르누이 확률변수라고 합니다. 위의 공식을 한줄로 표현하면 다음과 같은 식으로 나타낼 수 있습니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-\begin{align*}
-Cross-Entropy(y_i, p_i) &amp;amp;= -\sum_{k=1}^{n}\left\{\begin{matrix}
-ln(p_i)\;\;\;\;\;\;if\;y_i=1\\ 
-ln(1-p_i)\;\;\;\;if\;y_i=0
-\end{matrix}\right. \\
-&amp;amp;=-\sum_{k=1}^{n}y_iln(p_i)+(1-y_i)ln(1-p_i)
-\end{align*}
-}$&lt;/center&gt;
-&lt;p&gt;이 공식에서 Cross-Entropy의 이름이 왜 교차 엔트로피인지를 볼 수 있습니다. $y_i$와 $p_i$ 두 확률이 교차(Cross)하는 계산에 의해 Entropy, 즉 정보량이 정해진다고 하여 Cross-Entropy인 것입니다. 즉 두 확률을 기반으로 구한 정보량이 Cross-Entropy인 것입니다. 결과값을 관찰하면 값이 작을수록, 즉 관계성이 옅을수록 낮은 값이 나옵니다. 다음의 예시가 이해를 도와줄 것입니다.&lt;br /&gt;
-&lt;img src=&quot;/assets/img/deeplearning/ce_ex.png&quot; alt=&quot;ce_ex&quot; width=&quot;90%&quot; height=&quot;90%&quot; /&gt;&lt;br /&gt;
-위의 예시는 3개의 문 뒤에 선물이 있을 확률을 나타낸 것입니다. n번째 문 뒤에 선물이 있을 확률은 각각 $p_n$입니다. 그리고 실제값 $y_i$는 선물이 있을 때 1, 없을 때 0을 의미합니다. 이때 일어날 확률이 가장 높은 값, 즉 예측값은 (0.8 0.7 0.9)이고 이때의 실제값은 (1 1 0)입니다. 따라서 이 확률과 실제값을 Cross-Entropy 오차함수에 대입하면 위의 그림에서 볼 수 있듯 0.69가 나옵니다. 반대로 가장 일어날 확률이 낮은 값, 즉 예측값에서 가장 먼 값을 Cross-Entropy 오차함수에 대입하면 5.12가 나옵니다. 예측값에서 작은 값을 출력되고, 예측값에서 먼 값일수록 큰 값을 출력하는 특징을 이용하여 Cross-Entropy를 오차함수로 사용합니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;4-gradient-descent&quot;&gt;4. Gradient Descent&lt;/h1&gt;
-&lt;p&gt;오차가 큰지 작은지를 구했다면 구한 오차를 기반으로 가중치와 바이어스를 보정합니다. 여기서 경사 하강법을 사용하는데, 이는 적절한 가중치와 바이어스를 찾는 방법입니다. 높은 산에서 경사를 따라 내려오듯이 오차의 미분값을 따라 가중치를 조정합니다. 이산 모델에서의 퍼셉트론 알고리즘과 비슷한 포지션에 있습니다. 다음 이미지는 평균 제곱 오차(이하 MSE)의 경사하강법을 나타낸 그림입니다. 가로축은 가중치 $W$, 세로축은 오차 $Error$입니다.
-&lt;img src=&quot;/assets/img/deeplearning/msegd.gif&quot; alt=&quot;msegd&quot; width=&quot;90%&quot; height=&quot;90%&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;$\large{
-E(W)=\frac{1}{2m}\sum_{k=1}^{m}(y_i-\sigma(Wx+b))^2
-}$&lt;/center&gt;
-&lt;p&gt;MSE 함수는 오차함수로서 가중치와 오차의 관계를 2차 방정식으로 표현할 수 있습니다. 따라서 그림과 같은 형태의 그래프가 나오게 됩니다. 적절한 가중치를 찾기 위해서는 이 오차가 가중치에 끼치는 영향을 찾아 가중치에 더하거나 빼서 가중치를 보정해 줍니다. 그 과정은 다음과 같습니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-\hat{y}=\sigma(Wx+b)
-}$&lt;/center&gt;
-&lt;center&gt;$\large{
-\hat{y}=\sigma(w_1x_1+w_2x_2+\cdots+w_nx_n+b)
-}$&lt;/center&gt;
-&lt;p&gt;선형 모델을 활성화 함수에 넣은 모습입니다. 출력값은 확률입니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-\triangledown E=(\frac{\partial E}{\partial w_1},\frac{\partial E}{\partial w_2},\cdots,\frac{\partial E}{\partial w_n})
-}$&lt;/center&gt;
-&lt;p&gt;이때 오차함수는 MSE, Cross-Entropy 등을 사용합니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-\alpha=0.1\;\;(학습률)
-}$&lt;/center&gt;
-&lt;p&gt;오차함수의 미분값을 얼마나 반영할 것인지 정합니다. 학습률이 너무 작으면 오차 최솟값까지 가는데 시간이 너무 오래 걸릴 수 있고, 학습률이 너무 크면 가중치가 오차 최솟값이 되는 지점을 넘어가버려 오차 최솟값에 수렴하지 못할 수 있습니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-w_i' \leftarrow w_i - \alpha\frac{\partial E}{\partial w_i}
-}$&lt;/center&gt;
-&lt;center&gt;$\large{
-b_i' \leftarrow b_i-\alpha\frac{\partial E}{\partial b}
-}$&lt;/center&gt;
-&lt;p&gt;가중치와 바이어스에 오차함수의 미분에 비례한 값을 조정해 줍니다. 미분값이 작아질수록 가중치 변화가 작아지고, 0이 되면 최적 가중치가 됩니다. 모든 샘플에 대해 이 과정을 수행하기 때문에 이 새로운 가중치로 다시 경사 하강법을 수행합니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-\hat{y}=\sigma(W'x+b')
-}$&lt;/center&gt;
-
-&lt;h2 id=&quot;cross-entropy의-w-error-그래프&quot;&gt;Cross-Entropy의 W-Error 그래프&lt;/h2&gt;
-&lt;p&gt;사실 경사하강법에서 가장 문제가 되는 부분은 오차함수의 미분을 구하는 부분입니다. 그 이외에는 간단하기에 Cross-Entropy 오차함수의 미분을 구하는 방법을 알아보겠습니다. 먼저 시그모이드 함수의 미분을 구합니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-z=Wx+b
-}$&lt;/center&gt;
-&lt;center&gt;$\large{
-\hat{y}=\sigma(z)\;(Sigmoid)
-}$&lt;/center&gt;
-&lt;center&gt;$\large{
-\frac{\partial \sigma}{\partial z}=\sigma(z)(1-\sigma(z))
-}$&lt;/center&gt;
-&lt;p&gt;시그모이드 함수의 미분은 간단하게 $\sigma(z)(1-\sigma(z))$로 표현할 수 있습니다. 다시 Cross-Entropy 오차함수를 참고하면 다음과 같습니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-E(W)=-\sum_{k=1}^{n}y_iln(\sigma(z))+(1-y_i)ln(1-\sigma(z))
-}$&lt;/center&gt;
-&lt;p&gt;미분하기 두려워지게 생겼지만 괜찮습니다. 연쇄법칙을 적용하여 $\frac{\partial E}{\partial W}$를 풀어줍시다.&lt;/p&gt;
-&lt;center&gt;$\large{
-\begin{align*}
-\frac{\partial E}{\partial W}&amp;amp;=\frac{\partial E}{\partial \sigma}\frac{\partial \sigma}{\partial z}\frac{\partial z}{\partial W}\;\;\;(연쇄법칙) \\
-&amp;amp;=(\frac{1-y_i}{1-\sigma}-\frac{y_i}{\sigma})(\sigma(1-\sigma))X \\
-&amp;amp;=(\sigma(z)-y_i)X \\
-&amp;amp;=(\hat{y}-y_i)X
-\end{align*}
-}$&lt;/center&gt;
-&lt;p&gt;미분하기 어렵게 생겼던 것 치고는 간단한 형태의 미분값이 나왔습니다. 이 값을 다음 식에 대입하여 새로운 가중치와 바이어스를 찾습니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-w_i'\leftarrow w_i-\alpha \frac{\partial E}{\partial W}
-}$&lt;/center&gt;
-&lt;center&gt;$\large{
-w_i'\leftarrow w_i+\alpha (y_i-\hat{y})x_i
-}$&lt;/center&gt;
-&lt;center&gt;$\large{
-b_i'\leftarrow b_i-\alpha \frac{\partial E}{\partial b}
-}$&lt;/center&gt;
-&lt;center&gt;$\large{
-b_i'\leftarrow b_i+\alpha (y_i-\hat{y})
-}$&lt;/center&gt;
-&lt;p&gt;생각보다 간결한 결과가 나왔습니다. 경사하강법은 이 과정을 모든 샘플에 대해 반복하여 가중치와 바이어스를 조정합니다. MSE의 그래프는 Cross-Entropy의 W-Error 그래프에 비해 직관적이기에 이해하기 쉽지만, 실제 Cross-Entropy 오차함수는 무시무시하게 생긴 경우가 많습니다. 실제 Cross-Entropy의 함수는 아니지만, 다음 그림처럼 아주 복잡한 함수를 예시로 들어 봅시다.
-&lt;img src=&quot;/assets/img/deeplearning/ce_graph_ex.png&quot; alt=&quot;ce_graph_ex&quot; width=&quot;90%&quot; height=&quot;90%&quot; /&gt;&lt;br /&gt;
-경사 하강법을 사용하는 데는 두 가지 문제가 있습니다.&lt;br /&gt;
-첫번째는 그림에서 볼 수 있는 전역 최소값과 지역 최소값이 존재한다는 점입니다. 우리의 목표는 당연히 오차가 가장 낮아지는 전역 최솟값을 찾는 것입니다. 하지만 경사 하강법에는 지역 최소값에 대한 면역요소가 없기에, 지역 최소값에 속아넘어갈 수 있습니다. 이 문제를 해결하기 위해 고안된 것이 &lt;strong&gt;모멘텀(Momentum)&lt;/strong&gt;이란 방법입니다. 기존에 업데이트했던 미분값의 일정 비율을 남겨서 현재의 미분값에 더하여 가중치를 업데이트 하는 방식입니다.&lt;br /&gt;
-두번째 문제는 모든 데이터를 계산하기에 수고가 많이 든다는 점입니다. 퍼셉트론 알고리즘과 다르게 맞는 샘플도, 틀린 샘플도 모두 검사하기에 계산량이 매우 많습니다. 이 문제를 해결하는 방법은 무작위로 샘플을 뽑아서 가중치 업데이트를 수행하는 &lt;strong&gt;확률적 경사 하강법(Stochastic Gradient Descent, SGD)&lt;/strong&gt;입니다. 완전히 정확한 결과를 얻는 것은 아니지만, 무작위 추출된 샘플이란 점에서 평균에 가까운 결과를 얻을 수 있고, 무엇보다 시간을 많이 단축시킬 수 있어 사용하는 방법입니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;perceptron-algorithm-vs-gradient-descent&quot;&gt;Perceptron Algorithm VS Gradient Descent&lt;/h2&gt;
-&lt;p&gt;퍼셉트론 알고리즘과 경사 하강법의 차이는 바로 &lt;strong&gt;샘플의 검사 범위&lt;/strong&gt;입니다. 퍼셉트론 알고리즘은 잘못 분류된 샘플만 검사하고, 경사 하강법은 모든 샘플을 검사합니다. 따라서 모델은 경사 하강법이 더 정확하게 만들지만 수행하는데 걸리는 시간은 퍼셉트론 알고리즘이 더 짧습니다. 공학은 역시 Trade-off입니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;softmax와-one-hot-encoding&quot;&gt;Softmax와 One-Hot Encoding&lt;/h1&gt;
-&lt;center&gt;$\large{
-Softmax(z)=\frac{z_i}{\sum_{k=1}^{n}z_i}\;\;\;\rightarrow\;\;\;\frac{e^{z_i}}{\sum_{k=1}^{n}e^{z_i}}
-}$&lt;/center&gt;
-&lt;p&gt;소프트맥스는 시그모이드, step function과 같은 활성화 함수입니다. 3개 이상의 범주에 대한 확률을 나타낼때 사용합니다. 선형 모델의 각 결과값$(z_i)$을 모든 결과값의 합으로 나누어 표현합니다. 이는 결과값인 확률들의 총합을 1로 만들기 위함입니다. 하지만 이때 선형 모델의 결과값이 음수인 원소가 있을 때, 분모가 0이거나 0 이하로 내려가는 문제가 발생합니다. 소프트맥스는 활성화 함수로서 출력이 확률, 즉 양수로 나와야 하기 때문에 이 문제를 해결하기 위해 exp 함수를 사용합니다. exp 함수를 사용하면 선형 모델의 결과값의 합이 음수로 나오거나 분모가 0이 되는 경우를 막을 수 있습니다. 다음 그림으로 예시를 들겠습니다.
-&lt;img src=&quot;/assets/img/deeplearning/softmax_ex.png&quot; alt=&quot;softmax_ex&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;br /&gt;
-선형 모델의 결과가 (2.0 1.0 0.1)일 때, 결과값은 (0.7 0.2 0.1)이 나옵니다. 실제 결과값은 (0.6590011388859679, 0.2424329707047139, 0.09856589040931818)이지만, 소수점 둘째 자리에서 반올림한 값으로 생각합시다. 선형 모델의 결과가 높을수록 높은 확률이 출력되고, Softmax 함수의 출력값을 합하면 1이 되는 특징을 갖고 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/deeplearning/onehotex.png&quot; alt=&quot;onehotex&quot; width=&quot;90%&quot; height=&quot;90%&quot; /&gt;&lt;br /&gt;
-원 핫 인코딩은 정답만을 1로 만드는 데이터 전처리 방식입니다. 컴퓨터가 데이터를 학습하기 전에 데이터를 가공해주는 것입니다. 정답에 1을 부여하고 정답이 아닌 항에는 0을 부여합니다. 예를 들어 위의 표에서 [1, 0, 0] 벡터는 사과를 의미합니다. [0, 1, 0] 벡터는 치킨을 의미합니다. 이 방식으로 크로스 엔트로피에 들어갈 실제값 데이터를 만듭니다. 다음 그림을 통해 예시를 살펴보겠습니다.
-&lt;img src=&quot;/assets/img/deeplearning/onehotex2.png&quot; alt=&quot;onehotex2&quot; width=&quot;90%&quot; height=&quot;90%&quot; /&gt;&lt;br /&gt;
-Softmax 결과값과 실제값 데이터를 전처리한 One-Hot Encoding 값을 비교합니다. 이 차이를 가지고 오차함수로 사용합니다. 이 경우, 그냥 |One-Hot Encoding 값 - Softmax 결과값|을 하여 오차를 구할 수도 있습니다. 이 방법을 사용하여 평균을 구한 것이 위에 잠깐 나왔던 MSE(평균 제곱 오차) 함수입니다. 하지만 여기서는 Cross-Entropy를 사용합니다. 
-&lt;img src=&quot;/assets/img/deeplearning/cesmohe_ex.png&quot; alt=&quot;cesmohe_ex&quot; width=&quot;90%&quot; height=&quot;90%&quot; /&gt;&lt;br /&gt;
-Softmax 함수의 결과값인 $S(y)$와 One-Hot Encoding의 결과인 라벨 $L$을 Cross-Entropy 오차함수에 대입하여 오차를 구합니다. 그러고 나면 위에서 설명했듯 Cross-Entropy는 두 확률간의 관계를 나타내는 방식으로 오차를 산출합니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;마무리&quot;&gt;마무리&lt;/h1&gt;
-&lt;p&gt;다음 게시글은 NN의 비선형 모델에 대해 정리하겠습니다. 너무 길어 3편으로 나누어서 정리했네요. 한 강의에 이걸 다 넣을줄이야… 아무튼 다음 게시글에서 NN을 마무리하겠습니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;질문&quot;&gt;질문&lt;/h1&gt;
-&lt;ol&gt;
-  &lt;li&gt;이산 모델에서 연속 모델로 변경하는 이유를 잘 모르겠습니다. 정리한 게 맞나요?&lt;/li&gt;
-  &lt;li&gt;최대우도법에서 초기 확률을 부여하는 법?&lt;/li&gt;
-  &lt;li&gt;MSE보다 Cross-Entropy를 사용하는 이유?&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h1&gt;
-&lt;p&gt;Udacity Self-driving car nanodegree - Neural Network(링크 공유 불가능)&lt;br /&gt;
-&lt;a href=&quot;https://ratsgo.github.io/machine%20learning/2017/04/02/logistic/&quot;&gt;ratsgo’s blog - 로지스틱 회귀&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://angeloyeo.github.io/2020/07/17/MLE.html&quot;&gt;공돌이의 수학정리노트 - 최대우도법(MLE)&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://john-analyst.medium.com/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%B2%98%EB%A6%AC-%EB%A0%88%EC%9D%B4%EB%B8%94-%EC%9D%B8%EC%BD%94%EB%94%A9%EA%B3%BC-%EC%9B%90%ED%95%AB-%EC%9D%B8%EC%BD%94%EB%94%A9-f0220df21df1&quot;&gt;John 블로그 - 데이터 전처리 : 레이블 인코딩과 원핫 인코딩&lt;/a&gt;&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Udacity" /><category term="Deep Learning" /><summary type="html">이산 모델에서 연속 모델로 저번 게시글에선 로지스틱 회귀의 이산 모델에 대해서 정리했습니다. 하지만 경사 하강법을 사용하기 위해서는 연속 모델을 사용해야 합니다. 이산 모델과 비교하여 연속 모델에서 추가된 과정은 다음과 같습니다. Sigmoid 함수 (확률함수) Maximum Likelihood Estimation (최대우도법) Cross-Entropy Gradient Descent (경사 하강법)</summary></entry><entry><title type="html">[Udacity] Deep Learning (1) - Nerual Network 이산 모델</title><link href="https://refstop.github.io/uda-dl-nndm.html" rel="alternate" type="text/html" title="[Udacity] Deep Learning (1) - Nerual Network 이산 모델" /><published>2021-02-04T15:14:23+09:00</published><updated>2021-02-04T15:14:23+09:00</updated><id>https://refstop.github.io/uda-dl-nndm</id><content type="html" xml:base="https://refstop.github.io/uda-dl-nndm.html">&lt;h1 id=&quot;neural-network란&quot;&gt;Neural Network란?&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/img/deeplearning/neural network.gif&quot; alt=&quot;neural network&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;br /&gt;
-뉴럴 네트워크는 우리말로 신경망이라는 의미입니다. 옛날 옛적 공학자들은 컴퓨터에 지능, 즉 학습능력을 부여할 방법을 고민했고, 결국 사람의 뇌 구조를 모방하는 방법을 고안했습니다. 우리 뇌 속의 뉴런 세포가 연결 및 신호를 주고받는 방식을 알고리즘으로 구현하여 신경망이라는 것을 만들었습니다.&lt;br /&gt;
-위 그림을 보면 뉴런 세포의 가지돌기(Dendrite)로 전기 신호가 전달되어 핵(Nucleus)을 통해 축삭(Axon)으로 전기 신호가 나갑니다. 지금부터 이러한 뉴런의 구조를 어떻게 구현했는지 알아볼 것입니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;선형-회귀-linear-regression&quot;&gt;선형 회귀 (Linear Regression)&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/img/deeplearning/linear regression.gif&quot; alt=&quot;linear regression&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;br /&gt;
-먼저 가장 기초적인 선형 회귀를 살펴보겠습니다. 선형 회귀란 자료가 분포한 형태를 보고 $x$축과 $y$축 사이의 샘플 관계를 선형으로 나타내는 방법입니다. 일반적으로 선형 회귀 모델의 형태는 다음과 같습니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-w_1x_1+w_2x_2+b=0
-}$&lt;/center&gt;
-&lt;p&gt;위의 공식에서는 가중치가 $w_1$, $w_2$ 둘 뿐이지만 실제로는 고려해야 할 가중치 수만큼 필요합니다. 데이터의 수가 $n$개라면, 그 수인 $n$개만큼 가중치가 존재합니다. 데이터와 가중치를 표현하면 다음과 같습니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-X=\begin{bmatrix}
-x_1 \\
-x_2 \\
-\vdots \\
-x_n
-\end{bmatrix}
-\;\;\;\;\;\;\;\;\;
-W=\begin{bmatrix}
-w_1 \\
-w_2 \\
-\vdots \\
-w_n
-\end{bmatrix}
-}$&lt;/center&gt;
-&lt;p&gt;바이어스는 그냥 $b$로 선형 모델당 하나입니다. 이들을 행렬로 된 식으로 나타내면 다음과 같습니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-WX+b=0
-}$&lt;/center&gt;
-&lt;p&gt;하지만 이 강의에서는 이해를 돕기 위해서 2개의 가중치만 사용할 것입니다. 위의 그림에서 볼 수 있듯이 가중치와 바이어스 수정을 통해 선형 회귀 모델을 찾게  됩니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;로지스틱-회귀-logistic-regression&quot;&gt;로지스틱 회귀 (Logistic Regression)&lt;/h1&gt;
-&lt;p&gt;로지스틱 회귀는 회귀를 사용하여 데이터가 어떤 범주에 속할 확률을 0에서 1 사이의 값으로 예측하고, 그 확률에 따라 가능성이 더 높은 범주에 속하는 것으로 분류해주는 지도 학습 알고리즘입니다. 핵심은 분류입니다. 회귀라고 부르지만 정작 기능은 분류인 이상한 녀석입니다. 이 이름의 유래는 연속형 변수 대신 범주형 변수에 회귀시키려다 발생한 문제입니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;로지스틱-회귀를-사용하는-이유&quot;&gt;로지스틱 회귀를 사용하는 이유&lt;/h2&gt;
-&lt;p&gt;첫번째 예시는 나이에 따른 혈압의 증가 데이터입니다. 그래프를 보면 선형 회귀가 잘 이루어진 것을 볼 수 있습니다.
-&lt;img src=&quot;/assets/img/deeplearning/logistic_ex1.png&quot; alt=&quot;logistic_ex1&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
-두번째 예시는 나이에 따른 암 발생 여부 데이터입니다. 데이터 결과값이 yes or no, 즉 0과 1로 출력됩니다. 데이터의 경향을 잘 따르는 첫번째 그래프와는 달리 이번 그래프는 뭔가 이상합니다.
-&lt;img src=&quot;/assets/img/deeplearning/logistic_ex2.png&quot; alt=&quot;logistic_ex2&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
-결과값이 0~1 사이의 값이 나와야 하는데 양의 무한대, 음의 무한대까지 올라가 버립니다. 이것이 범주형 변수에 선형회귀를 적용했을 때의 문제입니다.
-이제 어떤 방식으로 이 문제를 해결할 수 있는지 봅시다.&lt;/p&gt;
-
-&lt;h2 id=&quot;로지스틱-회귀의-개요&quot;&gt;로지스틱 회귀의 개요&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/img/deeplearning/logistic node.png&quot; alt=&quot;logistic node&quot; width=&quot;90%&quot; height=&quot;90%&quot; /&gt;&lt;br /&gt;
-로지스틱 회귀가 선택한 해결방법은 바로 &lt;strong&gt;활성화 함수(Activation Function)&lt;/strong&gt;를 사용하는 것입니다. 활성화 함수는 선형 모델을 비선형 모델로 만들어 주는 역할을 하고 있습니다. 선형 모델만 다층으로 쌓을 경우, 결국 결과가 선형 모델이 되는 문제점이 있기에, 비선형 함수를 한번 거쳐주는 과정이 필요합니다. 로지스틱 회귀에서 주로 사용되는 활성화 함수는 Step, Sigmoid, Softmax 함수입니다. 이 함수들은 어떤 *모델에서 적용하는지에 따라, 그리고 분류할 범주의 갯수에 따라 사용 함수가 다릅니다. 모델에 따라서는 Step Function은 이산 모델에서 사용하고, Sigmoid와 Softmax는 연속 모델에서 사용합니다. 또한 범주에 따라서는 범주가 2개(일반적으로 0 또는 1, yes or no 같은것)일 때 Step Function과 Sigmoid, 3개 이상일때 Softmax를 사용합니다. 이 함수들에 대해서는 앞으로 더 자세히 알아보도록 하겠습니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;선형-경계면-linear-boundary&quot;&gt;선형 경계면 (Linear Boundary)&lt;/h1&gt;
-&lt;p&gt;계속해서 로지스틱 회귀를 알아보겠습니다. 다음의 자료는 학생들의 시험 시행 횟수에 따른 평균 등급을 샘플로 나타낸 것입니다.&lt;br /&gt;
-&lt;img src=&quot;/assets/img/deeplearning/linear_bound.png&quot; alt=&quot;linear boundary&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;br /&gt;
-시험 횟수가 많을수록, 그리고 성적이 높을수록 Pass 범주로, 시험 횟수가 적을수록, 그리고 성적이 낮을수록 Fail 범주로에 분류됩니다. 음… 그런데 시험 횟수가 적고 등급이 높은 사람은 불합격은 횟수가 걸릴 수 있으니 불합이 될 수 있지만, 시험 횟수가 많은데 등급이 낮은 사람은 합격이라… 이 결과는 뭔가 이상하네요. 아무튼 분류의 예시를 드는데는 문제가 없으니 이 데이터를 예시로 들겠습니다. 이 그림을 관찰해 보면 $w_1x_1+w_2x_2+b=0$의 선형 모델로 Pass와 Fail을 구분할 수 있습니다. 따라서 데이터를 선형 모델에 대입했을 때 $w_1x_1+w_2x_2+b$의 값이 0 이상이면, 즉 0이거나 양수이면 Pass, 0 이하, 즉 음수이면 Fail로 분류할 수 있습니다. 이때 Pass를 1, Fail을 0이라는 값을 부여한다고 하면 출력값, 결과 $y$의 함수는 다음과 같습니다.&lt;/p&gt;
-&lt;center&gt;$\large{
-y=\left\{\begin{matrix}
-0\;\;\;\;if\;w_1x_1+w_2x_2+b&amp;lt;0\\ 
-1\;\;\;\;if\;w_1x_1+w_2x_2+b\geq 0
-\end{matrix}\right.
-}$&lt;/center&gt;
-&lt;p&gt;이 $y$의 함수를 그래프로 나타낸 것이 바로 Step Function입니다. 간단히 말해서 양수일때 1, 음수일때 0의 결과를 도출하는 함수입니다. 이산 모델에선 이 함수를 활성화 함수로 사용하게 됩니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;perceptron-algorithm&quot;&gt;Perceptron Algorithm&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/img/deeplearning/perceptron.gif&quot; alt=&quot;perceptron&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;br /&gt;
-퍼셉트론 알고리즘은 가중치와 바이어스를 조정해 주는 알고리즘입니다. 잘못 분류된 sample의 성분을 현재 선형 모델에 적용하여 가중치 $w_1, w_2$와 바이어스 $b$를 보정해 줍니다. 하지만 한번에 그 sample의 성분만큼 조정하면 가중치와 바이어스의 변화가 너무 급격하기 때문에 학습률 $\alpha$로 반영 비율을 조정합니다. 이 과정을 잘못 분류된 모든 샘플에 대하여 시행합니다.&lt;br /&gt;
-이 알고리즘이 반복되는 동안 선형 모델은 잘못된 sample에 점점 더 가까이 접근합니다. 결국 과정이 끝나고 나면 위 그림의 마지막과 같이 잘못된 sample을 분류하게 됩니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;마무리&quot;&gt;마무리&lt;/h1&gt;
-&lt;p&gt;이산 모델의 선형 모델 찾는 방법은 여기까지입니다. 선형 모델을 찾은 후, 활성화 함수에 대입하여 0 또는 1의 결과를 구합니다. 다음 게시글에서는 이산 모델에서 연속 모델로 변화했을 때 추가되는 과정들을 알아보겠습니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;질문&quot;&gt;질문&lt;/h1&gt;
-&lt;ol&gt;
-  &lt;li&gt;딥러닝 방식, 즉 다층 신경망을 사용하는 방법은 모두 이런 방식인가요?&lt;/li&gt;
-  &lt;li&gt;*이산 모델, 연속 모델이라고 사용하는게 맞나요?&lt;/li&gt;
-  &lt;li&gt;Positive면 (–)해주고 negative면 (+)해주는 이유가 뭔가요?&lt;/li&gt;
-  &lt;li&gt;가중치에 sample값을 반영하여 가중치를 수정할 수 있는 이유? 가중치와 sample(x1 x2)의 관계?&lt;/li&gt;
-  &lt;li&gt;가중치를 초기화해줄 수 있는 방법은 없나요?&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h1&gt;
-&lt;p&gt;Udacity Self-driving car nanodegree - Neural Network(링크 공유 불가능)&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Udacity" /><category term="Deep Learning" /><summary type="html">Neural Network란? 뉴럴 네트워크는 우리말로 신경망이라는 의미입니다. 옛날 옛적 공학자들은 컴퓨터에 지능, 즉 학습능력을 부여할 방법을 고민했고, 결국 사람의 뇌 구조를 모방하는 방법을 고안했습니다. 우리 뇌 속의 뉴런 세포가 연결 및 신호를 주고받는 방식을 알고리즘으로 구현하여 신경망이라는 것을 만들었습니다. 위 그림을 보면 뉴런 세포의 가지돌기(Dendrite)로 전기 신호가 전달되어 핵(Nucleus)을 통해 축삭(Axon)으로 전기 신호가 나갑니다. 지금부터 이러한 뉴런의 구조를 어떻게 구현했는지 알아볼 것입니다.</summary></entry></feed>
+&lt;p&gt;Udacity Self-driving car nanodegree - Neural Network(링크 공유 불가능)&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Udacity" /><category term="Deep Learning" /><summary type="html">지난 게시글의 복습 지난 게시글들에서는 뉴럴 네트워크를 활성화 함수에 따라 이산 모델, 연속 모델로 나누어서 살펴보았습니다. 뉴럴 네트워크의 최종 목적은 정확한 예측 모델, 선형 함수를 만드는 것입니다. 이 선형 함수를 이산 모델에서는 Step Function, 연속 모델에서는 Sigmoid 또는 Softmax 함수에 대입합니다. 그 후 이산 모델에서는 퍼셉트론 알고리즘으로 가중치를 조절, 연속 모델에서는 Cross-Entropy 오차함수와 경사하강법을 사용하여 가중치를 조절합니다. 그 결과, 뉴럴 네트워크의 예측 모델인 선형 함수를 도출할 수 있습니다.</summary></entry></feed>

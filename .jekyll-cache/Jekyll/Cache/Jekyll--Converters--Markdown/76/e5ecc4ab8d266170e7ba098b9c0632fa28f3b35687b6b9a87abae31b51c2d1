@@ -1,5 +1,0 @@
-I"J<h1 id="neural-network란">Neural Network란?</h1>
-<p><img src="/assets/img/deeplearning/neural network.gif" alt="neural network" width="70%" height="70%" /><br />
-뉴럴 네트워크는 우리말로 신경망이라는 의미입니다. 옛날 옛적 공학자들은 컴퓨터에 지능, 즉 학습능력을 부여할 방법을 고민했고, 결국 사람의 뇌 구조를 모방하는 방법을 고안했습니다. 우리 뇌 속의 뉴런 세포가 연결 및 신호를 주고받는 방식을 알고리즘으로 구현하여 신경망이라는 것을 만들었습니다.<br />
-위 그림을 보면 뉴런 세포의 가지돌기(Dendrite)로 전기 신호가 전달되어 핵(Nucleus)을 통해 축삭(Axon)으로 전기 신호가 나갑니다. 지금부터 이러한 뉴런의 구조를 어떻게 구현했는지 알아볼 것입니다.</p>
-:ET

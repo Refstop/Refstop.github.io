@@ -240,6 +240,68 @@
 		<div class="post">
 			
 
+			<a class="post-list-title" href="./indoor-nav.html">2021 여름 프로젝트 - 실내 자율 주행 로봇</a>
+			
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-08-22T23:07:24+09:00">August 22, 2021</time>
+      </span>
+    
+    
+      
+    
+  
+  
+  
+  </span>
+
+			<div class="post-excerpt">
+				<p>지난번에 작성했던 간단한 <a href="https://refstop.github.io/i2n-signal.html">실내 자율주행 로봇 패키지</a>를 조금 발전시킨 형태입니다. 최종적인 목표는 아래 그림과 같은 택배를 가져다주는 실내 배송 로봇입니다.<img width="100%" height="100%" src="/assets/img/indoor_2d_nav/Concept.png" align="center" /><br />제가 맡은 부분은 로봇 SLAM 및 네비게이션이었기 때문에 정리할 내용은 다음과 같습니다.</p><ul>  <li>Cartographer 사용법    <ul>      <li>설치 및 세팅</li>      <li>파라미터 사용 방법</li>    </ul>  </li>  <li>Waypoint Navigation    <ul>      <li>move_base Action 사용 방법</li>      <li>소스코드</li>    </ul>  </li>  <li>Aruco Marker를 사용한 EKF Localization    <ul>      <li>Fiducial Package 사용 방법</li>      <li>소스코드</li>    </ul>  </li></ul><a class="read-more" href="./indoor-nav.html"> read more</a>
+			</div>
+		</div>
+	
+		<div class="post">
+			
+
+			<a class="post-list-title" href="./ekf-slam.html">Kalman Filter와 EKF(2) - EKF SLAM</a>
+			
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-08-22T21:49:24+09:00">August 22, 2021</time>
+      </span>
+    
+    
+      
+    
+  
+  
+  
+  </span>
+
+			<div class="post-excerpt">
+				<p>지난 게시글에 이어 EKF를 사용한 SLAM 방법을 정리하겠습니다. SLAM은 로봇의 Localization과 Map을 작성하는 것이 목적으로 실시간 결과로서 로봇의 위치가, 최종적인 결과로서 로봇이 작성한 Map을 얻을 수 있습니다. 여기서 Map은 랜드마크의 위치를 기록한 자료로서, 사람이 생각하는 시각적인 지도가 아닌 랜드마크의 위치만을 기록한 txt 파일이 될 수도 있습니다. 이러한 SLAM의 방법으로는 Kalman Filter, Particle Filter, Graph-based 3가지로 나눌 수 있습니다. 이번 게시글에서는 EKF를 사용한 SLAM을 중심으로 설명하도록 하겠습니다.</p><h2 id="ekf-for-online-slam">EKF for online SLAM</h2><p><img width="100%" height="100%" src="/assets/img/kalman filter/ekf_slam_node.png" align="center" /><br />위 그림은 EKF를 이용한 online SLAM을 표현한 그림입니다. online은 실시간인 만큼 현재 로봇의 위치 state $x_t$만을 저장하는 방식으로 작동합니다. $m$은 랜드마크의 위치를 의미하고, $u_t$와...<a class="read-more" href="./ekf-slam.html"> read more</a>
+			</div>
+		</div>
+	
+		<div class="post">
+			
+
 			<a class="post-list-title" href="./kf-ekf.html">Kalman Filter와 EKF(1) - 선형 KF와 EKF</a>
 			
 
@@ -265,84 +327,6 @@
 
 			<div class="post-excerpt">
 				<p>이 게시글에서는 SLAM에서의 KF와 EKF를 기준으로 설명할 예정입니다.</p><h2 id="kalman-filter란">Kalman Filter란?</h2><p>칼만 필터는 현재 상태(state) $\mu$와 공분산(covariance) $\Sigma$를 기반으로 다음 상태를 추정하는 방법입니다. $\mu$와 $\Sigma$만으로 나타낼 수 있는 Gaussian 분포를 따르며, 지난 게시글의 <a href="https://refstop.github.io/uda-loc-markov.html">Bayesian Filter</a>와도 관계가 있습니다. 선형 칼만 필터를 설명하기 전에 가우시안 분포에 대해서 조금 설명하도록 하겠습니다.</p><h2 id="gaussian-분포">Gaussian 분포</h2><ul> <li>단일 변수 가우시안 분포</li></ul><center>$p(x)=\frac{1}{ \sqrt{2 \sigma^2 \pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$</center><ul> <li>다변수 가우시안 분포</li></ul><center>$p(x)=\frac{1}{ \sqrt{det(2\pi\Sigma)}}e^{-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)}$</center><p>가우시안 분포는 단일 변수(single variable)과 다변수(multi variable)의 표현 방식이 있으며, SLAM 에서는 로봇의 현재 state를 벡터 $(x,y,\phi)$로 표시하기 때문에 다변수 가우시안 분포를 사용하는 것이 좋습니다.</p><h2 id="선형-모델의-가우시안-분포">선형 모델의 가우시안 분포</h2><p>일반적으로, 선형 모델은 다음과 같이 표현할 수 있습니다.</p><center>$Y=AX+B$</center><p>이때, $X$가 가우시안 분포를 따른다고 할...<a class="read-more" href="./kf-ekf.html"> read more</a>
-			</div>
-		</div>
-	
-		<div class="post">
-			
-
-			<a class="post-list-title" href="./uda-lenet.html">[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5</a>
-			
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2021-07-05T01:11:24+09:00">July 5, 2021</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        4 minute read
-      
-    </span>
-  
-  
-  </span>
-
-			<div class="post-excerpt">
-				<p>지난 게시글에 이어 CNN의 구성과 LeNet-5를 예시로 파라미터를 계산해 보겠습니다.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input 1 is the X coordinate of the point,Input 2 is the y coordinate of the point,</code></pre></div></div><p>^^^왜인지 버그가 나서 아무말이나 지껴둔것</p><h2 id="1-cnn의-구성">1. CNN의 구성</h2><p>CNN의 구성을 공부하는 예시로서 대표적으로 사용되는 LeNet-5 모델으로 정리하겠습니다.</p><h3 id="lenet-5-네트워크란">LeNet-5 네트워크란?</h3><p align="center"> <img width="100%" height="100%" src="/assets/img/deeplearning/lenet.png" /></p><p>LeNet-5 네트워크는 CNN을 처음으로 개발한 Yann Lecun 연구팀이 개발한 CNN 알고리즘의 이름입니다. 이 알고리즘이 소개된 논문 제목은 Gradient-based learning applied to document recognition”입니다.<br />LeNet-5 네트워크는 Input-C1-S2-C3-S4-C5-F6-Output으로 이루어져 있고, Convolution layer, Pooling layer 두 쌍(C1-S2-C3-S4)과 Flatten layer(C5), Fully Connected layer(F6) 1개로 구성되어 있습니다. 원래 논문에서는 활성화 함수로서 tanh 함수를...<a class="read-more" href="./uda-lenet.html"> read more</a>
-			</div>
-		</div>
-	
-		<div class="post">
-			
-
-			<a class="post-list-title" href="./uda-cnn.html">[Udacity] Deep Learning (6) - Convolutional Nerual Network</a>
-			
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2021-07-04T15:41:24+09:00">July 4, 2021</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        3 minute read
-      
-    </span>
-  
-  
-  </span>
-
-			<div class="post-excerpt">
-				<p align="center"> <img width="100%" height="100%" src="/assets/img/deeplearning/cnn.png" /></p><p>지금까지 우리는 심층 신경망(Deep Nerual Network)을 구성하기까지의 과정을 살펴보았습니다. 이제 이 심층 신경망으로 구성할 수 있는 네트워크 중 이미지 학습에 최적화된 <strong>합성곱 신경망(Convolutional Nerual Network, CNN)</strong>에 대해서 알아보겠습니다.</p><h2 id="cnn이-되기까지">CNN이 되기까지</h2><p>CNN이 고안되기 전에는 이미지를 Fully Connected Nerual Network라는 1차원 벡터 형태의 데이터를 학습하는 형태의 신경망 구조를 사용했습니다. 하지만 FNN은 몇 가지 단점이 있습니다.<br /> 첫번째로 이미지 데이터를 평면화 시키는 과정에서 이미지의 인접한 픽셀 간의 정보가 유실된다는 점입니다. FNN은 1차원 벡터 형태의 데이터를 입력받기 때문에 이미지의 인접 픽셀간의 상관관계를 반영할 수 없습니다. 반면 CNN은 이미지의 특징을 보존한 채로 학습을 진행하기 때문에 인접 픽셀간의 정보 유식을 막을...<a class="read-more" href="./uda-cnn.html"> read more</a>
 			</div>
 		</div>
 	

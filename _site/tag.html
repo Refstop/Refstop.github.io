@@ -232,6 +232,71 @@
 
 
 	
+	<div id="2021 여름 프로젝트" class="hidden tag-master">
+		<h1>2021 여름 프로젝트</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./indoor-nav.html">2021 여름 프로젝트 - 실내 자율 주행 로봇</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-08-22T23:07:24+09:00">August 22, 2021</time>
+      </span>
+    
+    
+      
+    
+  
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>지난번에 작성했던 간단한 <a href="https://refstop.github.io/i2n-signal.html">실내 자율주행 로봇 패키지</a>를 조금 발전시킨 형태입니다. 최종적인 목표는 아래 그림과 같은 택배를 가져다주는 실내 배송 로봇입니다.
+<img width="100%" height="100%" src="/assets/img/indoor_2d_nav/Concept.png" align="center" /><br />
+제가 맡은 부분은 로봇 SLAM 및 네비게이션이었기 때문에 정리할 내용은 다음과 같습니다.</p>
+<ul>
+  <li>Cartographer 사용법
+    <ul>
+      <li>설치 및 세팅</li>
+      <li>파라미터 사용 방법</li>
+    </ul>
+  </li>
+  <li>Waypoint Navigation
+    <ul>
+      <li>move_base Action 사용 방법</li>
+      <li>소스코드</li>
+    </ul>
+  </li>
+  <li>Aruco Marker를 사용한 EKF Localization
+    <ul>
+      <li>Fiducial Package 사용 방법</li>
+      <li>소스코드</li>
+    </ul>
+  </li>
+</ul>
+
+<a class="read-more" href="./indoor-nav.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
 	<div id="Bayesian Filter" class="hidden tag-master">
 		<h1>Bayesian Filter</h1>
 		<div class="archive">
@@ -709,6 +774,37 @@
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./ekf-slam.html">Kalman Filter와 EKF(2) - EKF SLAM</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-08-22T21:49:24+09:00">August 22, 2021</time>
+      </span>
+    
+    
+      
+    
+  
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>지난 게시글에 이어 EKF를 사용한 SLAM 방법을 정리하겠습니다. SLAM은 로봇의 Localization과 Map을 작성하는 것이 목적으로 실시간 결과로서 로봇의 위치가, 최종적인 결과로서 로봇이 작성한 Map을 얻을 수 있습니다. 여기서 Map은 랜드마크의 위치를 기록한 자료로서, 사람이 생각하는 시각적인 지도가 아닌 랜드마크의 위치만을 기록한 txt 파일이 될 수도 있습니다. 이러한 SLAM의 방법으로는 Kalman Filter, Particle Filter, Graph-based 3가지로 나눌 수 있습니다. 이번 게시글에서는 EKF를 사용한 SLAM을 중심으로 설명하도록 하겠습니다.</p> <h2 id="ekf-for-online-slam">EKF for online SLAM</h2> <p><img width="100%" height="100%" src="/assets/img/kalman filter/ekf_slam_node.png" align="center" /><br /> 위 그림은 EKF를 이용한 online SLAM을 표현한 그림입니다. online은 실시간인 만큼 현재 로봇의 위치 state $x_t$만을 저장하는 방식으로 작동합니다. $m$은 랜드마크의...<a class="read-more" href="./ekf-slam.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./kf-ekf.html">Kalman Filter와 EKF(1) - 선형 KF와 EKF</a>
 					
 
@@ -747,6 +843,37 @@
 		<div class="archive">
 			<div class="post-list">
 		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./ekf-slam.html">Kalman Filter와 EKF(2) - EKF SLAM</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-08-22T21:49:24+09:00">August 22, 2021</time>
+      </span>
+    
+    
+      
+    
+  
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>지난 게시글에 이어 EKF를 사용한 SLAM 방법을 정리하겠습니다. SLAM은 로봇의 Localization과 Map을 작성하는 것이 목적으로 실시간 결과로서 로봇의 위치가, 최종적인 결과로서 로봇이 작성한 Map을 얻을 수 있습니다. 여기서 Map은 랜드마크의 위치를 기록한 자료로서, 사람이 생각하는 시각적인 지도가 아닌 랜드마크의 위치만을 기록한 txt 파일이 될 수도 있습니다. 이러한 SLAM의 방법으로는 Kalman Filter, Particle Filter, Graph-based 3가지로 나눌 수 있습니다. 이번 게시글에서는 EKF를 사용한 SLAM을 중심으로 설명하도록 하겠습니다.</p> <h2 id="ekf-for-online-slam">EKF for online SLAM</h2> <p><img width="100%" height="100%" src="/assets/img/kalman filter/ekf_slam_node.png" align="center" /><br /> 위 그림은 EKF를 이용한 online SLAM을 표현한 그림입니다. online은 실시간인 만큼 현재 로봇의 위치 state $x_t$만을 저장하는 방식으로 작동합니다. $m$은 랜드마크의...<a class="read-more" href="./ekf-slam.html"> read more</a>
+					</div>
+				</div>
+			
 			
 
 				<div class="post">
@@ -2162,6 +2289,61 @@ realsense d435i와 rviz 연동해봄.<br />
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./indoor-nav.html">2021 여름 프로젝트 - 실내 자율 주행 로봇</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-08-22T23:07:24+09:00">August 22, 2021</time>
+      </span>
+    
+    
+      
+    
+  
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>지난번에 작성했던 간단한 <a href="https://refstop.github.io/i2n-signal.html">실내 자율주행 로봇 패키지</a>를 조금 발전시킨 형태입니다. 최종적인 목표는 아래 그림과 같은 택배를 가져다주는 실내 배송 로봇입니다.
+<img width="100%" height="100%" src="/assets/img/indoor_2d_nav/Concept.png" align="center" /><br />
+제가 맡은 부분은 로봇 SLAM 및 네비게이션이었기 때문에 정리할 내용은 다음과 같습니다.</p>
+<ul>
+  <li>Cartographer 사용법
+    <ul>
+      <li>설치 및 세팅</li>
+      <li>파라미터 사용 방법</li>
+    </ul>
+  </li>
+  <li>Waypoint Navigation
+    <ul>
+      <li>move_base Action 사용 방법</li>
+      <li>소스코드</li>
+    </ul>
+  </li>
+  <li>Aruco Marker를 사용한 EKF Localization
+    <ul>
+      <li>Fiducial Package 사용 방법</li>
+      <li>소스코드</li>
+    </ul>
+  </li>
+</ul>
+
+<a class="read-more" href="./indoor-nav.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./i2n-signal.html">Indoor 2D Navigation - 개요 & 좌표범위내 신호 출력 노드</a>
 					
 
@@ -2321,6 +2503,9 @@ realsense d435i와 rviz 연동해봄.<br />
         <ul class="tags">
             
                 
+                <li><a href="./tag.html?tag=2021+%EC%97%AC%EB%A6%84+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8" class="tag">2021 여름 프로젝트 <span>(1)</span></a></li>
+            
+                
                 <li><a href="./tag.html?tag=Bayesian+Filter" class="tag">Bayesian Filter <span>(2)</span></a></li>
             
                 
@@ -2333,10 +2518,10 @@ realsense d435i와 rviz 연동해봄.<br />
                 <li><a href="./tag.html?tag=Deep+Learning" class="tag">Deep Learning <span>(11)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=EKF" class="tag">EKF <span>(1)</span></a></li>
+                <li><a href="./tag.html?tag=EKF" class="tag">EKF <span>(2)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=Kalman+Filter" class="tag">Kalman Filter <span>(2)</span></a></li>
+                <li><a href="./tag.html?tag=Kalman+Filter" class="tag">Kalman Filter <span>(3)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=Kobuki" class="tag">Kobuki <span>(3)</span></a></li>
@@ -2384,7 +2569,7 @@ realsense d435i와 rviz 연동해봄.<br />
                 <li><a href="./tag.html?tag=%EB%AA%A8%EB%91%90%EB%A5%BC+%EC%9C%84%ED%95%9C+%EB%94%A5%EB%9F%AC%EB%8B%9D" class="tag">모두를 위한 딥러닝 <span>(4)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=%EC%8B%A4%EB%82%B4+%EC%9E%90%EC%9C%A8+%EC%A3%BC%ED%96%89" class="tag">실내 자율 주행 <span>(1)</span></a></li>
+                <li><a href="./tag.html?tag=%EC%8B%A4%EB%82%B4+%EC%9E%90%EC%9C%A8+%EC%A3%BC%ED%96%89" class="tag">실내 자율 주행 <span>(2)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=%ED%9A%8C%EC%82%AC+%EA%B2%AC%ED%95%99+%ED%9B%84%EA%B8%B0" class="tag">회사 견학 후기 <span>(1)</span></a></li>

@@ -3,6 +3,16 @@
 [   
       
   {
+  "tag" : "2021 여름 프로젝트",
+  "posts" : [
+      
+      "./indoor-nav.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "Bayesian Filter",
   "posts" : [
       
@@ -78,6 +88,8 @@
   "tag" : "EKF",
   "posts" : [
       
+      "./ekf-slam.html",
+      
       "./kf-ekf.html"
       
     ]
@@ -87,6 +99,8 @@
   {
   "tag" : "Kalman Filter",
   "posts" : [
+      
+      "./ekf-slam.html",
       
       "./kf-ekf.html",
       
@@ -323,6 +337,8 @@
   {
   "tag" : "실내 자율 주행",
   "posts" : [
+      
+      "./indoor-nav.html",
       
       "./i2n-signal.html"
       
