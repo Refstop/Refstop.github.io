@@ -1,6 +1,8 @@
 {
   "posts" : [
     
+    "./cartographer.html",
+    
     "./indoor-nav.html",
     
     "./ekf-slam.html",

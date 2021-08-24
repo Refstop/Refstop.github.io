@@ -6,6 +6,8 @@
   "tag" : "2021 여름 프로젝트",
   "posts" : [
       
+      "./cartographer.html",
+      
       "./indoor-nav.html"
       
     ]
@@ -337,6 +339,8 @@
   {
   "tag" : "실내 자율 주행",
   "posts" : [
+      
+      "./cartographer.html",
       
       "./indoor-nav.html",
       

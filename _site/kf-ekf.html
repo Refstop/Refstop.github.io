@@ -22,7 +22,7 @@
   "headline": "Kalman Filter와 EKF(1) - 선형 KF와 EKF",
   "abstract": "",
     "keywords": "Kalman Filter, EKF",
-    "wordcount": "985",
+    "wordcount": "983",
     "image": ["https://Refstop.github.io/assets/img/kalman filter/kalman_fig.png"],
   "datePublished": "2021-08-05 11:36:24 +0900",
   "dateModified": "2021-08-05 11:36:24 +0900",
@@ -62,7 +62,7 @@
 <meta name="twitter:description" content="">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="985"/>
+<meta data-rh="true" name="twitter:data1" content="983"/>
 <meta name="twitter:image:src" content="https://Refstop.github.io/assets/img//kalman filter/kalman_fig.png">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -398,10 +398,10 @@
 <p>t에서의 state 확률 $\overline{bel}(x_t)$은 motion model에 의해 결정되고(prediction step), prediction step에서 계산된 t에서의 state 확률 $\overline{bel}(x_t)$은 observation model에 의해서 보정됩니다.<br />
 이때, 모든 확률 분포를 Gaussian 확률 분포를 따른다고 가정하는 모델이 바로 Kalman Filter입니다. Gaussian 분포를 따른다고 가정하면 간단히 평균 $\mu$과 분산(공분산) $\sigma(\Sigma)$로 표시하기 때문에 두개의 파라미터만으로 확률분포를 표현할 수 있는 장점이 있습니다. Kalman Filter 알고리즘은 다음과 같습니다.</p>
 <center>
-$\begin{align*} 1&amp;: Kalman filter(\mu_t{t-1}, \Sigma_{t-1}, u_t, z_t) \\
+$\begin{align*} 1&amp;: Kalman Filter(\mu_{t-1}, \Sigma_{t-1}, u_t, z_t) \\
 &amp; [Prediction\;step] \\
-2&amp;: \overline{\mu}_t=A_t\mu_{t-1}+B_tu_t+\epsilon_t \\
-3&amp;: \overline{\Sigma}_t=A_t\Sigma_{t-1}A_t^T \\
+2&amp;: \overline{\mu}_t=A_t\mu_{t-1}+B_tu_t \\
+3&amp;: \overline{\Sigma}_t=A_t\Sigma_{t-1}A_t^T+R_t \\
 &amp; [Correction\;step] \\
 4&amp;: K_t=\overline{\Sigma}_tH_t^T(H_t\overline{\Sigma}_tH_t^T+Q_t)^{-1}\\
 5&amp;: \mu_t = \overline{\mu}_t+K_t(z_t-H_t\mu_t) \\
@@ -415,10 +415,10 @@ $\begin{align*} 1&amp;: Kalman filter(\mu_t{t-1}, \Sigma_{t-1}, u_t, z_t) \\
   <li>Prediction step</li>
 </ul>
 <center>
-$\begin{align*} 1&amp;: Kalman filter(\mu_t{t-1}, \Sigma_{t-1}, u_t, z_t) \\
+$\begin{align*} 1&amp;: Kalman Filter(\mu_{t-1}, \Sigma_{t-1}, u_t, z_t) \\
 &amp; [Prediction\;step] \\
-2&amp;: \overline{\mu}_t=A_t\mu_{t-1}+B_tu_t+\epsilon_t \\
-3&amp;: \overline{\Sigma}_t=A_t\Sigma_{t-1}A_t^T
+2&amp;: \overline{\mu}_t=A_t\mu_{t-1}+B_tu_t \\
+3&amp;: \overline{\Sigma}_t=A_t\Sigma_{t-1}A_t^T+R_t
 \end{align*}$
 </center>
 <p>prediction step은 다음 state를 motion model을 통해 예측하는 단계입니다. 계속 똑같은 말을 반복하는거 같긴 하지만, 우선 알아보도록 합시다. 이전 state와 motion $u_t$의 결합을 통해 다음 단계의 평균을 추측합니다. 하지만 이때는 아직 완전히 정확하지 않은 상태이므로 준 현재 state라는 의미로 평균과 공분산 기호 위에 작대기를 그어 표현해 줍니다. 다음 correction 단계에서 추가적인 과정을 통해 더 정확한 위치를 잡을 것입니다.<br />
@@ -488,7 +488,7 @@ $\begin{align*}
 
 <p>Kalman Filter와 마찬가지로 $R_t$, $Q_t$는 process noise, measurement noise입니다. EKF 알고리즘은 다음과 같습니다.</p>
 <center>
-$\begin{align*} 1&amp;: Extended Kalman filter(\mu_t{t-1}, \Sigma_{t-1}, u_t, z_t) \\
+$\begin{align*} 1&amp;: Extended\;Kalman\;Filter(\mu_{t-1}, \Sigma_{t-1}, u_t, z_t) \\
 &amp; [Prediction\;step] \\
 2&amp;: \overline{\mu}_t=g(u_t, \mu_{t-1}) \\
 3&amp;: \overline{\Sigma}_t=G_t\Sigma_{t-1}G_t^T+R_t \\
@@ -580,6 +580,29 @@ $\begin{align*} 1&amp;: Extended Kalman filter(\mu_t{t-1}, \Sigma_{t-1}, u_t, z_
           
           
 
+          <a href="./cartographer.html" class="recent-item-img" style="background: url('./assets/img//indoor_2d_nav/Concept.png') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>2021 여름 프로젝트 - Cartographer 사용</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
           <a href="./indoor-nav.html" class="recent-item-img" style="background: url('./assets/img//indoor_2d_nav/Concept.png') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>2021 여름 프로젝트 - 실내 자율 주행 로봇</span>
@@ -635,37 +658,6 @@ $\begin{align*} 1&amp;: Extended Kalman filter(\mu_t{t-1}, \Sigma_{t-1}, u_t, z_
   
   
   
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./uda-lenet.html" class="recent-item-img" style="background: url('./assets/img//deeplearning/lenet.png') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>[Udacity] Deep Learning (7) - CNN 구성과 LeNet-5</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        4 minute read
-      
-    </p>
   
   
   </span>
