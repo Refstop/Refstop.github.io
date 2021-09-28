@@ -240,7 +240,7 @@
 		<div class="post">
 			
 
-			<a class="post-list-title" href="./cartographer.html">2021 여름 프로젝트 - Cartographer 사용</a>
+			<a class="post-list-title" href="./git-cmd.html">자주쓰는 git 명령어 정리</a>
 			
 
   <span class = "post-card-meta">
@@ -264,7 +264,38 @@
   </span>
 
 			<div class="post-excerpt">
-				<ul>  <li>Cartographer 사용법    <ul>      <li>파라미터 사용 방법</li>      <li>urdf 작성</li>    </ul>  </li></ul><a class="read-more" href="./cartographer.html"> read more</a>
+				<h2 id="사용해본-git-명령어-정리">사용해본 git 명령어 정리</h2><p>git init : git 공간 만들기<br />git clone : git repository로부터 다운로드(깃 공간까지)<br />git add . : 깃 공간의 변경사항 전부 추가(저장후보) (잘몰겟음)<br />git commit -m ‘(커밋 메시지)’ : git add로 추가한 내용들 local에 업로드<br />git push : local -&gt; remote로 업로드<br />git status : 깃 공간의 현재상태(커밋내용, 현재 브랜치 등)<br />git branch : 현재 깃 공간(local)의 브랜치 보기<br />git log : 현재 브랜치의 커밋 목록들 보기(q 누르면 종료, enter 누르면 계속 보여줌)<br />-v : 브랜치 상세정보, 마지막 커밋 메시지 확인<br />-r : 리모트 공간의 브랜치 보기<br />-a : 로컬, 리모트 브랜치 다 보기<br />–delete, -d...<a class="read-more" href="./git-cmd.html"> read more</a>
+			</div>
+		</div>
+	
+		<div class="post">
+			
+
+			<a class="post-list-title" href="./cartographer.html">2021 여름 프로젝트 - Aruco Marker EKF Localization</a>
+			
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-08-23T11:06:24+09:00">August 23, 2021</time>
+      </span>
+    
+    
+      
+    
+  
+  
+  
+  </span>
+
+			<div class="post-excerpt">
+				<p>작성 예정</p><a class="read-more" href="./cartographer.html"> read more</a>
 			</div>
 		</div>
 	
@@ -296,37 +327,6 @@
 
 			<div class="post-excerpt">
 				<p>지난번에 작성했던 간단한 <a href="https://refstop.github.io/i2n-signal.html">실내 자율주행 로봇 패키지</a>를 조금 발전시킨 형태입니다. 최종적인 목표는 아래 그림과 같은 택배를 가져다주는 실내 배송 로봇입니다.<img width="100%" height="100%" src="/assets/img/indoor_2d_nav/Concept.png" align="center" /><br />제가 맡은 부분은 로봇 SLAM 및 네비게이션이었기 때문에 정리할 내용은 다음과 같습니다.</p><ul>  <li>Cartographer 사용    <ul>      <li>파라미터 사용 방법</li>    </ul>  </li>  <li>Waypoint Navigation    <ul>      <li>move_base Action 사용 방법</li>      <li>소스코드</li>    </ul>  </li>  <li>Aruco Marker를 사용한 EKF Localization    <ul>      <li>Fiducial Package 사용 방법</li>      <li>소스코드</li>    </ul>  </li></ul><a class="read-more" href="./indoor-nav.html"> read more</a>
-			</div>
-		</div>
-	
-		<div class="post">
-			
-
-			<a class="post-list-title" href="./ekf-slam.html">Kalman Filter와 EKF(2) - EKF SLAM</a>
-			
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2021-08-22T21:49:24+09:00">August 22, 2021</time>
-      </span>
-    
-    
-      
-    
-  
-  
-  
-  </span>
-
-			<div class="post-excerpt">
-				<p>지난 게시글에 이어 EKF를 사용한 SLAM 방법을 정리하겠습니다. SLAM은 로봇의 Localization과 Map을 작성하는 것이 목적으로 실시간 결과로서 로봇의 위치가, 최종적인 결과로서 로봇이 작성한 Map을 얻을 수 있습니다. 여기서 Map은 랜드마크의 위치를 기록한 자료로서, 사람이 생각하는 시각적인 지도가 아닌 랜드마크의 위치만을 기록한 txt 파일이 될 수도 있습니다. 이러한 SLAM의 방법으로는 Kalman Filter, Particle Filter, Graph-based 3가지로 나눌 수 있습니다. 이번 게시글에서는 EKF를 사용한 SLAM을 중심으로 설명하도록 하겠습니다.</p><h2 id="ekf-for-online-slam">EKF for online SLAM</h2><p><img width="100%" height="100%" src="/assets/img/kalman filter/ekf_slam_node.png" align="center" /><br />위 그림은 EKF를 이용한 online SLAM을 표현한 그림입니다. online은 실시간인 만큼 현재 로봇의 위치 state $x_t$만을 저장하는 방식으로 작동합니다. $m$은 랜드마크의 위치를 의미하고, $u_t$와...<a class="read-more" href="./ekf-slam.html"> read more</a>
 			</div>
 		</div>
 	

@@ -1,11 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://refstop.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://refstop.github.io/" rel="alternate" type="text/html" /><updated>2021-08-24T13:36:23+09:00</updated><id>https://refstop.github.io/feed.xml</id><title type="html">Refstop의 연구일지</title><subtitle>Deep Learning 및 SLAM을 공부하고 있습니다.</subtitle><author><name>Refstop</name></author><entry><title type="html">2021 여름 프로젝트 - Cartographer 사용</title><link href="https://refstop.github.io/cartographer.html" rel="alternate" type="text/html" title="2021 여름 프로젝트 - Cartographer 사용" /><published>2021-08-23T11:06:24+09:00</published><updated>2021-08-23T11:06:24+09:00</updated><id>https://refstop.github.io/cartographer</id><content type="html" xml:base="https://refstop.github.io/cartographer.html">&lt;ul&gt;
-  &lt;li&gt;Cartographer 사용법
-    &lt;ul&gt;
-      &lt;li&gt;파라미터 사용 방법&lt;/li&gt;
-      &lt;li&gt;urdf 작성&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Refstop</name></author><category term="실내 자율 주행" /><category term="2021 여름 프로젝트" /><summary type="html">Cartographer 사용법 파라미터 사용 방법 urdf 작성</summary></entry><entry><title type="html">2021 여름 프로젝트 - 실내 자율 주행 로봇</title><link href="https://refstop.github.io/indoor-nav.html" rel="alternate" type="text/html" title="2021 여름 프로젝트 - 실내 자율 주행 로봇" /><published>2021-08-22T23:07:24+09:00</published><updated>2021-08-22T23:07:24+09:00</updated><id>https://refstop.github.io/indoor-nav</id><content type="html" xml:base="https://refstop.github.io/indoor-nav.html">&lt;p&gt;지난번에 작성했던 간단한 &lt;a href=&quot;https://refstop.github.io/i2n-signal.html&quot;&gt;실내 자율주행 로봇 패키지&lt;/a&gt;를 조금 발전시킨 형태입니다. 최종적인 목표는 아래 그림과 같은 택배를 가져다주는 실내 배송 로봇입니다.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://refstop.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://refstop.github.io/" rel="alternate" type="text/html" /><updated>2021-09-29T02:15:58+09:00</updated><id>https://refstop.github.io/feed.xml</id><title type="html">Refstop의 연구일지</title><subtitle>Deep Learning 및 SLAM을 공부하고 있습니다.</subtitle><author><name>Refstop</name></author><entry><title type="html">2021 여름 프로젝트 - Aruco Marker EKF Localization</title><link href="https://refstop.github.io/cartographer.html" rel="alternate" type="text/html" title="2021 여름 프로젝트 - Aruco Marker EKF Localization" /><published>2021-08-23T11:06:24+09:00</published><updated>2021-08-23T11:06:24+09:00</updated><id>https://refstop.github.io/cartographer</id><content type="html" xml:base="https://refstop.github.io/cartographer.html">&lt;p&gt;작성 예정&lt;/p&gt;</content><author><name>Refstop</name></author><category term="실내 자율 주행" /><category term="2021 여름 프로젝트" /><summary type="html">작성 예정</summary></entry><entry><title type="html">자주쓰는 git 명령어 정리</title><link href="https://refstop.github.io/git-cmd.html" rel="alternate" type="text/html" title="자주쓰는 git 명령어 정리" /><published>2021-08-23T11:06:24+09:00</published><updated>2021-08-23T11:06:24+09:00</updated><id>https://refstop.github.io/git-cmd</id><content type="html" xml:base="https://refstop.github.io/git-cmd.html">&lt;h2 id=&quot;사용해본-git-명령어-정리&quot;&gt;사용해본 git 명령어 정리&lt;/h2&gt;
+
+&lt;p&gt;git init : git 공간 만들기&lt;br /&gt;
+git clone : git repository로부터 다운로드(깃 공간까지)&lt;br /&gt;
+git add . : 깃 공간의 변경사항 전부 추가(저장후보) (잘몰겟음)&lt;br /&gt;
+git commit -m ‘(커밋 메시지)’ : git add로 추가한 내용들 local에 업로드&lt;br /&gt;
+git push : local -&amp;gt; remote로 업로드&lt;br /&gt;
+git status : 깃 공간의 현재상태(커밋내용, 현재 브랜치 등)&lt;br /&gt;
+git branch : 현재 깃 공간(local)의 브랜치 보기&lt;br /&gt;
+git log : 현재 브랜치의 커밋 목록들 보기(q 누르면 종료, enter 누르면 계속 보여줌)&lt;br /&gt;
+-v : 브랜치 상세정보, 마지막 커밋 메시지 확인&lt;br /&gt;
+-r : 리모트 공간의 브랜치 보기&lt;br /&gt;
+-a : 로컬, 리모트 브랜치 다 보기&lt;br /&gt;
+–delete, -d (브랜치명) : local 브랜치 삭제&lt;br /&gt;
+작업된 사항이나 commit 한 이력이 남아있는 경우, branch가 삭제되지 않는 경우&lt;br /&gt;
+-D (브랜치명) : 브랜치 강제 삭제 « 이걸로 삭제 (추천x)&lt;br /&gt;
+-m (현재 브랜치명) (바꿀 브랜치명) : 브랜치 이름 변경&lt;br /&gt;
+git push origin –delete (브랜치명) : remote 브랜치 삭제&lt;br /&gt;
+git checkout (브랜치명) : 브랜치로 이동&lt;br /&gt;
+git checkout -b (new 브랜치명) : 브랜치를 생성하고 이동&lt;br /&gt;
+git push –set-upstream origin (new 브랜치명) : 새로 생성된 브랜치를 리모트에 연결할 때 사용&lt;br /&gt;
+이거 해야지 git push로 그냥 업로드 할수 있음, 생성하고 처음 한번만 하면됨&lt;br /&gt;
+git push -u origin (new 브랜치명) « 이것도 업스트림과 똑같은 명령어&lt;br /&gt;
+git merge (다른 브랜치) : 현재 브랜치에 다른 브랜치를 병합, 이때 병합되는건 최근 commit 기준&lt;/p&gt;
+
+&lt;p&gt;계속 새로 업데이트 예정&lt;/p&gt;</content><author><name>Refstop</name></author><category term="github" /><summary type="html">사용해본 git 명령어 정리</summary></entry><entry><title type="html">2021 여름 프로젝트 - 실내 자율 주행 로봇</title><link href="https://refstop.github.io/indoor-nav.html" rel="alternate" type="text/html" title="2021 여름 프로젝트 - 실내 자율 주행 로봇" /><published>2021-08-22T23:07:24+09:00</published><updated>2021-08-22T23:07:24+09:00</updated><id>https://refstop.github.io/indoor-nav</id><content type="html" xml:base="https://refstop.github.io/indoor-nav.html">&lt;p&gt;지난번에 작성했던 간단한 &lt;a href=&quot;https://refstop.github.io/i2n-signal.html&quot;&gt;실내 자율주행 로봇 패키지&lt;/a&gt;를 조금 발전시킨 형태입니다. 최종적인 목표는 아래 그림과 같은 택배를 가져다주는 실내 배송 로봇입니다.
 &lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/assets/img/indoor_2d_nav/Concept.png&quot; align=&quot;center&quot; /&gt;&lt;br /&gt;
 제가 맡은 부분은 로봇 SLAM 및 네비게이션이었기 때문에 정리할 내용은 다음과 같습니다.&lt;/p&gt;
 &lt;ul&gt;
@@ -1191,183 +1209,4 @@ W \leftarrow W+v
 &lt;h1 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h1&gt;
 &lt;p&gt;Udacity Self-driving car nanodegree - Tensorflow(링크 공유 불가능)&lt;br /&gt;
 &lt;a href=&quot;https://www.tensorflow.org/install/pip?hl=ko&quot;&gt;Tensorflow 공식 홈페이지 - TensorFlow 설치&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://kolikim.tistory.com/48&quot;&gt;Broccoli’s House - #5-(2) 학습 관련 기술 : 초기 가중치 설정&lt;/a&gt;&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Udacity" /><category term="Deep Learning" /><category term="Tensorflow" /><summary type="html">왜 Tensowflow 인가 Tensorflow란? 지난 시간까지 신경망을 쌓으면서 모델을 학습, 즉 적절한 가중치와 바이어스를 구하는 방법을 이론적으로 알아보았습니다. 이번 게시글에선 이 방법들을 물리적인 코드로 구현해 보겠습니다. 하지만 코드로 구현한다고 하여 덧셈 뺄셈 연산자를 이용하여 밑바닥부터 구현한다는 의미는 아닙니다. 이미 시중에는 딥러닝을 초보자도 쉽게(?) 구현할 수 있도록 제작해 놓은 여러 라이브러리들이 있습니다. 이 중 우리는 가장 많은 사람들이 사용하는 Tensorflow를 사용할 것입니다. Tensorflow는 구글에서 만든 딥러닝을 쉽게 구현할 수 있도록 기능을 제공하는 라이브러리입니다. 위 그림과 같이 딥러닝을 할 사용되는 텐서 형태의 데이터들이 모델을 구성하는 연산들의 그래프를 따라 흐르면서 연산이 일어납니다. 데이터를 의미하는 텐서(tensor)와 데이터 플로우 그래프를 따라 연산이 수행되는 형태인 flow를 합쳐 텐서플로(tensorflow)라고 부릅니다.</summary></entry><entry><title type="html">ROS2 첫걸음 (14) - 파라미터 사용(Python)</title><link href="https://refstop.github.io/ros2-custom_param.html" rel="alternate" type="text/html" title="ROS2 첫걸음 (14) - 파라미터 사용(Python)" /><published>2021-02-13T20:18:23+09:00</published><updated>2021-02-13T20:18:23+09:00</updated><id>https://refstop.github.io/ros2-custom_param</id><content type="html" xml:base="https://refstop.github.io/ros2-custom_param.html">&lt;h1 id=&quot;시작하며&quot;&gt;시작하며&lt;/h1&gt;
-&lt;p&gt;이 게시글은 Python 노드에서 파라미터를 사용하는 방법을 정리합니다. 파라미터는 &lt;a href=&quot;https://refstop.github.io/posts/ros2-param/&quot;&gt;지난번&lt;/a&gt;에 turtlesim으로 한번 찍먹해본 적이 있습니다. 간단히 말하자면 노드 내에서 사용되는 변수이고, 이 값을 노드 내 또는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ros2 param&lt;/code&gt; 명령어를 통해 확인하거나 수정할 수 있습니다. 이번 게시글에서는 직접 생성, 수정을 해보도록 하겠습니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;1-parameter-전용-패키지-생성&quot;&gt;1. parameter 전용 패키지 생성&lt;/h1&gt;
-&lt;p&gt;우선 파라미터 예제를 실습할 패키지를 생성합니다. 패키지의 위치는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/dev_ws/src&lt;/code&gt; 폴더 안입니다.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ros2 pkg create --build-type ament_python python_parameters --dependencies rclpy
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--dependencies&lt;/code&gt; 명령어를 통해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rclpy&lt;/code&gt; 의존성 패키지를 추가합니다. 이렇게 추가한 의존성은 자동으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.xml&lt;/code&gt; 파일과 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CMakeLists.txt&lt;/code&gt; 파일에 의존성 라인이 추가됩니다….만 파이썬 패키지는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CMakeLists.txt&lt;/code&gt; 파일이 없으므로 추가되지 않습니다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setup.py&lt;/code&gt; 파일에는 자동으로 추가되지 않으니 수정해 줘야 합니다. 우선 노드부터 작성 후 수정합시다.&lt;/p&gt;
-
-&lt;h1 id=&quot;2-python-노드-작성&quot;&gt;2. Python 노드 작성&lt;/h1&gt;
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dev_ws/src/python_parameters/python_parameters&lt;/code&gt; 폴더에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python_parameters_node.py&lt;/code&gt; 노드 소스 파일을 작성합니다. 내용은 다음과 같습니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;import rclpy
-import rclpy.node
-from rclpy.exceptions import ParameterNotDeclaredException
-from rcl_interfaces.msg import ParameterType
-
-class MinimalParam(rclpy.node.Node):
-    def __init__(self):
-        super().__init__('minimal_param_node')
-        timer_period = 2  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback)
-
-        self.declare_parameter('my_parameter', 'world')
-
-    def timer_callback(self):
-        my_param = self.get_parameter('my_parameter').get_parameter_value().string_value
-
-        self.get_logger().info('Hello %s!' % my_param)
-
-        my_new_param = rclpy.parameter.Parameter(
-            'my_parameter',
-            rclpy.Parameter.Type.STRING,
-            'world'
-        )
-        all_new_parameters = [my_new_param]
-        self.set_parameters(all_new_parameters)
-
-def main():
-    rclpy.init()
-    node = MinimalParam()
-    rclpy.spin(node)
-
-if __name__ == '__main__':
-    main()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;코드를 분석해 봅시다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;import&lt;/code&gt; 명령어로 의존성 패키지를 추가합니다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rclpy.exceptions&lt;/code&gt;는 파라미터를 사용하거나 수정하기 전에 선언이 안되있으면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ParameterNotDeclaredException&lt;/code&gt; 예외가 발생하게 하는 의존성입니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;import rclpy
-import rclpy.node
-from rclpy.exceptions import ParameterNotDeclaredException
-from rcl_interfaces.msg import ParameterType
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;다음 부분은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MinimalParam&lt;/code&gt;의 생성자 함수입니다. 이 함수에서는 노드 이름, 타이머, 파라미터 선언을 합니다. 타이머는 시간 간격 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;timer_period&lt;/code&gt;와 타이머에 맞춰 실행될 함수 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;timer_callback&lt;/code&gt;을 타이머 함수에 대입합니다. 그리고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;declare_parameter&lt;/code&gt; 함수를 사용하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;my_parameter&lt;/code&gt;라는 이름의 파라미터에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;world&lt;/code&gt; 문자열을 저장하여 초기화합니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;class MinimalParam(rclpy.node.Node):
-    def __init__(self):
-        super().__init__('minimal_param_node')
-        timer_period = 2  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback)
-
-        self.declare_parameter('my_parameter', 'world')
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;타이머에 따라 실행될 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;timer_callback&lt;/code&gt; 함수입니다. 이 함수는 현재 파라미터의 내용을 출력해주는 기능과 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ros2 param set&lt;/code&gt; 명령어로 파라미터를 수정했을 때 다시 원래 내용으로 되돌리는 기능을 갖고 있습니다. 파라미터 노드 생성 클래스의 내용은 이 함수까지입니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;def timer_callback(self):
-    my_param = self.get_parameter('my_parameter').get_parameter_value().string_value
-
-    self.get_logger().info('Hello %s!' % my_param)
-    # world로 되돌리는 구문
-    my_new_param = rclpy.parameter.Parameter(
-        'my_parameter',
-        rclpy.Parameter.Type.STRING,
-        'world'
-    )
-    all_new_parameters = [my_new_param]
-    self.set_parameters(all_new_parameters)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;마지막으로 남은 부분은 main함수와 main함수의 실행부입니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;def main():
-    rclpy.init()
-    node = MinimalParam()
-    rclpy.spin(node)
-
-if __name__ == '__main__':
-    main()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&quot;3-setuppy-파일-수정&quot;&gt;3. setup.py 파일 수정&lt;/h1&gt;
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setup.py&lt;/code&gt; 파일을 수정합니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;entry_points={
-    'console_scripts': [
-        'param_talker = python_parameters.python_parameters_node:main',
-    ],
-},
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&quot;4-빌드-소스-실행&quot;&gt;4. 빌드, 소스, 실행&lt;/h1&gt;
-&lt;p&gt;이 과정은 많이 했으니 설명은 생략하겠습니다.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ colcon build --packages-select python_parameters
-$ . install/setup.bash
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;실행-결과&quot;&gt;실행 결과&lt;/h1&gt;
-&lt;p&gt;위에서 작성한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;param_talker&lt;/code&gt; 노드의 실행 결과입니다.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ros2 run python_parameters param_talker 
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello world!
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;이제 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ros2 param set&lt;/code&gt; 명령어로 파라미터를 수정해 보겠습니다.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ros2 param set /minimal_param_node my_parameter earth
-Set parameter successful
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;param_talker&lt;/code&gt; 노드가 실행되고 있는 터미널의 결과는 다음과 같습니다.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ros2 run python_parameters param_talker 
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello earth!
-[INFO] [minimal_param_node]: Hello world!
-[INFO] [minimal_param_node]: Hello world!
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;my_parameter&lt;/code&gt; 파라미터가 잠깐 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;earth&lt;/code&gt;로 바뀌었다가 다시 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;world&lt;/code&gt;로 돌아왔습니다. 물론 위 소스의 원래대로 되돌리는 부분을 지우면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;earth&lt;/code&gt; 상태가 고정됩니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;launch-파일을-사용한-파라미터-수정&quot;&gt;launch 파일을 사용한 파라미터 수정&lt;/h1&gt;
-&lt;p&gt;그렇다면 소스는 그대로 두고 파라미터만 수정할 수는 없을까요? launch 파일을 작성하면 할 수 있습니다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/dev_ws/src/python_parameters&lt;/code&gt; 폴더에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;launch&lt;/code&gt; 폴더를 생성하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python_parameters_launch.py&lt;/code&gt; 파일을 작성합니다. 내용은 다음과 같습니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;from launch import LaunchDescription
-from launch_ros.actions import Node
-
-def generate_launch_description():
-    return LaunchDescription([
-        Node(
-            package='python_parameters',
-            node_executable='param_talker',
-            node_name='custom_parameter_node',
-            output='screen',
-            parameters=[
-                {'my_parameter': 'earth'}
-            ]
-        )
-    ])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;그 후 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setup.py&lt;/code&gt; 파일에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;import&lt;/code&gt; 구문과 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data_files&lt;/code&gt; 안의 구문을 추가합니다. launch 파일을 실행하기 위해 필요한 구문입니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-{.python}&quot;&gt;import os
-from glob import glob
-# ...
-
-setup(
-  # ...
-  data_files=[
-      # ...
-      (os.path.join('share', package_name), glob('launch/*_launch.py')),
-    ]
-  )
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;일반적인 노드 선언에서 다음 부분이 추가되었습니다.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;parameters=[
-    {'my_parameter': 'earth'}
-]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;my_parameter&lt;/code&gt; 파라미터를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;earth&lt;/code&gt;로 set하는 기능입니다. 물론 원래대로 되돌리는 구문에 의해 되돌아오긴 하지만 이런 방식으로 launch 파일에서 파라미터를 사용할 수 있습니다. 다만, launch 파일을 실행하면 터미널 창에 출력값이 보이지 않으므로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ros2 param get&lt;/code&gt; 명령어로 확인할 수 있습니다.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ros2 launch python_parameters python_parameters_launch.py 
-[INFO] [launch]: All log files can be found below /home/bhbhchoi/.ros/log/2021-02-15-15-14-38-127277-bhbhchoi-900X3L-11707
-[INFO] [launch]: Default logging verbosity is set to INFO
-[INFO] [param_talker-1]: process started with pid [11720]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ros2 param get /custom_parameter_node my_parameter
-String value is: earth
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;저는 결과가 잘 나오는지 확인하기 위해 원래대로 되돌리는 구문은 주석처리하고 빌드, 소스 한 후 실행했습니다. 계속해서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;earth&lt;/code&gt;로 잘 나오고 있음을 볼 수 있습니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;마무리&quot;&gt;마무리&lt;/h1&gt;
-&lt;p&gt;ROS2 첫걸음 정리 게시글은 이것으로 마무리 하겠습니다. 아래 페이지를 번역만 해 놓은 것 같은 느낌이 들지만 ROS2를 맛볼 수 있었던 좋은 기회가 되었습니다.&lt;/p&gt;
-
-&lt;h1 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://index.ros.org/doc/ros2/Tutorials/Using-Parameters-In-A-Class-Python/&quot;&gt;ROS Index-ROS2 튜토리얼 파라미터 사용(Python)&lt;/a&gt;&lt;/p&gt;</content><author><name>Refstop</name></author><category term="ROS2" /><summary type="html">시작하며 이 게시글은 Python 노드에서 파라미터를 사용하는 방법을 정리합니다. 파라미터는 지난번에 turtlesim으로 한번 찍먹해본 적이 있습니다. 간단히 말하자면 노드 내에서 사용되는 변수이고, 이 값을 노드 내 또는 ros2 param 명령어를 통해 확인하거나 수정할 수 있습니다. 이번 게시글에서는 직접 생성, 수정을 해보도록 하겠습니다.</summary></entry></feed>
+&lt;a href=&quot;https://kolikim.tistory.com/48&quot;&gt;Broccoli’s House - #5-(2) 학습 관련 기술 : 초기 가중치 설정&lt;/a&gt;&lt;/p&gt;</content><author><name>Refstop</name></author><category term="Udacity" /><category term="Deep Learning" /><category term="Tensorflow" /><summary type="html">왜 Tensowflow 인가 Tensorflow란? 지난 시간까지 신경망을 쌓으면서 모델을 학습, 즉 적절한 가중치와 바이어스를 구하는 방법을 이론적으로 알아보았습니다. 이번 게시글에선 이 방법들을 물리적인 코드로 구현해 보겠습니다. 하지만 코드로 구현한다고 하여 덧셈 뺄셈 연산자를 이용하여 밑바닥부터 구현한다는 의미는 아닙니다. 이미 시중에는 딥러닝을 초보자도 쉽게(?) 구현할 수 있도록 제작해 놓은 여러 라이브러리들이 있습니다. 이 중 우리는 가장 많은 사람들이 사용하는 Tensorflow를 사용할 것입니다. Tensorflow는 구글에서 만든 딥러닝을 쉽게 구현할 수 있도록 기능을 제공하는 라이브러리입니다. 위 그림과 같이 딥러닝을 할 사용되는 텐서 형태의 데이터들이 모델을 구성하는 연산들의 그래프를 따라 흐르면서 연산이 일어납니다. 데이터를 의미하는 텐서(tensor)와 데이터 플로우 그래프를 따라 연산이 수행되는 형태인 flow를 합쳐 텐서플로(tensorflow)라고 부릅니다.</summary></entry></feed>

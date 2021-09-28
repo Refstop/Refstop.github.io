@@ -1,6 +1,8 @@
 {
   "posts" : [
     
+    "./git-cmd.html",
+    
     "./cartographer.html",
     
     "./indoor-nav.html",

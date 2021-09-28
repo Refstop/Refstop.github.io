@@ -321,6 +321,16 @@
     
       
   {
+  "tag" : "github",
+  "posts" : [
+      
+      "./git-cmd.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "모두를 위한 딥러닝",
   "posts" : [
       
