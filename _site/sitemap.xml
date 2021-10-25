@@ -3,9 +3,35 @@
   
     
     <url>
+      <loc>https://Refstop.github.io/ct-recursive-func.html</loc>
+      
+        <lastmod>2021-10-09T11:41:24+09:00</lastmod>
+      
+      
+        <changefreq>daily</changefreq>
+      
+      
+        <priority>0.5</priority></url>
+    
+  
+    
+    <url>
+      <loc>https://Refstop.github.io/ios_base-cintie.html</loc>
+      
+        <lastmod>2021-10-07T11:06:24+09:00</lastmod>
+      
+      
+        <changefreq>daily</changefreq>
+      
+      
+        <priority>0.5</priority></url>
+    
+  
+    
+    <url>
       <loc>https://Refstop.github.io/git-cmd.html</loc>
       
-        <lastmod>2021-08-23T11:06:24+09:00</lastmod>
+        <lastmod>2021-09-29T11:06:24+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -656,7 +682,7 @@
     <url>
       <loc>https://Refstop.github.io/404.html</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -671,7 +697,7 @@
     <url>
       <loc>https://Refstop.github.io/about.html</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -686,7 +712,7 @@
     <url>
       <loc>https://Refstop.github.io/all-posts.json</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -701,7 +727,7 @@
     <url>
       <loc>https://Refstop.github.io/archive.html</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -716,7 +742,7 @@
     <url>
       <loc>https://Refstop.github.io/</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -731,7 +757,7 @@
     <url>
       <loc>https://Refstop.github.io/ipfs-404.html</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -746,7 +772,7 @@
     <url>
       <loc>https://Refstop.github.io/posts-by-tag.json</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -761,7 +787,7 @@
     <url>
       <loc>https://Refstop.github.io/search.json</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -778,7 +804,7 @@
     <url>
       <loc>https://Refstop.github.io/tag.html</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -793,7 +819,7 @@
     <url>
       <loc>https://Refstop.github.io/tags.html</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -808,7 +834,7 @@
     <url>
       <loc>https://Refstop.github.io/page2/</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -823,7 +849,7 @@
     <url>
       <loc>https://Refstop.github.io/page3/</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -838,7 +864,7 @@
     <url>
       <loc>https://Refstop.github.io/page4/</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -853,7 +879,7 @@
     <url>
       <loc>https://Refstop.github.io/page5/</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -868,7 +894,7 @@
     <url>
       <loc>https://Refstop.github.io/page6/</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -883,7 +909,7 @@
     <url>
       <loc>https://Refstop.github.io/page7/</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -898,7 +924,7 @@
     <url>
       <loc>https://Refstop.github.io/page8/</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -913,7 +939,7 @@
     <url>
       <loc>https://Refstop.github.io/page9/</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -928,7 +954,7 @@
     <url>
       <loc>https://Refstop.github.io/feed.xml</loc>
       
-        <lastmod>2021-09-29T02:15:58+09:00</lastmod>
+        <lastmod>2021-10-10T00:08:31+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>

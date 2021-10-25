@@ -1,11 +1,31 @@
 [
   
     {
+      "title"       : "[코딩 테스트] 재귀함수",
+      "category"    : "",
+      "tags"        : "코딩 테스트",
+      "url"         : "./ct-recursive-func.html",
+      "date"        : "2021-10-09 11:41:24 +0900",
+      "description" : "",
+      "content"     : "1. 팩토리얼팩토리얼은 n!으로 1부터 특정 숫자까지의 수를 모두 곱하는 것입니다. 예를 들어 5!은 1x2x3x4x5=120으로 나타냅니다.수식으로 표현하면 다음과 같습니다.$$F_{n}=n*F_{n-1}$$따라서 재귀함수로 나타내기 위해서 다음과 같은 규칙을 지정합니다. 종료조건: 1이 되었을 때 1을 return 반복수식: $F_{n}=n*F_{n-1}$int factorial(int num) { if(num &lt;= 1) { return 1; } return num*factorial(n-1);}처음 코드를 짰을 때 조건식을 num == 1으로 했었는데, 이럴 경우 num이 0이면 무한루프에 빠지기 때문에, 종료조건을 잘 지정해 줘야 한다는 점을 배웠습니다.2. 피보나치 수열피보나치 수열은 0, 1로 시작하여 전전 값과 전 값을 더한 값이 다음 수가 되는 수열입니다.예시) 0 1 1 2 3 5 8 13 21 34 …수식으로 표현하면 다음과 같습니다.$$F_{n} = F_{n-1}+F_{n-2}$$따라서 재귀함수로 나타내기 위해서 다음과 같은 규칙을 지정합니다. 종료조건: 0이 입력되었을 때 0을 반환, 1이 입력되었을 때 0+1을 반환 반복수식: $F_{n-1}+F_{n-2}$ int fibonacci(int num) { if(num &lt;= 1) { return num; } return fibonacci(n-1)+fibonacci(n-2);} \\[\\]"
+    } ,
+  
+    {
+      "title"       : "C++ 코딩 테스트 입출력 시간을 좀 더 줄이는 방법",
+      "category"    : "",
+      "tags"        : "github",
+      "url"         : "./ios_base-cintie.html",
+      "date"        : "2021-10-07 11:06:24 +0900",
+      "description" : "",
+      "content"     : "ios_base::sync_with_stdio(false)ios_base::sync_with_stdio(false)의 의미는 C에서의 입출력 라이브러리 stdio와 C++에서의 입출력 라이브러리 iostream의 버퍼 동기화를 분리하는 역할입니다.장점cin과 cout은 C의 stdio의 입출력함수 printf, scanf와 버퍼를 동기화하고 있어 ios_base::sync_with_stdio(false) 함수를 통해서 버퍼를 분리하여 C++만의 버퍼를 사용합니다. 검사할 버퍼의 크기가 줄어듦으로서 속도 향상의 이점을 누릴 수 있습니다.단점stdio와 iostream의 버퍼를 분리하였으므로 C언어에서의 입출력 함수(printf, scanf, getchar, puts, putchar 등)들을 사용하지 못합니다.cin.tie(NULL)cin.tie(NULL)은 cin과 cout의 tie를 풀어준다는 의미입니다. cin과 cout은 기본적으로 tie되어 있어 cin을 사용하기 전에 cout에서 출력할 값을 내보내서 “Enter name:” 을 출력합니다. 이때 출력할 값을 버퍼에서 내보내는 것을 플러시(flush)라고 합니다. cin과 cout 둘 중 한쪽만 untie해도 두쪽 다 untie된 것이므로 cin.tie(NULL); cout.tie(NULL); 코드는 결국 cin.tie(NULL)과 같습니다.std::cout &lt;&lt; \"Enter name:\";std::cin &gt;&gt; name;장점cout 플러시 과정을 건너뛰고 입력을 받으므로 속도 향상의 이점이 있습니다.단점cin에서 cout을 풀면 cout에서 입력을 받기 전에 무언가를 표시 할 때마다 cin을 수동으로 플러시해야합니다.endl -&gt; ‘\\n’단순히 endl을 개행문자 \\n으로 바꿔주는 것입니다. endl은 개행 후 버퍼를 비워주는 역할까지 하지만 개행문자 \\n은 개행의 역할만 하기 때문에 조금의 속도향상이 있습니다.사용방법#include &lt;iostream&gt;using namespace std;int main() { ios_base::sync_with_stdio(false); cin.tie(NULL); String name; cout &lt;&lt; \"Enter name: \"; cin &gt;&gt; name; cout &lt;&lt; name &lt;&lt; '\\n'; return 0;}"
+    } ,
+  
+    {
       "title"       : "자주쓰는 git 명령어 정리",
       "category"    : "",
       "tags"        : "github",
       "url"         : "./git-cmd.html",
-      "date"        : "2021-08-23 11:06:24 +0900",
+      "date"        : "2021-09-29 11:06:24 +0900",
       "description" : "",
       "content"     : "사용해본 git 명령어 정리git init : git 공간 만들기git clone : git repository로부터 다운로드(깃 공간까지)git add . : 깃 공간의 변경사항 전부 추가(저장후보) (잘몰겟음)git commit -m ‘(커밋 메시지)’ : git add로 추가한 내용들 local에 업로드git push : local -&gt; remote로 업로드git status : 깃 공간의 현재상태(커밋내용, 현재 브랜치 등)git branch : 현재 깃 공간(local)의 브랜치 보기git log : 현재 브랜치의 커밋 목록들 보기(q 누르면 종료, enter 누르면 계속 보여줌)-v : 브랜치 상세정보, 마지막 커밋 메시지 확인-r : 리모트 공간의 브랜치 보기-a : 로컬, 리모트 브랜치 다 보기–delete, -d (브랜치명) : local 브랜치 삭제작업된 사항이나 commit 한 이력이 남아있는 경우, branch가 삭제되지 않는 경우-D (브랜치명) : 브랜치 강제 삭제 « 이걸로 삭제 (추천x)-m (현재 브랜치명) (바꿀 브랜치명) : 브랜치 이름 변경git push origin –delete (브랜치명) : remote 브랜치 삭제git checkout (브랜치명) : 브랜치로 이동git checkout -b (new 브랜치명) : 브랜치를 생성하고 이동git push –set-upstream origin (new 브랜치명) : 새로 생성된 브랜치를 리모트에 연결할 때 사용이거 해야지 git push로 그냥 업로드 할수 있음, 생성하고 처음 한번만 하면됨git push -u origin (new 브랜치명) « 이것도 업스트림과 똑같은 명령어git merge (다른 브랜치) : 현재 브랜치에 다른 브랜치를 병합, 이때 병합되는건 최근 commit 기준계속 새로 업데이트 예정"
     } ,

@@ -1,0 +1,61 @@
+I"�<h2 id="1-팩토리얼">1. 팩토리얼</h2>
+
+<p>팩토리얼은 n!으로 1부터 특정 숫자까지의 수를 모두 곱하는 것입니다. 예를 들어 5!은 1x2x3x4x5=120으로 나타냅니다.</p>
+
+<p>수식으로 표현하면 다음과 같습니다.</p>
+
+<center>
+
+$$
+F_{n}=n*F_{n-1}
+$$
+
+</center>
+
+<p>따라서 재귀함수로 나타내기 위해서 다음과 같은 규칙을 지정합니다.</p>
+
+<ul>
+  <li>종료조건: 1이 되었을 때 1을 return</li>
+  <li>반복수식: $F_{n}=n*F_{n-1}$</li>
+</ul>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">num</span><span class="o">*</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>처음 코드를 짰을 때 조건식을 <code class="language-plaintext highlighter-rouge">num == 1</code>으로 했었는데, 이럴 경우 num이 0이면 무한루프에 빠지기 때문에, 종료조건을 잘 지정해 줘야 한다는 점을 배웠습니다.</p>
+
+<h2 id="2-피보나치-수열">2. 피보나치 수열</h2>
+
+<p>피보나치 수열은 0, 1로 시작하여 전전 값과 전 값을 더한 값이 다음 수가 되는 수열입니다.</p>
+
+<p>예시) 0 1 1 2 3 5 8 13 21 34 …</p>
+
+<p>수식으로 표현하면 다음과 같습니다.<br />
+\(F_{n} = F_{n-1}+F_{n-2}\)
+따라서 재귀함수로 나타내기 위해서 다음과 같은 규칙을 지정합니다.</p>
+
+<ul>
+  <li>
+    <p>종료조건: 0이 입력되었을 때 0을 반환, 1이 입력되었을 때 0+1을 반환</p>
+  </li>
+  <li>
+    <p>반복수식: $F_{n-1}+F{n-2}$</p>
+
+    <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">num</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+\[\]
+  </li>
+</ul>
+
+:ET

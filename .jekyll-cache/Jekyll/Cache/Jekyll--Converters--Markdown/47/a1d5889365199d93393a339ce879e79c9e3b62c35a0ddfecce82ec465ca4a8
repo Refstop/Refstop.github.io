@@ -1,0 +1,50 @@
+I"><h2 id="ios_basesync_with_stdiofalse">ios_base::sync_with_stdio(false)</h2>
+
+<p>ios_base::sync_with_stdio(false)의 의미는 C에서의 입출력 라이브러리 stdio와 C++에서의 입출력 라이브러리 iostream의 버퍼 동기화를 분리하는 역할입니다.</p>
+
+<h3 id="장점">장점</h3>
+
+<p>cin과 cout은 C의 stdio의 입출력함수 printf, scanf와 버퍼를 동기화하고 있어  ios_base::sync_with_stdio(false) 함수를 통해서 버퍼를 분리하여 C++만의 버퍼를 사용합니다. 검사할 버퍼의 크기가 줄어듦으로서 속도 향상의 이점을 누릴 수 있습니다.</p>
+
+<h3 id="단점">단점</h3>
+
+<p>stdio와 iostream의 버퍼를 분리하였으므로 C언어에서의 입출력 함수(printf, scanf, getchar, puts, putchar 등)들을 사용하지 못합니다.</p>
+
+<h2 id="cintienull">cin.tie(NULL)</h2>
+
+<p>cin.tie(NULL)은 cin과 cout의 tie를 풀어준다는 의미입니다. cin과 cout은 기본적으로 tie되어 있어 cin을 사용하기 전에 cout에서 출력할 값을 내보내서 “Enter name:” 을 출력합니다. 이때 출력할 값을 버퍼에서 내보내는 것을 플러시(flush)라고 합니다. cin과 cout 둘 중 한쪽만 untie해도 두쪽 다 untie된 것이므로 <code class="language-plaintext highlighter-rouge">cin.tie(NULL); cout.tie(NULL);</code> 코드는 결국 <code class="language-plaintext highlighter-rouge">cin.tie(NULL)</code>과 같습니다.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter name:"</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">name</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="장점-1">장점</h3>
+
+<p>cout 플러시 과정을 건너뛰고 입력을 받으므로 속도 향상의 이점이 있습니다.</p>
+
+<h3 id="단점-1">단점</h3>
+
+<p>cin에서 cout을 풀면 cout에서 입력을 받기 전에 무언가를 표시 할 때마다 cin을 수동으로 플러시해야합니다.</p>
+
+<h2 id="endl---n">endl -&gt; ‘\n’</h2>
+
+<p>단순히 endl을 개행문자 \n으로 바꿔주는 것입니다. endl은 개행 후 버퍼를 비워주는 역할까지 하지만 개행문자 \n은 개행의 역할만 하기 때문에 조금의 속도향상이 있습니다.</p>
+
+<h4 id="사용방법">사용방법</h4>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ios_base</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">String</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter name: "</span><span class="p">;</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="sc">'\n'</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+:ET

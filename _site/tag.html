@@ -2194,6 +2194,37 @@ realsense d435i와 rviz 연동해봄.<br />
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./ios_base-cintie.html">C++ 코딩 테스트 입출력 시간을 좀 더 줄이는 방법</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-10-07T11:06:24+09:00">October 7, 2021</time>
+      </span>
+    
+    
+      
+    
+  
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<h2 id="ios_basesync_with_stdiofalse">ios_base::sync_with_stdio(false)</h2> <p>ios_base::sync_with_stdio(false)의 의미는 C에서의 입출력 라이브러리 stdio와 C++에서의 입출력 라이브러리 iostream의 버퍼 동기화를 분리하는 역할입니다.</p> <h3 id="장점">장점</h3> <p>cin과 cout은 C의 stdio의 입출력함수 printf, scanf와 버퍼를 동기화하고 있어 ios_base::sync_with_stdio(false) 함수를 통해서 버퍼를 분리하여 C++만의 버퍼를 사용합니다. 검사할 버퍼의 크기가 줄어듦으로서 속도 향상의 이점을 누릴 수 있습니다.</p> <h3 id="단점">단점</h3> <p>stdio와 iostream의 버퍼를 분리하였으므로 C언어에서의 입출력 함수(printf, scanf, getchar, puts, putchar 등)들을 사용하지 못합니다.</p> <h2 id="cintienull">cin.tie(NULL)</h2> <p>cin.tie(NULL)은 cin과 cout의 tie를 풀어준다는 의미입니다. cin과 cout은 기본적으로 tie되어 있어 cin을 사용하기 전에 cout에서 출력할 값을 내보내서 “Enter name:” 을 출력합니다. 이때 출력할 값을 버퍼에서 내보내는 것을 플러시(flush)라고 합니다. cin과 cout 둘 중 한쪽만 untie해도...<a class="read-more" href="./ios_base-cintie.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./git-cmd.html">자주쓰는 git 명령어 정리</a>
 					
 
@@ -2206,7 +2237,7 @@ realsense d435i와 rviz 연동해봄.<br />
     
       
       <span class="page_meta-date">
-        <time datetime="2021-08-23T11:06:24+09:00">August 23, 2021</time>
+        <time datetime="2021-09-29T11:06:24+09:00">September 29, 2021</time>
       </span>
     
     
@@ -2490,6 +2521,47 @@ realsense d435i와 rviz 연동해봄.<br />
 	</div>
 
 	
+	<div id="코딩 테스트" class="hidden tag-master">
+		<h1>코딩 테스트</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./ct-recursive-func.html">[코딩 테스트] 재귀함수</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2021-10-09T11:41:24+09:00">October 9, 2021</time>
+      </span>
+    
+    
+      
+    
+  
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<h2 id="1-팩토리얼">1. 팩토리얼</h2> <p>팩토리얼은 n!으로 1부터 특정 숫자까지의 수를 모두 곱하는 것입니다. 예를 들어 5!은 1x2x3x4x5=120으로 나타냅니다.</p> <p>수식으로 표현하면 다음과 같습니다.</p> <center> $$ F_{n}=n*F_{n-1} $$ </center> <p>따라서 재귀함수로 나타내기 위해서 다음과 같은 규칙을 지정합니다.</p> <ul> <li>종료조건: 1이 되었을 때 1을 return</li> <li>반복수식: $F_{n}=n*F_{n-1}$</li> </ul> <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span> <span class="k">return</span> <span class="n">num</span><span class="o">*</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="p">}</span> </code></pre></div></div> <p>처음 코드를 짰을 때 조건식을 <code class="language-plaintext highlighter-rouge">num ==...<a class="read-more" href="./ct-recursive-func.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
 	<div id="회사 견학 후기" class="hidden tag-master">
 		<h1>회사 견학 후기</h1>
 		<div class="archive">
@@ -2671,13 +2743,16 @@ realsense d435i와 rviz 연동해봄.<br />
                 <li><a href="./tag.html?tag=Udacity" class="tag">Udacity <span>(11)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=github" class="tag">github <span>(1)</span></a></li>
+                <li><a href="./tag.html?tag=github" class="tag">github <span>(2)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=%EB%AA%A8%EB%91%90%EB%A5%BC+%EC%9C%84%ED%95%9C+%EB%94%A5%EB%9F%AC%EB%8B%9D" class="tag">모두를 위한 딥러닝 <span>(4)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=%EC%8B%A4%EB%82%B4+%EC%9E%90%EC%9C%A8+%EC%A3%BC%ED%96%89" class="tag">실내 자율 주행 <span>(3)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=%EC%BD%94%EB%94%A9+%ED%85%8C%EC%8A%A4%ED%8A%B8" class="tag">코딩 테스트 <span>(1)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=%ED%9A%8C%EC%82%AC+%EA%B2%AC%ED%95%99+%ED%9B%84%EA%B8%B0" class="tag">회사 견학 후기 <span>(1)</span></a></li>
